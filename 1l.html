@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Позитивний Відгук</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>/* Загальні стилі */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fdfdfd;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+.slide-container {
+    width: 800px;
+    height: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 30px 40px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Хедер */
+.slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.lesson-badge {
+    background-color: #f0f0f0;
+    padding: 5px 12px;
+    border-radius: 15px;
+    color: #555;
+}
+
+.author-handle {
+    color: #b0b0b0;
+}
+
+/* Секція заголовка */
+.title-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.title-number {
+    font-size: 24px;
+    color: #f7b2c5;
+    font-weight: 700;
+    margin: 0;
+}
+
+.title-wrapper {
+    display: inline-block;
+    position: relative;
+    margin-top: 5px;
+}
+
+.title-wrapper::before,
+.title-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #f7b2c5;
+}
+
+.title-wrapper::before {
+    top: -10px;
+}
+
+.title-wrapper::after {
+    bottom: -10px;
+}
+
+/* Декоративні елементи ліній заголовка */
+.title-wrapper::before::before, .title-wrapper::before::after,
+.title-wrapper::after::before, .title-wrapper::after::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    width: 2px;
+    height: 10px;
+    background-color: #f7b2c5;
+}
+
+.title-wrapper::before::before, .title-wrapper::after::before {
+    left: -10px;
+}
+
+.title-wrapper::before::after, .title-wrapper::after::after {
+    right: -10px;
+}
+
+
+h1 {
+    background-color: #feeef2;
+    color: #222;
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 10px 30px;
+    margin: 0;
+    display: inline-block;
+}
+
+/* Основний контент */
+.main-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.text-info {
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+.text-info p {
+    margin: 0 0 30px 0;
+}
+
+.highlight-pink {
+    color: #e54b6d;
+    font-weight: 700;
+}
+
+.underline-wavy {
+    text-decoration: underline wavy #333;
+    text-underline-offset: 4px;
+    font-weight: 700;
+}
+
+/* Стек карток */
+.cards-stack {
+    position: relative;
+    width: 350px;
+    height: 300px;
+}
+
+.card {
+    position: absolute;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    font-size: 20px;
+    font-weight: 500;
+    color: #222;
+}
+
+.asterisk {
+    font-size: 28px;
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+
+.card p {
+    margin: 0;
+    margin-left: 25px; /* Відступ від зірочки */
+}
+
+.card-1 {
+    background-color: #fdeef3;
+    width: 280px;
+    height: 100px;
+    top: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.card-2 {
+    background-color: #f7d9e3;
+    width: 300px;
+    height: 160px;
+    top: 60px;
+    right: 10px;
+    z-index: 2;
+}
+
+.card-3 {
+    background-color: #f3c4d3;
+    width: 260px;
+    height: 120px;
+    top: 170px;
+    left: 0;
+    z-index: 1;
+}</style>
+</head>
+<body>
+    <div class="slide-container">
+        <header class="slide-header">
+            <span class="lesson-badge">УРОК 3</span>
+            <span class="author-handle">@ADEL_RIARDEN</span>
+        </header>
+
+        <main class="slide-content">
+            <div class="title-section">
+                <p class="title-number">(03)</p>
+                <div class="title-wrapper">
+                    <h1>ПОЗИТИВНИЙ ВІДГУК</h1>
+                </div>
+            </div>
+
+            <div class="main-body">
+                <div class="text-info">
+                    <p>на позитивні відгуки<br><span class="highlight-pink">завжди</span> треба відповідати</p>
+                    <p>ці відгуки — не просто<br>вдячність, а інструмент<br><span class="underline-wavy">для просування</span></p>
+                </div>
+
+                <div class="cards-stack">
+                    <div class="card card-1">
+                        <span class="asterisk">*</span>
+                        <p>у месенджерах</p>
+                    </div>
+                    <div class="card card-2">
+                        <span class="asterisk">*</span>
+                        <p>у Google</p>
+                    </div>
+                    <div class="card card-3">
+                        <span class="asterisk">*</span>
+                        <p>у соцмережах</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
