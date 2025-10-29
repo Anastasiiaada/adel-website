@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Графічний Дизайнер</title>
+    <style> /* === Загальні налаштування === */
+:root {
+    --pink: #F02D7D; /* Основний рожевий колір */
+    --grey-bg: #EAEAEA; /* Колір фону */
+    --text-dark: #333;
+    --card-radius: 20px;
+    --btn-radius: 30px;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--grey-bg);
+    color: var(--text-dark);
+    margin: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container {
+    max-width: 420px; /* Симулюємо ширину телефону */
+    margin: 0 auto;
+    background-color: var(--grey-bg);
+    overflow: hidden; /* Щоб картки не "вилазили" */
+}
+
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: var(--pink);
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* === Картка (білий блок) === */
+.card {
+    background: #ffffff;
+    border-radius: var(--card-radius);
+    padding: 25px;
+    margin: 20px 10px; /* Відступи з боків, щоб було видно фон */
+}
+
+/* === Кнопки === */
+.btn {
+    display: block;
+    background-color: var(--pink);
+    color: white;
+    text-decoration: none;
+    padding: 16px;
+    border-radius: var(--btn-radius);
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 10px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #d6226b; /* Трохи темніший при наведенні */
+}
+
+/* === Хедер (Hero) === */
+.hero {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    /* У дизайні складний вигнутий контур, тут ми спрощуємо до кола */
+}
+
+.hero h1 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.hero .subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* === Списки посилань (Послуги, Роботи) === */
+.link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-list li {
+    border-bottom: 1px solid #f0f0f0;
+}
+.link-list li:last-child {
+    border-bottom: none;
+}
+
+.link-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 5px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600; /* 'bold' занадто жирний, '600' краще */
+}
+
+.link-list a span {
+    color: #ccc;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+/* === Секція "Моя ціль" === */
+.goal-section {
+    padding: 0 10px;
+    text-align: center;
+}
+.goal-image {
+    width: 80%;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* === Секція "Етапи" === */
+.steps-section {
+    padding: 0 10px;
+}
+.steps-image {
+    width: 100%;
+    display: block; /* Забирає зайвий відступ знизу */
+}
+
+/* === Список з галочками (Мій підхід) === */
+.check-list {
+    list-style: none;
+    padding-left: 10px;
+}
+.check-list li {
+    position: relative;
+    padding-left: 35px; /* Місце для галочки */
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.check-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--pink);
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+/* === Відгуки === */
+.review-card p {
+    font-style: italic;
+    text-align: left;
+    margin: 0 10px;
+    font-size: 0.9rem;
+    color: #555;
+    flex: 1; /* Займає весь вільний простір */
+}
+
+.review-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.review-content .arrow {
+    color: var(--pink);
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* === Контакти === */
+.contacts-section {
+    padding: 0 10px;
+}
+/* Робимо кнопки контактів трохи ближче одна до одної */
+.contacts-section .btn {
+    margin: 15px 10px;
+}
+
+/* === Футер === */
+footer {
+    text-align: center;
+    padding: 10px;
+}
+footer p {
+    font-size: 0.8rem;
+    color: #999;
+}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header class="hero">
+            <img src="https" alt="Фото дизайнера" class="profile-pic">
+            <h1>Привет!</h1>
+            <p class="subtitle">Я Даша - графический<br>и motion-дизайнер</p>
+            <a href="#" class="btn">СВЯЗАТЬСЯ</a>
+        </header>
+
+        <section class="card">
+            <h2>УСЛУГИ</h2>
+            <ul class="link-list">
+                <li><a href="#">Логотипы <span>&rarr;</span></a></li>
+                <li><a href="#">Фирменный стиль <span>&rarr;</span></a></li>
+                <li><a href="#">Полиграфия <span>&rarr;</span></a></li>
+                <li><a href="#">Иллюстрации <span>&rarr;</span></a></li>
+                <li><a href="#">Инфографика <span>&rarr;</span></a></li>
+                <li><a href="#">Сторис <span>&rarr;</span></a></li>
+                <li><a href="#">Визуал ленты <span>&rarr;</span></a></li>
+            </ul>
+        </section>
+
+        <section class="goal-section">
+            <h2>МОЯ ЦЕЛЬ</h2>
+            <p>...создать для вас стильный, продающий<br>и запоминающийся дизайн...</p>
+            <img src="https" alt="Приклад роботи" class="goal-image">
+            <a href="#" class="btn">СВЯЗАТЬСЯ</a>
+        </section>
+
+        <section class="card">
+            <h2>РАБОТЫ</h2>
+            <ul class="link-list">
+                <li><a href="#">Логотипы <span>&rarr;</span></a></li>
+                <li><a href="#">Фирменный стиль <span>&rarr;</span></a></li>
+                <li><a href="#">Полиграфия <span>&rarr;</span></a></li>
+                <li><a href="#">Иллюстрации <span>&rarr;</span></a></li>
+            </ul>
+        </section>
+
+        <section class="steps-section">
+            <h2>ЭТАПЫ РАБОТЫ</h2>
+            <img src="https" alt="Етапи роботи" class="steps-image">
+        </section>
+
+        <section class="card">
+            <h2>МОЙ ПОДХОД</h2>
+            <ul class="check-list">
+                <li>Комфортное сотрудничество</li>
+                <li>Работа в дедлайны</li>
+                <li>Заключение договора по необходимости</li>
+                <li>Высокое качество работы</li>
+            </ul>
+        </section>
+
+        <section class="card review-card">
+            <h2>ОТЗЫВЫ</h2>
+            <div class="review-content">
+                <span class="arrow">&larr;</span>
+                <p>"Хочу сказать большое спасибо Даше за проделанную работу. Это был не легкий путь, за все те правки, которые было внесено..."</p>
+                <span class="arrow">&rarr;</span>
+            </div>
+        </section>
+
+        <section class="contacts-section">
+            <h2>КОНТАКТЫ</h2>
+            <a href="#" class="btn">Telegram</a>
+            <a href="#" class="btn">WhatsApp</a>
+            <a href="#" class="btn">E-mail</a>
+        </section>
+
+        <footer>
+            <p>Разработано Taplink</p>
+        </footer>
+
+    </div> </body>
+</html>
