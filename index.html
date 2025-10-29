@@ -166,6 +166,32 @@ header {
     font-size: 24px; /* Трохи менший шрифт на мобільних */
   }
 }
+/* iOS-only styles */
+@supports (-webkit-touch-callout: none) {
+  /* підкреслення */
+  .highlight-dark-pink { text-decoration: none; position: relative; }
+  .highlight-dark-pink::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #d94877 50%, transparent 50%) repeat-x;
+    background-size: 8px 4px;
+  }
+
+  /* фон */
+  .motivation {
+    background-attachment: scroll !important;
+    background-position: center !important;
+  }
+
+  /* відключення blur */
+  section::after, body::before {
+    filter: none !important;
+  }
+}
 
 /* ============================
    СЕКЦІЇ
@@ -2268,15 +2294,6 @@ setInterval(() => {
   <img src="Ellipse 6.png" alt="" class="price-decor decor-right">
 </section>
 
-
-
-
-
-
-
-         
-     
-
 <section class="contact">
   <div class="contact-inner">
     <h2 class="contact-title">зв’язок зі мною</h2>
@@ -2284,7 +2301,6 @@ setInterval(() => {
     <a href="https://t.me/yourusername" target="_blank" class="telegram-btn">написати</a>
   </div>
 </section>
-
 
   <footer>
     © 2025 Adele Course. Всі права захищені.
