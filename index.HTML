@@ -1,0 +1,2734 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Адмін - це не просто дівчинка на ресепшені</title>
+  <meta name="description" content="Адмін - це не просто дівчинка на ресепшені" />
+  <style>
+   /* ============================
+   ПІДКЛЮЧЕННЯ ЛОКАЛЬНИХ ШРИФТІВ
+============================ */
+@font-face {
+  font-family: 'Allegretto Script One';
+  src: url('font/Allegretto_Script_One_Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Основні варіанти Halvar Breit Rg */
+@font-face {
+  font-family: 'Halvar Breit Rg';
+  src: url('font/HalvarBreit-Rg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Halvar Breit Bd';
+  src: url('font/HalvarBreit-Bd.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Halvar Breit Lt';
+  src: url('font/HalvarBreit-Lt.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* ============================
+   КОЛЬОРИ ТА ЗМІННІ
+============================ */
+:root {
+  --pink: #d94877;
+  --light-pink: #F7C4D1;
+  --green: #4B6137;
+  --black: #000000;
+  --bg: #fff9fa;
+  --text: #1a1a1a;
+}
+
+/* ============================
+   ГЛОБАЛЬНІ СТИЛІ
+============================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Halvar Breit Rg', Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+    overflow-x: hidden;
+  width: 100%;
+}
+/* ============================
+   Рожевий глов у бекграунді
+============================ */
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 1200px;
+  background: url('Ellipse 6.png') center/contain no-repeat;
+  opacity: 0.25; /* робимо ніжним */
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================
+   ТИПОВІ ЕЛЕМЕНТИ
+============================ */
+h1, h2, h3, .brand, .title-wrapper h1 {
+  font-family: 'Halvar Breit Bd', cursive;
+  color: var(--black);
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: var(--text);
+}
+
+strong, b {
+  font-family: 'Halvar Breit Bd', Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* ============================
+   КНОПКИ ТА ПОСИЛАННЯ
+============================ */
+a, .btn, .program-title, .match-controls button {
+  font-family: 'Halvar Breit Bd', sans-serif;
+}
+
+.btn {
+  background: var(--pink);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: var(--green);
+}
+
+/* ============================
+   ВЕРХНЄ МЕНЮ (HEADER)
+============================ */
+/* 🌸 Плаваючий футер-навігатор (як live glass iOS) */
+.floating-footer {
+  position: fixed;
+  bottom: -100px; /* спочатку схований */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 40px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  padding: 10px 20px;
+  z-index: 100;
+  transition: bottom 0.6s ease;
+}
+
+.footer-btn {
+  font-family: 'Halvar Breit Bd', sans-serif;
+  color: #000;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.footer-btn.main {
+  background: #d94877;
+  color: #fff;
+  font-weight: 700;
+}
+
+.footer-btn:hover,
+.footer-btn.active {
+  background: #F7C4D1;
+  color: #fff;
+}
+
+/* 📱 мобільна адаптація */
+@media (max-width: 768px) {
+  .floating-footer {
+    width: 94%;
+    justify-content: space-around;
+    padding: 12px;
+    bottom: -100px;
+    border-radius: 25px;
+  }
+  .footer-btn {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+  .footer-btn.main {
+    font-size: 15px;
+  }
+}
+
+.show-footer {
+  bottom: 20px !important;
+}
+
+
+/* 🔧 iPhone (iOS Safari) fix */
+
+@supports (-webkit-touch-callout: none) {
+  /* Виправлення фону мотивації */
+  .motivation {
+    background-attachment: scroll !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+  .motivation::after {
+    background: rgba(0,0,0,0.45) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Помітніше рожеве хвилясте підкреслення */
+  .highlight-dark-pink,
+  .wavy-underline {
+    text-decoration: none !important;
+    position: relative;
+    display: inline-block;
+  }
+  @supports (-webkit-touch-callout: none) {
+  .highlight-dark-pink::after,
+  .wavy-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 8px;
+    background: url("data:image/svg+xml;utf8,<svg width='120' height='16' xmlns='http://www.w3.org/2000/svg'><path d='M0 8 Q10 0 20 8 T40 8 T60 8 T80 8 T100 8 T120 8' stroke='%23d94877' stroke-width='3' fill='none'/></svg>") repeat-x;
+    background-size: 24px 8px;
+  }
+}
+
+}
+/* ================================
+   📱  FIX для iPhone / iPad Safari
+   ================================ */
+
+/* 1️⃣ Підтримка шрифтів Safari (.woff2 + fallback) */
+@font-face {
+  font-family: 'Halvar Breit Rg';
+  src: url('font/HalvarBreit-Rg.woff2') format('woff2'),
+       url('font/HalvarBreit-Rg.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Halvar Breit Bd';
+  src: url('font/HalvarBreit-Bd.woff2') format('woff2'),
+       url('font/HalvarBreit-Bd.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Allegretto Script One';
+  src: url('font/Allegretto_Script_One_Regular.woff2') format('woff2'),
+       url('font/Allegretto_Script_One_Regular.ttf') format('truetype');
+}
+
+/* 2️⃣ Виправлення для Safari */
+@supports (-webkit-touch-callout: none) {
+
+  /* Заборона фіксованих фонів */
+  .motivation,
+  .hero,
+  .adele-slide {
+    background-attachment: scroll !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Хвилясте рожеве підкреслення через SVG */
+  .highlight-dark-pink,
+  .wavy-underline {
+    position: relative;
+    text-decoration: none !important;
+  }
+
+  .highlight-dark-pink::after,
+  .wavy-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 8px;
+    background: url("data:image/svg+xml;utf8,<svg width='120' height='16' xmlns='http://www.w3.org/2000/svg'><path d='M0 8 Q10 0 20 8 T40 8 T60 8 T80 8 T100 8 T120 8' stroke='%23d94877' stroke-width='3' fill='none'/></svg>") repeat-x;
+    background-size: 24px 8px;
+  }
+
+  /* Корекція шрифтової сітки */
+  body {
+    -webkit-text-size-adjust: 100%;
+    font-smooth: always;
+  }
+
+  /* Заборона горизонтального скролу (іноді злітає) */
+  html, body {
+    overflow-x: hidden !important;
+  }
+}
+
+/* 3️⃣ Додатково — PNG елементи без фону */
+.main-photo,
+.film-strip,
+.photo-arrow {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 4️⃣ Тестовий фікс для текстових блоків, щоб не “стрибав” line-height */
+.text-info p {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+
+
+
+/* ============================
+   СЕКЦІЇ
+============================ */
+/* ПЛАВНІ ПЕРЕХОДИ МІЖ СЕКЦІЯМИ */
+section {
+  position: relative;
+  z-index: 1;
+  transition: background 1s ease;
+}
+
+/* рожево-білі переливи */
+.hero {
+  background: linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%);
+}
+
+.adele-slide,
+.stats-section,
+.match-section {
+  background: #fdeef3 !important; /* або #fff9fa — залежно який виглядає краще */
+}
+
+
+
+/* ЧОРНИЙ блок без градієнта — контраст */
+.program-section {
+  background: #111;
+}
+
+/* після чорного — знову плавний рожевий перехід */
+.motivation {
+  background: linear-gradient(180deg, #111 0%, #f7c4d1 100%);
+}
+
+.result-section {
+  background: linear-gradient(180deg, #f7c4d1 0%, #fdeef3 100%);
+}
+
+.price-section {
+  background: linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%);
+}
+
+.contact {
+  background: linear-gradient(180deg, #fff9fa 0%, #fdeef3 100%);
+}
+
+/* додаткове "розмиття" на стиках — дуже ніжний ефект */
+section::after {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  background: inherit;
+  filter: blur(60px);
+  opacity: 0.35;
+  z-index: -1;
+}
+/* Плавний перехід між рожевою секцією та чорною програмою */
+.match-section::after {
+  content: "";
+  position: absolute;
+  bottom: -120px; /* наскільки заходить у чорний */
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(180deg, #fdeef3 0%, #111 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+
+    /* HERO */
+    .hero {
+  background:  url('IMG_7590.png') center/cover no-repeat;
+  min-height: 90vh; /* базова висота для великих екранів */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 80px;
+  color: white;
+  position: relative;
+}
+
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.4);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 600px;
+  z-index: 2;
+}
+
+/* Спеціальне форматування для слова "Адмін" */
+.hero h1 {
+  font-family: 'Halvar Breit Rg', sans-serif;
+  font-size: 52px;
+  color: white;
+  line-height: 1.1;
+}
+
+
+/* ============================
+   РОЖЕВИЙ ХАЙЛАЙТ
+============================ */
+.highlight {
+  padding: 0 2px;
+  display: inline;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+
+
+
+.hero h2 {
+  color: #fdfdfd;
+  margin: 20px 0;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 18px 36px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+/* Адаптивність */
+@media (max-width: 1024px) {
+  .hero {
+    padding-left: 50px;
+  }
+  .hero h1 {
+    font-size: 44px;
+  }
+  .hero-btn {
+    font-size: 16px;
+    padding: 16px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 80vh;
+  }
+  .hero h1 {
+    font-size: 36px;
+        text-align: left;
+  }
+  .hero h2 {
+    font-size: 20px;
+    text-align: left;
+  }
+  .hero-btn {
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 14px 28px;
+
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+  .hero h2 {
+    font-size: 18px;
+  }
+  .hero-btn {
+    padding: 12px 24px;
+        margin-top: 20px;
+  }
+.hero-content {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 14px 20px;
+  border-radius: 12px;
+}
+
+.hero-text {
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+
+
+
+
+
+
+
+
+
+}
+
+/* ============================
+   СЕКЦІЯ АДЕЛЬ (стабільна версія)
+============================ */
+.adele-slide {
+  background: #fdeef3;
+  position: relative;
+  z-index: 4;
+  padding: clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px);
+  padding-bottom:0px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.slide-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  font-family: "Halvar Breit Rg", Arial, sans-serif;
+  position: relative;
+  z-index: 5;
+}
+
+
+/* === Основний контейнер === */
+.main-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 60px;
+  padding-left: 17%;
+}
+
+/* === Фото === */
+.adele-photo {
+  flex: 0 0 auto;
+  width: 260px;
+  margin-left: -80px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+}
+
+.adele-photo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* === Фотострічка позаду фото === */
+.photo-wrapper {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+}
+
+.film-strip {
+  position: absolute;
+  left: -70px;
+  top: 30px;
+  width: 140px;
+  transform: rotate(-9deg);
+  z-index: 1;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  opacity: 0.95;
+  transition: all 0.3s ease;
+}
+
+/* планшети */
+@media (max-width: 1024px) {
+  .film-strip {
+    left: -50px;
+    top: 20px;
+    width: 14 0px;
+    transform: rotate(-6deg);
+  }
+}
+
+/* мобільні */
+@media (max-width: 768px) {
+  .film-strip {
+    left: -55px;
+    top: 12px;
+    width: 116px;
+    transform: rotate(-7deg);
+    opacity: 0.9;
+  }
+}
+
+/* вузькі телефони */
+@media (max-width: 480px) {
+  .film-strip {
+    left: -45px;
+    top: 8px;
+    width: 100px;
+    transform: rotate(-9deg);
+    opacity: 0.85;
+  }
+}
+
+/* дуже маленькі екрани */
+@media (max-width: 360px) {
+  .film-strip {
+    left: -25px;
+    top: 6px;
+    width: 100px;
+    transform: rotate(-8deg);
+  }
+}
+
+/* === Стрілка під фото === */
+.photo-arrow {
+  position: absolute;
+  bottom: -7%;
+  right: -3%;
+  width: 60px;
+  z-index: 3;
+  cursor: pointer;
+  animation: bounceArrow 1.6s infinite ease-in-out;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Основне фото */
+.main-photo {
+  position: relative;
+  z-index: 2;
+}
+
+/* === Текст === */
+.text-info {
+  flex: 0.9;
+  max-width: 680px;
+  font-size: 20px;
+  line-height: 1.7;
+  padding-left: 7%;
+}
+
+.text-info p {
+  margin-bottom: 18px;
+}
+
+.text-info p:last-child {
+  margin-top: 30px;
+  font-style: italic;
+}
+
+/* === Картки === */
+.cards-stack {
+  display: flex;
+  gap: 16px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  position: relative;
+  padding: 20px 18px 18px 28px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: #222;
+  background: #fdeef3;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  flex: 1 1 140px;
+}
+
+.card .asterisk {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: var(--pink);
+  font-size: 20px;
+}
+
+.card small {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 6px;
+  color: #555;
+}
+
+.card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.25);
+  background: #f7b2c5;
+  color: white;
+}
+
+/* === Заголовок з іконкою === */
+.title-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 16px;
+}
+
+.title-with-icon h1 {
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 42px;
+  color: var(--black);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.title-icon {
+  height: 115px;
+  width: auto;
+  transform: translateY(-3px);
+  margin-right: 0px;
+}
+
+/* === Адаптивність === */
+@media (max-width: 768px) {
+  .adele-slide {
+    padding: 60px 20px;
+  }
+
+  .main-body {
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    gap: 40px;
+    padding-left: 2%;
+  }
+
+  .adele-photo {
+    margin-left: 0;
+    width: 210px;
+  }
+
+  .text-info {
+    padding: 0 10px;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .cards-stack {
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  .title-with-icon h1 {
+    font-size: clamp(20px, 6vw, 32px);
+  }
+
+  .title-icon {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-info {
+    font-size: 16px;
+  }
+
+  .adele-photo {
+    width: 180px;
+  }
+
+  .cards-stack {
+    gap: 10px;
+  }
+}
+
+.highlight-dark-pink {
+  text-decoration: underline wavy var(--pink);
+  text-underline-offset: 4px;
+  font-weight: 700;
+}
+
+
+/* STATS */
+
+.stats-section {
+  padding-top: 100px; /* відступ, щоб слайдер красиво “заходив” зверху */
+  padding-bottom: 50px;
+  background: #fdeef3;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+
+}
+
+.stats-header {
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.stats-header h2 {
+  font-family: "Halvar Breit Rg", cursive;
+  font-size: 42px;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+/* зображення зліва від заголовка */
+.stats-header.with-image {
+  display: flex;
+  align-items: center;
+  justify-content: left; /* центрує всю групу (png + текст) по горизонталі */
+  gap: 20px;
+  text-align: left; /* щоб текст не центрувався */
+}
+
+.stats-left-img {
+  width:40%;
+  height: auto;
+  flex-shrink: 0;
+  transform: translateY(2px);
+  opacity: 0.95;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.stats-left-img:hover {
+  transform: scale(1.05) rotate(-2deg);
+  opacity: 1;
+}
+
+/* на мобільних */
+@media (max-width: 768px) {
+  .stats-header.with-image {
+    justify-content: flex-start; /* вирівнюємо зліва */
+    padding-top: 40px; /* відступ, щоб слайдер красиво “заходив” зверху */
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+
+  .stats-left-img {
+    width: 100px;
+  }
+
+  .stats-header.with-image h2 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+}
+
+
+
+.wavy-underline {
+  text-decoration: underline wavy var(--pink);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+
+.stats-header p {
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.stat {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  flex: 1 1 220px;
+  max-width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat strong {
+  display: block;
+  font-size: 40px;
+  color: var(--pink);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.stat:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+}
+.stats-beauty {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  padding: 50px 24px 60px;
+  width: 240px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+}
+
+/* Галочка в рожевому кружечку */
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  background: var(--light-pink);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.icon-circle span {
+  color: var(--pink);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Текст */
+.stat-card p {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.stat-card strong {
+  font-size: 36px;
+  color: var(--pink);
+  font-family: 'Halvar Breit Bd', sans-serif;
+}
+
+/* Нижня дужка */
+.stat-card .bracket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  border-bottom: 4px solid var(--light-pink);
+  border-radius: 0 0 40px 40px;
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+  .stats-beauty {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .stat-card {
+    width: 80%;
+  }
+}
+/* адаптив */
+@media(max-width:768px){
+  .stats-section{padding:40px 10px;
+  padding-top: 0px;}
+  .stats-header h2{font-size:32px;}
+  .stats-header p{font-size:18px;}
+}
+
+
+/* ========= BASE ========= */
+.bubble-layer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 520px;
+  margin: 0 auto 80px;
+  border-radius: 60px;
+  overflow: hidden;
+}
+
+/* 💭 Кулі */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: #c46aa1;
+  opacity: 0.3;
+  z-index: 1;
+
+}
+
+/* 💬 Теги */
+.tag {
+  position: absolute;
+  display: inline-block;
+  padding: 18px 42px;
+  border-radius: 999px;
+  font-family: 'Halvar Breit Rg', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  z-index: 2;
+  white-space: nowrap;
+
+}
+.tag.pink { background: #f7c4d1; color: #000; }
+.tag.white { background: #fff; border: 3px solid #f7c4d1; color: #000; }
+
+
+/* ========= 💻 DESKTOP (>1200px) ========= */
+@media (min-width: 1200px) {
+  /* Кулі */
+  .c1 { top: 25.5%; left: 20%; width: 40px; height: 40px; }
+  .c2 { top: 19%; left: 43%; width: 50px; height: 50px; }
+  .c3 { top: 55%; left: 59.8%; width: 36px; height: 36px; }
+
+  /* Теги */
+  .t1 { top: 7%;  left: 40%; transform: rotate(13deg); }
+  .t2 { top: 12%; left: 19%; transform: rotate(7deg); }
+  .t3 { top: 26%; left: 34%; transform: rotate(-7deg); }
+  .t4 { top: 45%; left: 60%; transform: rotate(19deg); }
+  .t5 { top: 32.8%; left: 14%; transform: rotate(2deg); }
+  .t6 { top: 47%; left: 24%; transform: rotate(0deg); }
+  .t7 { top: 46%; left: 44%; transform: rotate(0deg); }
+  .t8 { top: 62%; left: 26%; transform: rotate(0deg); }
+}
+
+/* ========= 🧩 LAPTOP / TABLET (≤1024px) ========= */
+@media (max-width: 1024px) {
+  .bubble-layer { height: 460px; }
+  .tag { font-size: 22px; padding: 14px 34px; }
+
+  .c1 { top: 28%; left: 22%; width: 36px; height: 36px; }
+  .c2 { top: 20%; left: 45%; width: 44px; height: 44px; }
+  .c3 { top: 58%; left: 63%; width: 32px; height: 32px; }
+
+  .t1 { top: 10%; left: 32%; transform: rotate(8deg); }
+  .t2 { top: 14%; left: 8%;  transform: rotate(3deg); }
+  .t3 { top: 27%; left: 28%; transform: rotate(-4deg); }
+  .t4 { top: 44%; left: 53%; transform: rotate(12deg); }
+  .t5 { top: 31%; left: 10%; transform: rotate(0deg); }
+  .t6 { top: 48%; left: 20%; transform: rotate(0deg); }
+  .t7 { top: 52%; left: 38%; transform: rotate(0deg); }
+  .t8 { top: 64%; left: 18%; transform: rotate(0deg); }
+}
+
+/* ========= 📱 TABLET SMALL (≤768px) ========= */
+@media (max-width: 768px) {
+  .bubble-layer { height: 420px; }
+  .tag { font-size: 18px; padding: 10px 26px; }
+
+  .c1 { top: 24%; left: 18%; width: 30px; height: 30px; }
+  .c2 { top: 18%; left: 40%; width: 38px; height: 38px; }
+  .c3 { top: 60%; left: 56%; width: 28px; height: 28px; }
+
+  .t1 { top: 8%;  left: 20%; transform: rotate(5deg); }
+  .t2 { top: 15%; left: 4%;  transform: rotate(2deg); }
+  .t3 { top: 26%; left: 28%; transform: rotate(-2deg); }
+  .t4 { top: 46%; left: 50%; transform: rotate(5deg); }
+  .t5 { top: 34%; left: 10%; transform: rotate(0deg); }
+  .t6 { top: 52%; left: 18%; transform: rotate(0deg); }
+  .t7 { top: 58%; left: 36%; transform: rotate(0deg); }
+  .t8 { top: 66%; left: 22%; transform: rotate(0deg); }
+}
+
+/* ========= 📞 MOBILE (≤480px) ========= */
+@media (max-width: 480px) {
+  .bubble-layer { height: 360px; }
+  .tag { font-size: 15px; padding: 8px 18px; white-space: normal; text-align: center; }
+
+  .c1 { top: 25%; left: 18%; width: 24px; height: 24px; }
+  .c2 { top: 15%; left: 38%; width: 30px; height: 30px; }
+  .c3 { top: 62%; left: 58%; width: 24px; height: 24px; }
+
+  .t1 { top: 5%;  left: 4%;  transform: rotate(0deg); }
+  .t2 { top: 12%; left: 2%;  transform: rotate(0deg); }
+  .t3 { top: 25%; left: 20%; transform: rotate(0deg); }
+  .t4 { top: 43%; left: 45%; transform: rotate(0deg); }
+  .t5 { top: 32%; left: 4%;  transform: rotate(0deg); }
+  .t6 { top: 50%; left: 8%;  transform: rotate(0deg); }
+  .t7 { top: 56%; left: 28%; transform: rotate(0deg); }
+  .t8 { top: 65%; left: 10%; transform: rotate(0deg); }
+}
+
+
+
+
+
+/* Бігаюча стрічка LOVE LOVE LOVE */
+.love-ticker {
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  padding: 12px 0;
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.ticker-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 15s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Ефект блиску тексту */
+.love-ticker span {
+  background: linear-gradient(90deg, #fff, #ff84b7, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: -200px; }
+  100% { background-position: 200px; }
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+  .love-ticker {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+}
+
+
+    /* MATCH */
+    .match-section {
+  width: 100%;
+ 
+  padding: 120px 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.match-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  gap: 60px;
+}
+
+.match-left {
+  flex: 1;
+}
+
+.match-left h2 {
+  font-family: "Halvar Breit Rg", sans-serif;
+  font-size: 48px;
+  color: #000;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.match-left .highlight {
+
+  padding: 0 6px;
+  font-family: "Allegretto Script One", cursive;
+  color: #000;
+  background: none !important;
+  color: #000 !important;
+}
+
+.match-left p {
+  font-size: 20px;
+  color: #333;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.match-right {
+  flex: 1.2;
+  position: relative;
+}
+
+.match-carousel {
+  position: relative;
+  overflow: hidden;
+  min-height: 160px;
+}
+
+.match-item {
+  position: absolute;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.6s ease;
+  font-size: 22px;
+  line-height: 1.6;
+  color: #111;
+  background: #fbe1ea;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.match-item.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+}
+
+.match-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+.match-controls button {
+  background: #ff8fb1;
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.match-controls button:hover {
+  background: #ff6f9d;
+  transform: scale(1.1);
+}
+
+@media(max-width: 768px) {
+  .match-section {
+    padding: 40px 20px 30px; /* менший верхній та нижній відступ */
+
+  }
+
+  .match-container {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    position: relative;
+    gap: 10px; /* 🔥 додає відстань між match-left і match-right */
+  }
+
+  .match-left {
+    margin-bottom: 0; /* 🔥 прибираємо зайвий нижній відступ */
+  }
+
+  .match-left h2 {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+
+  .match-left p {
+    display: none; /* 🔥 прибирає текст тільки на мобільних */
+  }
+
+  .match-controls {
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+
+/* ============================
+   PROGRAM SECTION (оновлено)
+============================ */
+.program-section {
+  width: 100%;
+  border-top-left-radius: 80px;
+  border-top-right-radius: 80px;
+  margin-top: -20px; /* щоб накладалась поверх попередньої */
+  color: #fff;
+  padding: 120px 0;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Контейнер */
+.program-wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Заголовок */
+.program-heading {
+  font-family: "Halvar Breit Bd", sans-serif ;
+  font-size: 56px ;
+  color: var(--white);
+  text-align: left;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.program-heading-wrapper {
+display: flex;
+justify-content: space-between;
+align-items: center; /* Вертикальне вирівнювання */
+margin-left: 5vw;
+padding-right: 5vw; /* Щоб вирівняти картинку по правому краю програми */
+margin-bottom: 60px;
+}
+
+.program-header-image {
+max-height: 300px; /* Ви можете налаштувати розмір */
+width: auto;
+flex-shrink: 0;
+margin-left: 20px; /* Невеликий відступ від тексту */
+}
+/* Розташування контенту */
+.program-layout {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Список програми */
+.program-right {
+  flex: 0 0 70%;
+  padding-right: 5vw;
+}
+
+/* Контейнер з пунктами програми */
+.program {
+  width: 100%;
+  border-top: 1px solid #444;
+}
+
+.program-item {
+  border-bottom: 1px solid #444;
+  padding: 28px 0;
+}
+
+/* Кнопка розділу */
+.program-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  font-family: "Halvar Breit Rg", sans-serif;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  transition: color 0.3s ease;
+}
+
+.program-title:hover span:first-child {
+  color: var(--pink);
+}
+
+.program-title .icon {
+  font-size: 26px;
+  color: var(--pink);
+  transition: transform 0.3s ease;
+}
+
+/* Контент пунктів */
+.program-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.program-item.open .program-content {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 16px;
+}
+
+.program-content p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ddd;
+  font-family: "Halvar Breit Lt", sans-serif;
+}
+
+.program-item.open .icon {
+  transform: rotate(180deg);
+}
+
+/* ============================
+   АДАПТИВНІСТЬ
+============================ */
+@media (max-width: 1024px) {
+  .program-section {
+    padding: 100px 0;
+  }
+
+  .program-heading {
+    font-size: 48px;
+    margin-left: 6vw;
+  }
+
+  .program-right {
+    flex: 0 0 80%;
+    padding-right: 6vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .program-section {
+    padding: 80px 0;
+  }
+
+  .program-layout {
+ flex-direction: column;
+justify-content: flex-start;
+}
+
+/* === ОНОВЛЕНИЙ БЛОК === */
+.program-heading-wrapper {
+ margin-left: 6vw;
+ padding-right: 6vw;
+ margin-bottom: 30px;
+ align-items: flex-start; /* На мобільному краще притиснути догори */
+ }
+
+.program-header-image {
+ max-height: 80px; /* Зменшуємо картинку */
+ }
+
+  .program-heading {
+    font-size: 42px;
+    text-align: left;
+  }
+
+  .program-right {
+    flex: 1 1 100%;
+    padding: 0 6vw;
+  }
+
+  .program-title {
+    font-size: 18px;
+  }
+
+  .program-content p {
+    font-size: 16px;
+  }
+}
+
+    /* MOTIVATION */
+.motivation {
+  position: relative;
+  overflow: hidden;
+  padding: 140px 40px;
+  color: #fff;
+  background: url('IMG_5101 1.png') center/cover no-repeat; /* 👈 ТВОЄ ФОТО */
+  background-attachment: fixed; /* легкий паралакс */
+}
+
+.motivation::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* затемнення для контрасту тексту */
+  z-index: 1;
+}
+
+.motivation-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+
+.motivation-text h2 {
+  font-family: "Halvar Breit Bd", cursive;
+  font-size: 56px;
+  line-height: 1.2;
+  color: #ffffff;
+   text-align: left;
+}
+
+.hint {
+  font-size: 20px;
+  color: #fff;
+  display: inline-block;
+  padding: 6px 18px;
+  border: 3px dashed #fff;
+  border-radius: 30px;
+  font-style: italic;
+  margin-bottom: 24px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.motivation-buttons .btn {
+  margin-top: 16px;
+  padding: 14px 28px;
+  font-weight: 700;
+  border-radius: 40px;
+  transition: all 0.3s ease;
+}
+
+.motivation-buttons .btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+
+/* адаптив */
+@media(max-width:768px){
+  .motivation-text h2 { font-size: 42px; }
+  .hint { font-size: 16px; padding: 4px 12px; }
+}
+
+@media(max-width:480px){
+  .motivation-text h2 { font-size: 32px; }
+  .motivation-buttons .btn { font-size: 14px; padding: 10px 20px; margin: 6px 0; display:block; }
+}
+
+
+/* ============================
+   СЕКЦІЯ "ТВІЙ РЕЗУЛЬТАТ" (заголовок на фото, текст під фото)
+============================ */
+.result-section {
+  background: #fff9fa;
+  padding: 120px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 🌸 Фото + заголовок */
+.result-header {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 0px auto;
+}
+
+/* ✅ трохи зміщуємо квітку */
+.result-flower {
+  width: 100%;
+  max-width: 700px;
+  opacity: 0.9;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  top: -10px;       /* піднімаємо вище */
+  left: 80px;       /* трохи вправо */
+}
+
+.result-header h2 {
+  position: absolute;
+  top: 45%;         /* підлаштовуємо вертикаль, щоб лишився центр */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 42px;
+  line-height: 1.2;
+  color: #000;
+  text-transform: none;
+  z-index: 2;
+  width: 100%;
+  padding: 0 0px;
+}
+
+
+/* 🌷 Текст під фото */
+.result-text {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+
+}
+
+.result-text p {
+  font-family: 'Halvar Breit Lt', sans-serif;
+  color: #000;
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* 📱 адаптивність */
+@media (max-width: 768px) {
+  .result-section {
+    padding: 80px 20px;
+  }
+  .result-header h2 {
+    font-size: 28px;
+  }
+  .result-flower {
+    max-width: 480px;
+    opacity: 0.8;
+  }
+  .result-text p {
+    font-size: 17px;
+  }
+}
+
+
+
+
+    /* TESTIMONIALS */
+ .testimonials-section {
+  background: #fff9fa;
+  padding: 10px 20px;
+  text-align: center;
+  position: relative;
+  
+}
+
+.title-section { margin-bottom: 40px; }
+
+.title-wrapper {
+  display: inline-flex;       /* ставимо в рядок */
+  align-items: center;        /* вирівнюємо по вертикалі */
+  gap: 10px;                  /* відстань між текстом і зображенням */
+  padding: 12px 24px;
+  border-radius: 16px;
+}
+
+.title-wrapper h1 {
+  font-family: "Halvar Breit Bd", cursive;
+  font-size: 38px;
+  color: #000;
+  margin: 0;
+  text-align: left;
+}
+
+.testimonials-carousel {
+  position: relative;
+  overflow: hidden;
+  max-width: 2000px;
+  margin: 0 auto;
+  cursor: grab;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s ease;
+  
+}
+
+.testimonial {
+  flex: 0 0 30%;
+  background: #fff;
+  border-radius: 24px;
+
+  padding: 30px;
+  text-align: left;
+  min-height: 320px;
+  position: relative;
+}
+
+.testimonial::before {
+  content: "“";
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 70px;
+  color: #f7c4d1;
+  font-family: serif;
+}
+.heart_img_testi{
+  width: 110px;                /* або 80px — як тобі по дизайну */
+  height: auto;
+  transform: translateY(2px); /* легке вирівнювання по лінії тексту */
+}
+.testimonial img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.testimonial p {
+  font-size: 16px;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.testimonial strong {
+  display: block;
+  font-weight: 700;
+  color: #d94877;
+}
+
+/* точки */
+.carousel-indicators {
+  margin-top: 30px;
+  margin-bottom: 70px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.carousel-indicators span {
+  width: 12px;
+  height: 12px;
+  background: #f7c4d1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators span.active {
+  background: #d94877;
+  transform: scale(1.2);
+}
+
+/* 📱 адаптив */
+@media (max-width: 1024px) {
+  .testimonial { flex: 0 0 45%; 
+  }
+  .testimonials-carousel{
+    width:88%;
+  }
+  .carousel-track {
+    width:110%;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial { flex: 0 0 90%; }
+}
+
+
+
+    /* PRICE */
+
+
+.price-section {
+  background: #fff9fa;
+  
+  padding: 10px 20px;
+  text-align: center;
+}
+/* ============================
+   ЗАГОЛОВОК "ЗРОБИ КРОК"
+============================ */
+.title-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto 40px;
+  text-transform: uppercase;
+  font-family: 'Halvar Breit Bd', sans-serif;
+  line-height: 1;
+}
+
+.step-left {
+  font-size: 64px;
+  color: #000;
+  text-align: left;
+}
+
+.step-right {
+  font-size: 64px;
+  color: #d94877;
+  text-align: right;
+}
+
+/* ефект для мобільних */
+@media (max-width: 768px) {
+  .title-step {
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .step-left, .step-right {
+
+    line-height: 1.1;
+  }
+  .step-left {
+    color: #000;
+    align-self: flex-start;
+        font-size: 40px;
+  }
+  .step-right {
+    color: #d94877;
+        font-size: 27px;
+  }
+}
+/* ====== ІЗОЛЯЦІЯ SNIP1404 ====== */
+.snip1404.isolate * {
+  all: unset;
+  display: revert;
+  box-sizing: border-box;
+  font-family: 'Halvar Breit Rg', Arial, sans-serif;
+}
+.snip1404.isolate {
+  all: revert;
+  font-family: 'Halvar Breit Rg', Arial, sans-serif;
+  color: #ffffff;
+  text-align: left;
+  font-size: 16px;
+  max-width: 400px;
+  margin: 60px auto;
+}
+.snip1404.isolate .plan {
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #d94877;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: #f7c4d1;
+  border-radius: 8px;
+  transition: all 0.25s ease-out;
+}
+.snip1404.isolate header {
+  background-color: #f7c4d1;
+  color: #ffffff;
+}
+.snip1404.isolate .plan-title {
+  background-color: rgba(217, 72, 118, 0.582);
+  margin: 0;
+  padding: 20px 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 18px;
+  position: relative;
+}
+.snip1404.isolate .plan-title:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 300px 0 0;
+  border-color: rgba(217, 72, 118, 0.582) transparent transparent;
+}
+.snip1404.isolate .plan-cost {
+  padding: 40px 20px 10px;
+  text-align: right;
+}
+.snip1404.isolate .plan-price {
+  font-weight: 600;
+  font-size: 3em;
+}
+.snip1404.isolate .plan-type {
+  opacity: 0.8;
+  font-size: 0.7em;
+  text-transform: uppercase;
+}
+.snip1404.isolate .plan-features {
+  padding: 0 0 20px;
+  margin: 0;
+  list-style: none;
+}
+.snip1404.isolate .plan-features li {
+  padding: 8px 5%;
+  font-size: 16px;
+}
+.snip1404.isolate .plan-features i {
+  margin-right: 8px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.snip1404.isolate .plan-select {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+}
+.snip1404.isolate .plan-select a {
+  background-color: #d94877;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-size: 0.75em;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  display: inline-block;
+}
+.snip1404.isolate .plan-select a:hover {
+  background-color: #f7c4d1;
+}
+.snip1404.isolate .plan:hover {
+  margin-top: -10px;
+  border-color: #d8215b;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+/* ============================
+   ДЕКОРАТИВНІ ЕЛІПСИ ДЛЯ ПРАЙСУ
+============================ */
+.price-decor {
+  position: absolute;
+  top: 50%;
+  width: 980px;
+  height: auto;
+  opacity: 0.5;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.decor-left {
+  left: -180px;
+}
+
+.decor-right {
+  right: -180px;
+  transform: translateY(-50%) scaleX(-1); /* дзеркально */
+}
+
+/* вимикаємо на мобільних */
+@media (max-width: 768px) {
+  .price-decor {
+    display: none;
+  }
+}
+
+
+    /* CONTACT */
+/* ============================
+   МІНІМАЛІСТИЧНИЙ CONTACT
+============================ */
+.contact {
+  background: #fff;
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.contact-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-title {
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 48px;
+  text-transform: lowercase;
+  color: #000;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.contact-text {
+  font-family: 'Halvar Breit Lt', sans-serif;
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+.telegram-btn {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 40px;
+  font-family: 'Halvar Breit Bd', sans-serif;
+  text-transform: uppercase;
+  background: #d94877;
+  color: #fff;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.telegram-btn:hover {
+  background: #4B6137;
+  transform: translateY(-3px);
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+  .contact { padding: 60px 20px; }
+  .contact-title { font-size: 36px; }
+  .contact-text { font-size: 16px; }
+  .telegram-btn { font-size: 16px; padding: 14px 30px; }
+}
+
+footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max-width:768px){ section{padding:60px 20px;} .hero{padding-left:20px;text-align:center;justify-content:center;} .result{grid-template-columns:1fr;} }
+  
+  
+.video-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+}
+
+.video-content {
+  position: relative;
+  width: 90%;
+  max-width: 640px;
+  max-height: 80vh; /* 🔥 обмежує висоту */
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-content video {
+  width: 100%;
+  height: auto;
+  max-height: 80vh; /* 🔥 обмежує вертикальну висоту */
+  display: block;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 2;
+}
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 4;
+  transition: background 0.3s ease;
+}
+.play-overlay img {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+.play-overlay:hover img { transform: scale(1.1); }
+
+  
+  </style>
+</head>
+<body>
+
+
+ <section class="hero">
+  <div class="hero-content">
+    <h1>
+Адмін — це не просто дівчинка на ресепшені
+    </h1>
+
+    <h2>
+  <span class="highlight">
+    Від ресепшену до profit: навчимо твою праву руку робити гроші і закохувати клієнтів.
+  </span>
+</h2>
+
+    <a href="#program" class="hero-btn">
+      Дізнатися більше →
+    </a>
+  </div>
+</section>
+
+
+<section class="adele-slide">
+  <div class="slide-container">
+
+<!-- Додаємо title wrapper без заокруглення -->
+<div class="title-section" style="text-align:center;margin-bottom:40px;">
+  <div class="title-with-icon">
+    <img src="310cc84b5fdb46d548836ed72475503581cd38e5.png" alt="Адель логотип" class="title-icon" />
+    <h1>АДЕЛЬ — ЦЕ</h1>
+  </div>
+</div>
+
+
+
+
+    <div class="main-body">
+      <!-- Фото Адель -->
+      <div class="adele-photo">
+<div class="photo-wrapper">
+  <img src="Film_strip.png" alt="Фотострічка" class="film-strip">
+  <img src="adel_phone.png" alt="Адель" class="main-photo">
+  <div class="play-overlay" id="openVideo">
+    <img src="play-button.png" alt="Play Video">
+  </div>
+
+  <img src="arrow.png" alt="Стрілка" class="photo-arrow">
+</div>
+
+
+</div>
+
+
+      <!-- Текст з інтерактивними картками -->
+      <div class="text-info">
+        <p><strong>10+ років у преміум beauty</strong> – HR, ментор і гуру продажів</p>
+        <p>Вона перетворює адміністраторів на <span class="highlight-pink">системних лідерів</span>, які керують командою, піднімають продажі і роблять салон <span class="underline-wavy">profit-орієнтованим</span>.</p>
+
+        <div class="cards-stack">
+          <div class="card card-1"><span class="asterisk">*</span>Сервіс <br><small>Вражати клієнта кожним контактом</small></div>
+          <div class="card card-2"><span class="asterisk">*</span>Продажі <br><small>Не нав’язуючи, але ефективно</small></div>
+          <div class="card card-3"><span class="asterisk">*</span>Команда <br><small>Будувати згуртовану та продуктивну</small></div>
+        </div>
+
+        <p style="margin-top:20px;font-style:italic;">
+  Адель вчить не просто адміністраторів – вона формує 
+  <strong class="highlight-dark-pink">праву руку бізнесу</strong>, яка робить роботу салону легшою, прибутковішою та цікавою.
+</p>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="stats-section">
+  <div class="stats-header with-image">
+    <img src="call.png" alt="Декор call" class="stats-left-img">
+    <h2>
+      скільки <span class="wavy-underline">любові</span> та <span class="wavy-underline">системи</span> у курсі
+    </h2>
+  </div>
+
+  <div class="bubble-layer">
+    <!-- 💭 Кулі -->
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <div class="circle c3"></div>
+
+    <!-- 💬 Теги -->
+    <div class="tag pink t1">поліграфію</div>
+    <div class="tag white t2">презентації</div>
+    <div class="tag white t3">мобільні й веб інтерфейси</div>
+    <div class="tag pink t4">чеклісти</div>
+    <div class="tag pink t5">рекламні</div>
+    <div class="tag pink t6">креативи</div>
+    <div class="tag white t7">гайди</div>
+    <div class="tag pink t8">упаковку курсів та інтенсивів</div>
+  </div>
+</section>
+
+
+
+<section class="love-ticker">
+  <div class="ticker-track">
+    <span>LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE &nbsp; LOVE</span>
+  </div>
+</section>
+
+
+<section class="match-section">
+  <div class="match-container">
+    <div class="match-left">
+      <h2>це точно <span class="highlight">метч</span>, якщо...</h2>
+      <p>Ти шукаєш не просто курс, а середовище, де тебе розуміють, підтримують і допомагають зростати професійно.</p>
+    </div>
+    <div class="match-right">
+      <div class="match-carousel">
+        <div class="match-item active">
+          <p> ♡ Ти адміністратор, який хоче системності, але не знає, з чого почати.</p>
+        </div>
+        <div class="match-item">
+          <p> ♡ Ти керуюча салону і хочеш, щоб твій адмін працював не “на око”, а за чітким алгоритмом.</p>
+        </div>
+        <div class="match-item">
+          <p> ♡ Ти власниця, яка втомилась все тримати на собі — і хочеш делегувати без хаосу.</p>
+        </div>
+        <div class="match-item">
+          <p> ♡ Ти тільки мрієш про кар’єру адміністратора, але хочеш стартувати з правильних навичок.</p>
+        </div>
+      </div>
+
+      <div class="match-controls">
+        <button class="prev">‹</button>
+        <button class="next">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const matchItems = document.querySelectorAll('.match-item');
+  let matchIndex = 0;
+
+  const showItem = (i) => {
+    matchItems.forEach(item => item.classList.remove('active'));
+    matchItems[i].classList.add('active');
+  };
+
+  document.querySelector('.next').addEventListener('click', () => {
+    matchIndex = (matchIndex + 1) % matchItems.length;
+    showItem(matchIndex);
+  });
+
+  document.querySelector('.prev').addEventListener('click', () => {
+    matchIndex = (matchIndex - 1 + matchItems.length) % matchItems.length;
+    showItem(matchIndex);
+  });
+</script>
+
+<section id="program" class="program-section">
+ <div class="program-wrapper">
+  
+      <div class="program-heading-wrapper">
+   <h2 class="program-heading">програма курсу</h2>
+   <img src="pink_micro.png" alt="Мікрофон" class="program-header-image">
+  </div>
+    <div class="program-layout">
+   <div class="program-right">
+    <div class="program">
+     <div class="program-item">
+      <button class="program-title">
+    <span>1. Найм і старт</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Навчишся правильно шукати адміністратора, ставити чіткі критерії, проводити співбесіди без інтуїції “подобається / не подобається”. Розберемо стажування, адаптацію і як не втратити людину на першому тижні. </p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>2. Обов’язки адміністратора</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Базові функції, додаткові задачі, субординація та “зони відповідальності”. Ти побачиш, як має виглядати день адміністратора — по годинах, із прикладами шаблонів.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>3. Психологія сервісу</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>М’яка комунікація, відновлення довіри після негативу, як збирати відгуки, що реально впливають на продаж. Поговоримо про тон сервісу і як зробити клієнтів адвокатами бренду.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>4. Продажі 1: переписка і коментарі</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Алгоритми відповідей, шаблони фраз, скрипти для обробки заперечень. Як не бути нав’язливими, але завжди закривати діалог на запис.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>5. Продажі 2: дзвінки та довпродажі</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Як звучати впевнено, закривати на додаткові послуги без “тиску”, формули для upsell і приклади успішних розмов.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>6. CRM і клієнтська база</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Яку CRM обрати, як налаштувати аналітику, розподіл клієнтів за категоріями, автоматизація нагадувань і система онлайн-запису.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>7. Комунікація з майстрами</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Як адміну бути мостом між клієнтами та командою: структура чатів, правила комунікації, профілактика конфліктів, робота з “токсичними” колегами.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>8. KPI та ефективність</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Які показники реально відображають якість роботи. Система оцінки: від конверсії у запис до повторних візитів. Шаблони звітів і приклади таблиць.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>9. Ріст і розвиток</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Як вирощувати старшого адміністратора чи керуючу. Сценарії розвитку, зарплатні моделі, мотивація через цілі, а не страх.</p>
+   </div>
+  </div>
+
+  <div class="program-item">
+   <button class="program-title">
+    <span>10. Q&A сесія з керуючою та адміном</span>
+    <span class="icon">+</span>
+   </button>
+   <div class="program-content">
+    <p>Жива зустріч у Zoom, де вони розбирають кризові ситуації, відповідають на питання, показують “закулісся” справжньої адміністративної роботи.</p>
+   </div>
+  </div>
+ </div>
+ </div>
+ </div>
+ 
+</section>
+
+<script>
+ document.querySelectorAll(".program-title").forEach((btn) => {
+  btn.addEventListener("click", () => {
+   const item = btn.parentElement;
+   item.classList.toggle("open");
+   btn.querySelector(".icon").textContent = item.classList.contains("open") ? "−" : "+";
+  });
+ });
+</script>
+
+
+
+<section class="motivation">
+  <div class="motivation-inner">
+    <div class="motivation-text">
+      <h2>курс сам не пройде… але ти можеш проскочити повз!</h2>
+      <p class="hint">#НеПроґавСвоюМожливість</p>
+
+      <!-- Декілька кнопок під текстом 
+      <div class="motivation-buttons">
+        <a href="#signup" class="btn">Хочу почати →</a>
+        <a href="#signup" class="btn" style="background: #fff; color: var(--pink); margin-left: 12px;">Дізнатися більше</a>
+        <a href="#signup" class="btn" style="background: #4B6137; color: #fff; margin-left: 12px;">Записатися зараз</a>
+      </div>
+    </div>-->
+
+    <!-- декоративні плями / абстрактні елементи -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+  </div>
+</section>
+
+
+
+<section class="result-section">
+
+  <!-- 🌸 Блок із квіткою і заголовком -->
+  <div class="result-header">
+    <img src="star.png" alt="flower background" class="result-flower">
+    <h2>адміністратор — не просто дівчинка, а стратегія </h2>
+  </div>
+
+  <!-- 🌷 Текст нижче, під фото -->
+  <div class="result-text">
+    <p>
+      Ти більше не панікуєш, коли дзвонить телефон,  
+      і не губишся, коли треба закрити продаж.
+      Адмін, який вміє продавати, керувати і надихати —  
+      це вже не мрія, це <b>ТИ</b>
+    </p>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+ <section class="testimonials-section">
+  <div class="title-section">
+    <div class="title-wrapper">
+  <h1>відгуки учасників</h1>
+  <img class="heart_img_testi" src="Screenshot 2025-10-27 162028.png" alt="heart">
+    </div>
+  </div>
+
+  <div class="testimonials-carousel">
+    <div class="carousel-track">
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Аліна">
+        <p>“Курс — це вибух! Стала впевненою в роботі і нарешті зрозуміла, як системно керувати процесами.”</p>
+        <strong>Аліна</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Марія">
+        <p>“Дуже структурно, просто і з любов’ю. Нарешті відчуваю себе правою рукою власника.”</p>
+        <strong>Марія</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Ірина">
+        <p>“Після курсу все стало на свої місця. Клієнти задоволені, а команда працює спокійно.”</p>
+        <strong>Ірина</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Катерина">
+        <p>“Навчання змінило моє бачення ролі адміністратора. Тепер я — координатор усього салону.”</p>
+        <strong>Катерина</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Дарія">
+        <p>“Після кожного уроку — практичні фішки. Це реально курс, який працює.”</p>
+        <strong>Дарія</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Юлія">
+        <p>“Мені подобається, що матеріали подані легко, але зміст — максимально професійний.”</p>
+        <strong>Юлія</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Олена">
+        <p>“Я стала спокійнішою і впевненою. Тепер я не просто адміністратор, а менеджер сервісу.”</p>
+        <strong>Олена</strong>
+      </div>
+
+      <div class="testimonial">
+        <img src="IMG_5101 1.png" alt="Тетяна">
+        <p>“Курс мотивував не лише працювати краще, а й любити свою роботу ще більше.”</p>
+        <strong>Тетяна</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-indicators"></div>
+</section>
+
+<script>
+const track = document.querySelector('.carousel-track');
+const items = Array.from(track.children);
+const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+let index = 0;
+
+// створюємо точки
+items.forEach((_, i) => {
+  const dot = document.createElement('span');
+  if (i === 0) dot.classList.add('active');
+  indicatorsContainer.appendChild(dot);
+});
+
+const dots = Array.from(indicatorsContainer.children);
+
+// клонування першого та останнього елементів
+const firstClone = items[0].cloneNode(true);
+const lastClone = items[items.length - 1].cloneNode(true);
+track.appendChild(firstClone);
+track.insertBefore(lastClone, items[0]);
+
+const allItems = Array.from(track.children);
+const itemWidth = items[0].getBoundingClientRect().width + 24;
+
+let isTransitioning = false;
+track.style.transform = `translateX(-${itemWidth}px)`;
+
+const updateDots = () => {
+  dots.forEach(d => d.classList.remove('active'));
+  dots[index % items.length].classList.add('active');
+};
+
+const moveToIndex = (newIndex) => {
+  if (isTransitioning) return;
+  isTransitioning = true;
+  index = newIndex;
+  track.style.transition = 'transform 0.6s ease';
+  track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
+  updateDots();
+};
+
+track.addEventListener('transitionend', () => {
+  isTransitioning = false;
+  if (index === -1) {
+    track.style.transition = 'none';
+    index = items.length - 1;
+    track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
+  } else if (index === items.length) {
+    track.style.transition = 'none';
+    index = 0;
+    track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
+  }
+});
+
+// кліки по точках
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => moveToIndex(i));
+});
+
+// свайп для мобільних
+let startX = 0;
+track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+track.addEventListener('touchend', (e) => {
+  const endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) moveToIndex(index + 1);
+  else if (endX - startX > 50) moveToIndex(index - 1);
+});
+
+// автопрокрутка без пауз
+setInterval(() => {
+  if (!isTransitioning) moveToIndex(index + 1);
+}, 4000);
+
+</script>
+
+<section id="signup" class="price-section">
+<div class="title-step">
+  <div class="step-left">зроби крок</div>
+  <div class="step-right">до нової системи</div>
+</div>
+
+  <div class="snip1404 isolate">
+    <div class="plan">
+      <header>
+        <h4 class="plan-title">Starter</h4>
+        <div class="plan-cost">
+          <span class="plan-price">₴4 900</span><span class="plan-type">/курс</span>
+        </div>
+      </header>
+      <ul class="plan-features">
+        <li><i class="ion-checkmark"></i>6 тижнів навчання</li>
+        <li><i class="ion-checkmark"></i>10 модулів з практикою</li>
+        <li><i class="ion-checkmark"></i>Чеклісти, скрипти, шаблони</li>
+        <li><i class="ion-checkmark"></i>Підтримка Адель та команди</li>
+        <li><i class="ion-checkmark"></i>Доступ 6 місяців</li>
+      </ul>
+      <div class="plan-select"><a href="#contact">Записатися</a></div>
+    </div>
+  </div>
+    <img src="Ellipse 6.png" alt="" class="price-decor decor-left">
+  <img src="Ellipse 6.png" alt="" class="price-decor decor-right">
+</section>
+
+
+
+
+
+
+
+         
+     
+
+<section class="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">зв’язок зі мною</h2>
+    <p class="contact-text">Будь на хвилі — пиши мені у Telegram</p>
+    <a href="https://t.me/yourusername" target="_blank" class="telegram-btn">написати</a>
+  </div>
+</section>
+
+
+  <footer>
+    © 2025 Adele Course. Всі права захищені.
+  </footer>
+  <div class="floating-footer">
+
+  <a href="#signup" class="footer-btn main">Записатися</a>
+
+</div>
+<script>
+const footer = document.querySelector('.floating-footer');
+const heroHeight = document.querySelector('.hero').offsetHeight;
+const footerBtns = document.querySelectorAll('.footer-btn');
+
+// показуємо футер після hero
+window.addEventListener('scroll', () => {
+  if (window.scrollY > heroHeight - 100) {
+    footer.classList.add('show-footer');
+  } else {
+    footer.classList.remove('show-footer');
+  }
+});
+
+// логіка активності при кліку / тапі
+footerBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    footerBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // знімаємо активність через 1.5с (на мобільних — як тап)
+    setTimeout(() => btn.classList.remove('active'), 1500);
+  });
+});
+
+// автоматичне підсвічування при скролі до секції
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let scrollPos = window.scrollY + window.innerHeight / 2;
+
+  sections.forEach(section => {
+    if (scrollPos > section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+      const id = section.getAttribute('id');
+      footerBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('href') === `#${id}`) {
+          btn.classList.add('active');
+        }
+      });
+    }
+  });
+});
+</script>
+
+
+
+
+
+<!-- 🎬 Відео-попап -->
+<div id="videoModal" class="video-modal">
+  <div class="video-content">
+    <span class="close-btn">&times;</span>
+    <video id="adeleVideo" controls playsinline>
+      <source src="ADEL.mp4" type="video/mp4">
+      Ваш браузер не підтримує відео тег.
+    </video>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('videoModal');
+  const video = document.getElementById('adeleVideo');
+  const openBtn = document.querySelector('.adele-photo .play-overlay');
+  const closeBtn = modal.querySelector('.close-btn');
+
+  // відкрити попап і почати відео
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    video.currentTime = 0;
+    video.muted = false;
+    video.play();
+  });
+
+  // закрити
+  closeBtn.addEventListener('click', () => {
+    video.pause();
+    modal.style.display = 'none';
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      video.pause();
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
+
+
+
+
+
+</body>
+</html>
