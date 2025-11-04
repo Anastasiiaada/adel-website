@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Адмін - це не просто дівчинка на ресепшені</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <meta name="description" content="Адмін - це не просто дівчинка на ресепшені" />
   <style>
    /* ============================
@@ -393,37 +394,113 @@ section::after {
 
 
     /* HERO */
-    .hero {
-  background:  url('IMG_7590.png') center/cover no-repeat;
-  min-height: 90vh; /* базова висота для великих екранів */
+.hero-modern {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  padding: 100px 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-modern::after {
+  content: "";
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  background: url("pink_pic.png") center/contain no-repeat;
+  opacity: 0.9;
+  z-index: 0;
+  filter: blur(25px);
+}
+
+.hero-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 80px;
-  color: white;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
   position: relative;
+  z-index: 1;
 }
 
-.hero::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,0.4);
-}
-
-.hero-content {
-  position: relative;
-  max-width: 600px;
-  z-index: 2;
-}
-
-/* Спеціальне форматування для слова "Адмін" */
-.hero h1 {
+.hero-text {
+  flex: 1;
   font-family: 'Halvar Breit Rg', sans-serif;
-  font-size: 52px;
-  color: white;
-  line-height: 1.1;
 }
+
+.hero-text h1 {
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 54px;
+  color: #000;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  color: #444;
+  font-size: 20px;
+  margin-bottom: 32px;
+  max-width: 480px;
+  line-height: 1.5;
+}
+
+.hero-btn {
+  background: #d94877;
+  color: #fff;
+  font-family: 'Halvar Breit Bd', sans-serif;
+  text-transform: uppercase;
+  padding: 16px 34px;
+  border-radius: 40px;
+  text-decoration: none;
+  transition: 0.3s;
+  display: inline-block;
+}
+
+.hero-btn:hover {
+  background: #000;
+}
+
+.hero-photo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-photo img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
+
+/* адаптив */
+@media (max-width: 900px) {
+  .hero-container {
+    flex-direction: column-reverse;
+   
+    text-align: center;
+  }
+  .hero-text h1 {
+    font-size: 38px;
+  }
+  .hero-sub {
+    font-size: 18px;
+    margin: 16px auto 28px;
+  }
+  .hero-photo img {
+    max-width: 320px;
+  }
+  .hero-modern::after {
+    bottom: 30%;
+  }
+}
+
 
 
 /* ============================
@@ -437,98 +514,6 @@ section::after {
 }
 
 
-
-
-.hero h2 {
-  color: #fdfdfd;
-  margin: 20px 0;
-}
-
-.hero-btn {
-  display: inline-block;
-  padding: 18px 36px;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  color: white;
-  font-weight: 600;
-  font-size: 18px;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-  z-index: 2;
-}
-
-/* Адаптивність */
-@media (max-width: 1024px) {
-  .hero {
-    padding-left: 50px;
-  }
-  .hero h1 {
-    font-size: 44px;
-  }
-  .hero-btn {
-    font-size: 16px;
-    padding: 16px 32px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    justify-content: center;
-    padding: 60px 20px;
-    text-align: center;
-    min-height: 80vh;
-  }
-  .hero h1 {
-    font-size: 36px;
-        text-align: left;
-  }
-  .hero h2 {
-    font-size: 20px;
-    text-align: left;
-  }
-  .hero-btn {
-    margin-top: 20px;
-    font-size: 16px;
-    padding: 14px 28px;
-
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 28px;
-  }
-  .hero h2 {
-    font-size: 18px;
-  }
-  .hero-btn {
-    padding: 12px 24px;
-        margin-top: 20px;
-  }
-.hero-content {
-  background: rgba(0, 0, 0, 0.25);
-  padding: 14px 20px;
-  border-radius: 12px;
-}
-
-.hero-text {
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-}
-
-
-
-
-
-
-
-
-
-}
 
 /* ============================
    СЕКЦІЯ АДЕЛЬ (стабільна версія)
@@ -822,14 +807,14 @@ section::after {
 
 .stats-header {
   max-width: 700px;
-  margin: 0 auto 60px;
+  margin: 0 auto 0px;
 }
 
 .stats-header h2 {
   font-family: "Halvar Breit Rg", cursive;
   font-size: 42px;
   color: var(--black);
-  margin-bottom: 16px;
+
 }
 /* зображення зліва від заголовка */
 .stats-header.with-image {
@@ -1004,123 +989,20 @@ section::after {
   .stats-header p{font-size:18px;}
 }
 
-
-/* ========= BASE ========= */
-.bubble-layer {
-  position: relative;
+.stats-svg-wrapper {
   width: 100%;
-  max-width: 1100px;
-  height: 520px;
-  margin: 0 auto 80px;
-  border-radius: 60px;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5%;
 }
 
-/* 💭 Кулі */
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  background: #c46aa1;
-  opacity: 0.3;
-  z-index: 1;
-
+.stats-svg {
+  width: 100%;
+  height: auto;
+  max-width: 1200px;
+  display: block;
 }
-
-/* 💬 Теги */
-.tag {
-  position: absolute;
-  display: inline-block;
-  padding: 18px 42px;
-  border-radius: 999px;
-  font-family: 'Halvar Breit Rg', sans-serif;
-  font-size: 26px;
-  font-weight: 600;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  z-index: 2;
-  white-space: nowrap;
-
-}
-.tag.pink { background: #f7c4d1; color: #000; }
-.tag.white { background: #fff; border: 3px solid #f7c4d1; color: #000; }
-
-
-/* ========= 💻 DESKTOP (>1200px) ========= */
-@media (min-width: 1200px) {
-  /* Кулі */
-  .c1 { top: 25.5%; left: 20%; width: 40px; height: 40px; }
-  .c2 { top: 19%; left: 43%; width: 50px; height: 50px; }
-  .c3 { top: 55%; left: 59.8%; width: 36px; height: 36px; }
-
-  /* Теги */
-  .t1 { top: 7%;  left: 40%; transform: rotate(13deg); }
-  .t2 { top: 12%; left: 19%; transform: rotate(7deg); }
-  .t3 { top: 26%; left: 34%; transform: rotate(-7deg); }
-  .t4 { top: 45%; left: 60%; transform: rotate(19deg); }
-  .t5 { top: 32.8%; left: 14%; transform: rotate(2deg); }
-  .t6 { top: 47%; left: 24%; transform: rotate(0deg); }
-  .t7 { top: 46%; left: 44%; transform: rotate(0deg); }
-  .t8 { top: 62%; left: 26%; transform: rotate(0deg); }
-}
-
-/* ========= 🧩 LAPTOP / TABLET (≤1024px) ========= */
-@media (max-width: 1024px) {
-  .bubble-layer { height: 460px; }
-  .tag { font-size: 22px; padding: 14px 34px; }
-
-  .c1 { top: 28%; left: 22%; width: 36px; height: 36px; }
-  .c2 { top: 20%; left: 45%; width: 44px; height: 44px; }
-  .c3 { top: 58%; left: 63%; width: 32px; height: 32px; }
-
-  .t1 { top: 10%; left: 32%; transform: rotate(8deg); }
-  .t2 { top: 14%; left: 8%;  transform: rotate(3deg); }
-  .t3 { top: 27%; left: 28%; transform: rotate(-4deg); }
-  .t4 { top: 44%; left: 53%; transform: rotate(12deg); }
-  .t5 { top: 31%; left: 10%; transform: rotate(0deg); }
-  .t6 { top: 48%; left: 20%; transform: rotate(0deg); }
-  .t7 { top: 52%; left: 38%; transform: rotate(0deg); }
-  .t8 { top: 64%; left: 18%; transform: rotate(0deg); }
-}
-
-/* ========= 📱 TABLET SMALL (≤768px) ========= */
-@media (max-width: 768px) {
-  .bubble-layer { height: 420px; }
-  .tag { font-size: 18px; padding: 10px 26px; }
-
-  .c1 { top: 24%; left: 18%; width: 30px; height: 30px; }
-  .c2 { top: 18%; left: 40%; width: 38px; height: 38px; }
-  .c3 { top: 60%; left: 56%; width: 28px; height: 28px; }
-
-  .t1 { top: 8%;  left: 20%; transform: rotate(5deg); }
-  .t2 { top: 15%; left: 4%;  transform: rotate(2deg); }
-  .t3 { top: 26%; left: 28%; transform: rotate(-2deg); }
-  .t4 { top: 46%; left: 50%; transform: rotate(5deg); }
-  .t5 { top: 34%; left: 10%; transform: rotate(0deg); }
-  .t6 { top: 52%; left: 18%; transform: rotate(0deg); }
-  .t7 { top: 58%; left: 36%; transform: rotate(0deg); }
-  .t8 { top: 66%; left: 22%; transform: rotate(0deg); }
-}
-
-/* ========= 📞 MOBILE (≤480px) ========= */
-@media (max-width: 480px) {
-  .bubble-layer { height: 360px; }
-  .tag { font-size: 15px; padding: 8px 18px; white-space: normal; text-align: center; }
-
-  .c1 { top: 25%; left: 18%; width: 24px; height: 24px; }
-  .c2 { top: 15%; left: 38%; width: 30px; height: 30px; }
-  .c3 { top: 62%; left: 58%; width: 24px; height: 24px; }
-
-  .t1 { top: 5%;  left: 4%;  transform: rotate(0deg); }
-  .t2 { top: 12%; left: 2%;  transform: rotate(0deg); }
-  .t3 { top: 25%; left: 20%; transform: rotate(0deg); }
-  .t4 { top: 43%; left: 45%; transform: rotate(0deg); }
-  .t5 { top: 32%; left: 4%;  transform: rotate(0deg); }
-  .t6 { top: 50%; left: 8%;  transform: rotate(0deg); }
-  .t7 { top: 56%; left: 28%; transform: rotate(0deg); }
-  .t8 { top: 65%; left: 10%; transform: rotate(0deg); }
-}
-
-
-
 
 
 /* Бігаюча стрічка LOVE LOVE LOVE */
@@ -1782,194 +1664,130 @@ justify-content: flex-start;
 
 
 
-    /* PRICE */
-
-
+    /* === ВИПРАВЛЕННЯ РОЗТАШУВАННЯ ПРАЙС-БЛОКУ === */
 .price-section {
-  background: #fff9fa;
-  
-  padding: 10px 20px;
+  background: linear-gradient(180deg,#fdeef3 0%,#fff9fa 100%);
   text-align: center;
+  padding: 120px 20px;
 }
-/* ============================
-   ЗАГОЛОВОК "ЗРОБИ КРОК"
-============================ */
-.title-step {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 10px;
-  max-width: 900px;
-  margin: 0 auto 40px;
-  text-transform: uppercase;
+
+.price-title {
   font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 52px;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  line-height: 1.1;
+}
+
+.price-title .accent {
+  color: var(--pink);
+}
+
+.price-card {
+  position: relative;
+  background: var(--pink);
+  color: #fff;
+  border-radius: 28px;
+  padding: 60px 40px 50px;
+  width: 340px;
+  margin: 0 auto;
+  text-align: left;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.price-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.price-header h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.price-amount {
+  font-size: 56px;
+  font-weight: 700;
   line-height: 1;
 }
 
-.step-left {
-  font-size: 64px;
+.price-amount span {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  opacity: .9;
+}
+
+.save-badge {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: #fff;
   color: #000;
-  text-align: left;
-}
-
-.step-right {
-  font-size: 64px;
-  color: #d94877;
-  text-align: right;
-}
-
-/* ефект для мобільних */
-@media (max-width: 768px) {
-  .title-step {
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
-  }
-  .step-left, .step-right {
-
-    line-height: 1.1;
-  }
-  .step-left {
-    color: #000;
-    align-self: flex-start;
-        font-size: 40px;
-  }
-  .step-right {
-    color: #d94877;
-        font-size: 27px;
-  }
-}
-/* ====== ІЗОЛЯЦІЯ SNIP1404 ====== */
-.snip1404.isolate * {
-  all: unset;
-  display: revert;
-  box-sizing: border-box;
-  font-family: 'Halvar Breit Rg', Arial, sans-serif;
-}
-.snip1404.isolate {
-  all: revert;
-  font-family: 'Halvar Breit Rg', Arial, sans-serif;
-  color: #ffffff;
-  text-align: left;
-  font-size: 16px;
-  max-width: 400px;
-  margin: 60px auto;
-}
-.snip1404.isolate .plan {
-  position: relative;
-  overflow: hidden;
-  border: 3px solid #d94877;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  background-color: #f7c4d1;
-  border-radius: 8px;
-  transition: all 0.25s ease-out;
-}
-.snip1404.isolate header {
-  background-color: #f7c4d1;
-  color: #ffffff;
-}
-.snip1404.isolate .plan-title {
-  background-color: rgba(217, 72, 118, 0.582);
-  margin: 0;
-  padding: 20px 20px 0;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 18px;
-  position: relative;
-}
-.snip1404.isolate .plan-title:after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 40px 300px 0 0;
-  border-color: rgba(217, 72, 118, 0.582) transparent transparent;
-}
-.snip1404.isolate .plan-cost {
-  padding: 40px 20px 10px;
-  text-align: right;
-}
-.snip1404.isolate .plan-price {
-  font-weight: 600;
-  font-size: 3em;
-}
-.snip1404.isolate .plan-type {
-  opacity: 0.8;
-  font-size: 0.7em;
-  text-transform: uppercase;
-}
-.snip1404.isolate .plan-features {
-  padding: 0 0 20px;
-  margin: 0;
-  list-style: none;
-}
-.snip1404.isolate .plan-features li {
-  padding: 8px 5%;
-  font-size: 16px;
-}
-.snip1404.isolate .plan-features i {
-  margin-right: 8px;
-  color: rgba(0, 0, 0, 0.5);
-}
-.snip1404.isolate .plan-select {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  text-align: center;
-}
-.snip1404.isolate .plan-select a {
-  background-color: #d94877;
-  color: #ffffff;
-  text-decoration: none;
-  padding: 12px 20px;
-  font-size: 0.75em;
-  font-weight: 600;
+  padding: 6px 14px;
   border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  display: inline-block;
-}
-.snip1404.isolate .plan-select a:hover {
-  background-color: #f7c4d1;
-}
-.snip1404.isolate .plan:hover {
-  margin-top: -10px;
-  border-color: #d8215b;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
-}
-/* ============================
-   ДЕКОРАТИВНІ ЕЛІПСИ ДЛЯ ПРАЙСУ
-============================ */
-.price-decor {
-  position: absolute;
-  top: 50%;
-  width: 980px;
-  height: auto;
-  opacity: 0.5;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 0;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-.decor-left {
-  left: -180px;
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
 }
 
-.decor-right {
-  right: -180px;
-  transform: translateY(-50%) scaleX(-1); /* дзеркально */
+.features li {
+  font-size: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
 }
 
-/* вимикаємо на мобільних */
+.price-btn {
+  display: block;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 14px 0;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: background .3s;
+}
+
+.price-btn:hover {
+  background: var(--bg);
+  color: #000;
+}
+
+/* Адаптив */
 @media (max-width: 768px) {
-  .price-decor {
-    display: none;
+  .price-title {
+    font-size: 34px;
+    margin-bottom: 40px;
+  }
+  .price-card {
+    width: 90%;
+    padding: 50px 24px;
   }
 }
 
+/* 🎨 фон PNG для секції прайс тільки на десктопі */
+@media (min-width: 1025px) {
+  .price-section,
+  .hero-modern {
+    background: 
+      linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%), /* твій основний градієнт */
+      url('Group.png') center/cover no-repeat; /* 👉 сюди встав свій PNG */
+    background-blend-mode: soft-light; /* робить ніжно, без різких переходів */
+  }
+}
+
+.hero-modern {
+    background: 
+      linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%), /* твій основний градієнт */
+      url('Group.png') center/cover no-repeat; /* 👉 сюди встав свій PNG */
+    background-blend-mode: soft-light; /* робить ніжно, без різких переходів */
+  }
 
     /* CONTACT */
 /* ============================
@@ -2016,7 +1834,7 @@ justify-content: flex-start;
 }
 
 .telegram-btn:hover {
-  background: #4B6137;
+  background: var(--light-pink);
   transform: translateY(-3px);
 }
 
@@ -2093,29 +1911,38 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 }
 .play-overlay:hover img { transform: scale(1.1); }
 
+/* 🧩 Safari iOS fix: жирний шрифт у wavy-underline */
+@supports (-webkit-touch-callout: none) {
+  .wavy-underline {
+    font-family: 'Halvar Breit Bd', sans-serif !important;
+    font-weight: 700 !important;
+    -webkit-text-stroke: 0.2px transparent; /* примушує перерендер шрифту */
+  }
+}
+
   
   </style>
 </head>
 <body>
 
 
- <section class="hero">
-  <div class="hero-content">
-    <h1>
-Адмін — це не просто дівчинка на ресепшені
-    </h1>
+<section class="hero-modern">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>Адмін — це не просто дівчинка<br>на ресепшені</h1>
+      <p class="hero-sub">
+        Від ресепшену до profit: навчимо твою праву руку
+        робити гроші і закохувати клієнтів.
+      </p>
+      <a href="#program" class="hero-btn">Дізнатися більше →</a>
+    </div>
 
-    <h2>
-  <span class="highlight">
-    Від ресепшену до profit: навчимо твою праву руку робити гроші і закохувати клієнтів.
-  </span>
-</h2>
-
-    <a href="#program" class="hero-btn">
-      Дізнатися більше →
-    </a>
+    <div class="hero-photo">
+      <img src="DSC04420.jpg" alt="Адель фото">
+    </div>
   </div>
 </section>
+
 
 
 <section class="adele-slide">
@@ -2190,23 +2017,12 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
     </h2>
   </div>
 
-  <div class="bubble-layer">
-    <!-- 💭 Кулі -->
-    <div class="circle c1"></div>
-    <div class="circle c2"></div>
-    <div class="circle c3"></div>
-
-    <!-- 💬 Теги -->
-    <div class="tag pink t1">поліграфію</div>
-    <div class="tag white t2">презентації</div>
-    <div class="tag white t3">мобільні й веб інтерфейси</div>
-    <div class="tag pink t4">чеклісти</div>
-    <div class="tag pink t5">рекламні</div>
-    <div class="tag pink t6">креативи</div>
-    <div class="tag white t7">гайди</div>
-    <div class="tag pink t8">упаковку курсів та інтенсивів</div>
+  <!-- твоє готове SVG-зображення -->
+  <div class="stats-svg-wrapper">
+    <img src="stats.svg" alt="Інфографіка курсу" class="stats-svg">
   </div>
 </section>
+
 
 
 
@@ -2584,33 +2400,31 @@ setInterval(() => {
 
 </script>
 
-<section id="signup" class="price-section">
-<div class="title-step">
-  <div class="step-left">зроби крок</div>
-  <div class="step-right">до нової системи</div>
-</div>
+<section class="price-section">
+  <h2 class="price-title">
+    <span>ЗРОБИ КРОК ДО </span><br> <span class="accent">НОВОЇ СИСТЕМИ</span>
+  </h2>
 
-  <div class="snip1404 isolate">
-    <div class="plan">
-      <header>
-        <h4 class="plan-title">Starter</h4>
-        <div class="plan-cost">
-          <span class="plan-price">₴4 900</span><span class="plan-type">/курс</span>
-        </div>
-      </header>
-      <ul class="plan-features">
-        <li><i class="ion-checkmark"></i>6 тижнів навчання</li>
-        <li><i class="ion-checkmark"></i>10 модулів з практикою</li>
-        <li><i class="ion-checkmark"></i>Чеклісти, скрипти, шаблони</li>
-        <li><i class="ion-checkmark"></i>Підтримка Адель та команди</li>
-        <li><i class="ion-checkmark"></i>Доступ 6 місяців</li>
-      </ul>
-      <div class="plan-select"><a href="#contact">Записатися</a></div>
+  <div class="price-card">
+    <div class="price-header">
+      <h3>Pro</h3>
+      <p class="price-amount">$299 <span>Per year</span></p>
+      <div class="save-badge">Save 25%</div>
     </div>
+
+    <ul class="features">
+      <li>+ Заглушка 1</li>
+      <li>+ Заглушка 2</li>
+      <li>+ Заглушка 3</li>
+      <li>+ Заглушка 4</li>
+      <li>+ Заглушка 5</li>
+      <li>+ Заглушка 6</li>
+    </ul>
+
+    <a href="#" class="price-btn">Choose yearly plan</a>
   </div>
-    <img src="Ellipse 6.png" alt="" class="price-decor decor-left">
-  <img src="Ellipse 6.png" alt="" class="price-decor decor-right">
 </section>
+
 
 
 
@@ -2689,41 +2503,42 @@ window.addEventListener('scroll', () => {
 <div id="videoModal" class="video-modal">
   <div class="video-content">
     <span class="close-btn">&times;</span>
-    <video id="adeleVideo" controls playsinline>
-      <source src="ADEL.mp4" type="video/mp4">
-      Ваш браузер не підтримує відео тег.
-    </video>
+    <iframe 
+      id="adeleVideo"
+      src=""
+      width="100%"
+      height="360"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      frameborder="0">
+    </iframe>
   </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('videoModal');
-  const video = document.getElementById('adeleVideo');
-  const openBtn = document.querySelector('.adele-photo .play-overlay');
-  const closeBtn = modal.querySelector('.close-btn');
 
-  // відкрити попап і почати відео
+
+<script>
+  const modal = document.getElementById('videoModal');
+  const openBtn = document.getElementById('openVideo');
+  const closeBtn = document.querySelector('.close-btn');
+  const iframe = document.getElementById('adeleVideo');
+
   openBtn.addEventListener('click', () => {
     modal.style.display = 'flex';
-    video.currentTime = 0;
-    video.muted = false;
-    video.play();
+    iframe.src = "https://drive.google.com/file/d/1ySRo2sS27233sA09XC3P-uZsWV5iJIjd/preview?autoplay=1";
   });
 
-  // закрити
   closeBtn.addEventListener('click', () => {
-    video.pause();
+    iframe.src = "";
     modal.style.display = 'none';
   });
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-      video.pause();
+      iframe.src = "";
       modal.style.display = 'none';
     }
   });
-});
 </script>
 
 
