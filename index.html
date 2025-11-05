@@ -2596,19 +2596,30 @@ window.onload = () => {
   const closeBtn = document.querySelector('.close-btn');
   const video = document.getElementById('adeleVideo');
 
-  // 👇 ключовий фікс
-  video.load(); // змушує браузер завчасно підготувати відео
+  // попереднє завантаження, щоб Safari мав кадр
+  video.preload = 'auto';
+  video.playsInline = true;
+  video.load();
 
-  openBtn.addEventListener('click', () => {
+  // 👇 головний хак
+  const playSafe = () => {
     modal.style.display = 'flex';
+    video.currentTime = 0;
+    video.muted = false;
 
-    // ✅ трохи зачекати перед play (дає Safari час на ініціалізацію)
-    setTimeout(() => {
-      video.currentTime = 0;
-      video.muted = false;
-      video.play().catch(err => console.log('Safari autoplay fix:', err));
-    }, 200);
-  });
+    // Safari часто ігнорує перше play() → даємо 2 спроби
+    const tryPlay = async () => {
+      try {
+        await video.play();
+      } catch {
+        setTimeout(() => video.play(), 250);
+      }
+    };
+
+    tryPlay();
+  };
+
+  openBtn.addEventListener('click', playSafe);
 
   closeBtn.addEventListener('click', () => {
     video.pause();
