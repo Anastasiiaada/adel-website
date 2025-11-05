@@ -2596,27 +2596,31 @@ window.onload = () => {
   const closeBtn = document.querySelector('.close-btn');
   const video = document.getElementById('adeleVideo');
 
-  // попереднє завантаження, щоб Safari мав кадр
+  // прогріваємо відео
   video.preload = 'auto';
   video.playsInline = true;
   video.load();
 
-  // 👇 головний хак
   const playSafe = () => {
     modal.style.display = 'flex';
-    video.currentTime = 0;
+
+    // 🎯 робимо фейковий tap прямо по відео
     video.muted = false;
+    video.currentTime = 0;
 
-    // Safari часто ігнорує перше play() → даємо 2 спроби
-    const tryPlay = async () => {
-      try {
-        await video.play();
-      } catch {
-        setTimeout(() => video.play(), 250);
+    const gestureEvent = new Event('touchstart');
+    video.dispatchEvent(gestureEvent); // імітація взаємодії
+
+    // запускаємо через маленьку затримку
+    setTimeout(() => {
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // fallback: ще раз пробуємо після паузи
+          setTimeout(() => video.play(), 300);
+        });
       }
-    };
-
-    tryPlay();
+    }, 150);
   };
 
   openBtn.addEventListener('click', playSafe);
