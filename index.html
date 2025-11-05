@@ -2596,10 +2596,18 @@ window.onload = () => {
   const closeBtn = document.querySelector('.close-btn');
   const video = document.getElementById('adeleVideo');
 
+  // 👇 ключовий фікс
+  video.load(); // змушує браузер завчасно підготувати відео
+
   openBtn.addEventListener('click', () => {
     modal.style.display = 'flex';
-    video.currentTime = 0;
-    video.play();
+
+    // ✅ трохи зачекати перед play (дає Safari час на ініціалізацію)
+    setTimeout(() => {
+      video.currentTime = 0;
+      video.muted = false;
+      video.play().catch(err => console.log('Safari autoplay fix:', err));
+    }, 200);
   });
 
   closeBtn.addEventListener('click', () => {
@@ -2614,7 +2622,6 @@ window.onload = () => {
     }
   });
 };
-
 
 </script>
 
