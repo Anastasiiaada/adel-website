@@ -200,6 +200,12 @@ a, .btn, .program-title, .match-controls button {
 .show-footer {
   bottom: 20px !important;
 }
+.hide-footer {
+  bottom: -120px !important;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.6s ease;
+}
 
 
 /* 🔧 iPhone (iOS Safari) fix */
@@ -680,7 +686,7 @@ section::after {
   border-radius: 20px;
   font-weight: 600;
   color: #222;
-  background: #fdeef3;
+  background: #f4c8d6;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   flex: 1 1 140px;
@@ -1770,6 +1776,33 @@ justify-content: flex-start;
     padding: 50px 24px;
   }
 }
+.decor-img {
+  position: absolute;
+  z-index: 2;
+  width: 90px;
+  height: auto;
+  pointer-events: none;
+}
+
+/* курсор — зверху зліва, легкий нахил */
+.decor-left {
+  top: 150px;
+  left: -40px;
+  transform: rotate(-15deg);
+}
+
+/* скрєпка — зверху справа, трохи нахилена */
+.decor-right {
+  top: -50px;
+  right: -30px;
+  transform: rotate(12deg);
+}
+
+.decor-heart {
+  top: 400px;
+  right: -30px;
+  transform: rotate(12deg);
+}
 
 /* 🎨 фон PNG для секції прайс тільки на десктопі */
 @media (min-width: 1025px) {
@@ -1860,38 +1893,57 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   backdrop-filter: blur(6px);
 }
 
+/* 🎥 Вертикальне відео формату reels */
 .video-content {
   position: relative;
   width: 90%;
-  max-width: 640px;
-  max-height: 80vh; /* 🔥 обмежує висоту */
+  max-width: 360px;
+  aspect-ratio: 9 / 16;
   background: #000;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.video-content video {
+/* === FIX для повноекранного режиму відео === */
+.reel-video {
   width: 100%;
-  height: auto;
-  max-height: 80vh; /* 🔥 обмежує вертикальну висоту */
-  display: block;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Коли відео у fullscreen — показуємо повністю, без обрізки */
+.reel-video:fullscreen {
+  object-fit: contain !important;
+  background: #000; /* чорний фон, якщо співвідношення сторін інше */
+}
+
+/* Для Safari (бо він трошки інший) */
+.reel-video::-webkit-media-controls-fullscreen-button {
+  display: none;
 }
 
 
+/* ❌ Кнопка закриття */
 .close-btn {
   position: absolute;
-  top: 6px;
+  top: 10px;
   right: 14px;
   font-size: 32px;
   color: #fff;
   cursor: pointer;
-  line-height: 1;
-  z-index: 2;
+  z-index: 10;
+  transition: opacity 0.3s ease;
 }
+.close-btn:hover { opacity: 0.7; }
+
+@media (max-width: 480px) {
+  .video-content { max-width: 320px; }
+  .close-btn { font-size: 26px; top: 6px; right: 10px; }
+}
+
 .play-overlay {
   position: absolute;
   inset: 0;
@@ -1903,22 +1955,33 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   transition: background 0.3s ease;
 }
 .play-overlay img {
-  width: 64px;
-  height: 64px;
+  width: clamp(48px, 8vw, 80px);
+  height: auto;
   filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
   opacity: 0.9;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-.play-overlay:hover img { transform: scale(1.1); }
 
-/* 🧩 Safari iOS fix: жирний шрифт у wavy-underline */
+.play-overlay:hover img {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* 🧠 FIX: жирний заголовок "скільки любові та системи у курсі" на iPhone */
 @supports (-webkit-touch-callout: none) {
-  .wavy-underline {
+  .stats-header h2 {
     font-family: 'Halvar Breit Bd', sans-serif !important;
     font-weight: 700 !important;
-    -webkit-text-stroke: 0.2px transparent; /* примушує перерендер шрифту */
+    -webkit-text-stroke: 0.2px transparent; /* примушує Safari перемалювати жирний */
+  }
+
+  /* щоб підкреслені слова не “скидали” жирність */
+  .stats-header h2 .wavy-underline {
+    font-family: inherit !important;
+    font-weight: inherit !important;
   }
 }
+
 
   
   </style>
@@ -2400,29 +2463,33 @@ setInterval(() => {
 
 </script>
 
-<section class="price-section">
+<section id="signup" class="price-section">
   <h2 class="price-title">
     <span>ЗРОБИ КРОК ДО </span><br> <span class="accent">НОВОЇ СИСТЕМИ</span>
   </h2>
 
   <div class="price-card">
-    <div class="price-header">
-      <h3>Pro</h3>
-      <p class="price-amount">$299 <span>Per year</span></p>
-      <div class="save-badge">Save 25%</div>
-    </div>
-
-    <ul class="features">
-      <li>+ Заглушка 1</li>
-      <li>+ Заглушка 2</li>
-      <li>+ Заглушка 3</li>
-      <li>+ Заглушка 4</li>
-      <li>+ Заглушка 5</li>
-      <li>+ Заглушка 6</li>
-    </ul>
-
-    <a href="#" class="price-btn">Choose yearly plan</a>
+  <img src="курсор.png" alt="cursor" class="decor-img decor-left">
+  <img src="скрепка2.png" alt="skrepka" class="decor-img decor-right">
+  <img src="heartprice.png" alt="heart" class="decor-img decor-heart">
+  <div class="price-header">
+    <h3>Pro</h3>
+    <p class="price-amount">$299 <span>Per year</span></p>
+    <div class="save-badge">Save 25%</div>
   </div>
+
+  <ul class="features">
+    <li>+ Заглушка 1</li>
+    <li>+ Заглушка 2</li>
+    <li>+ Заглушка 3</li>
+    <li>+ Заглушка 4</li>
+    <li>+ Заглушка 5</li>
+    <li>+ Заглушка 6</li>
+  </ul>
+
+  <a href="#" class="price-btn">Choose yearly plan</a>
+</div>
+
 </section>
 
 
@@ -2454,35 +2521,36 @@ setInterval(() => {
 </div>
 <script>
 const footer = document.querySelector('.floating-footer');
-const heroHeight = document.querySelector('.hero').offsetHeight;
+const heroSection = document.querySelector('.hero-modern');
+const heroHeight = heroSection ? heroSection.offsetHeight : 600;
 const footerBtns = document.querySelectorAll('.footer-btn');
+const priceSection = document.querySelector('.price-section');
+const sections = document.querySelectorAll('section[id]');
 
-// показуємо футер після hero
 window.addEventListener('scroll', () => {
-  if (window.scrollY > heroHeight - 100) {
+  const scrollY = window.scrollY;
+  const scrollMid = scrollY + window.innerHeight / 2;
+
+  // === показуємо футер після hero ===
+  if (scrollY > heroHeight - 100) {
     footer.classList.add('show-footer');
   } else {
     footer.classList.remove('show-footer');
   }
-});
 
-// логіка активності при кліку / тапі
-footerBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    footerBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    // знімаємо активність через 1.5с (на мобільних — як тап)
-    setTimeout(() => btn.classList.remove('active'), 1500);
-  });
-});
+  // === ховаємо футер, якщо юзер у секції прайсу ===
+  const priceTop = priceSection.offsetTop;
+  const priceBottom = priceTop + priceSection.offsetHeight;
+  if (scrollMid > priceTop && scrollMid < priceBottom) {
+    footer.classList.remove('show-footer');
+    footer.classList.add('hide-footer');
+  } else {
+    footer.classList.remove('hide-footer');
+  }
 
-// автоматичне підсвічування при скролі до секції
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-  let scrollPos = window.scrollY + window.innerHeight / 2;
-
+  // === підсвічування активної секції ===
   sections.forEach(section => {
-    if (scrollPos > section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
+    if (scrollMid > section.offsetTop && scrollMid < section.offsetTop + section.offsetHeight) {
       const id = section.getAttribute('id');
       footerBtns.forEach(btn => {
         btn.classList.remove('active');
@@ -2493,53 +2561,64 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+// === логіка кліку/тапу ===
+footerBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    footerBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    setTimeout(() => btn.classList.remove('active'), 1500);
+  });
+});
 </script>
 
 
 
 
 
-<!-- 🎬 Відео-попап -->
+
+<!-- 🎬 ВІДЕО-МОДАЛЬНЕ ВІКНО -->
 <div id="videoModal" class="video-modal">
   <div class="video-content">
     <span class="close-btn">&times;</span>
-    <iframe 
-      id="adeleVideo"
-      src=""
-      width="100%"
-      height="360"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-      frameborder="0">
-    </iframe>
+    <video id="adeleVideo" class="reel-video" autoplay muted playsinline controls>
+      <source src="ADEL.webm" type="video/webm">
+      Твій браузер не підтримує відео. Тому просто листай далі
+    </video>
   </div>
 </div>
 
 
-
 <script>
+window.onload = () => {
   const modal = document.getElementById('videoModal');
   const openBtn = document.getElementById('openVideo');
   const closeBtn = document.querySelector('.close-btn');
-  const iframe = document.getElementById('adeleVideo');
+  const video = document.getElementById('adeleVideo');
 
   openBtn.addEventListener('click', () => {
     modal.style.display = 'flex';
-    iframe.src = "https://drive.google.com/file/d/1ySRo2sS27233sA09XC3P-uZsWV5iJIjd/preview?autoplay=1";
+    video.currentTime = 0;
+    video.play();
   });
 
   closeBtn.addEventListener('click', () => {
-    iframe.src = "";
+    video.pause();
     modal.style.display = 'none';
   });
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-      iframe.src = "";
+      video.pause();
       modal.style.display = 'none';
     }
   });
+};
+
+
 </script>
+
+
 
 
 
