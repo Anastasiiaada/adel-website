@@ -52,6 +52,13 @@
 /* ============================
    ГЛОБАЛЬНІ СТИЛІ
 ============================ */
+@supports (-webkit-touch-callout: none) {
+  .motivation, .floating-footer, .video-modal {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -71,7 +78,7 @@ html, body {
 ============================ */
 body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   top: -10%;
   left: 50%;
   transform: translateX(-50%);
@@ -2059,7 +2066,7 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 <div class="photo-wrapper">
   <img src="Film_strip.png" alt="Фотострічка" class="film-strip">
  <div class="video-wrapper">
-  <video id="adeleVideo" class="reel-video" poster="adel_phone.png" playsinline controls>
+  <video id="adeleVideo" class="reel-video" poster="adel_phone.png" playsinline controls preload="metadata">
     <source src="ADEL.webm" type="video/webm">
     Твій браузер не підтримує відео
   </video>
@@ -2637,6 +2644,24 @@ video.addEventListener('ended', () => {
 
 
 
+<script>
+const adeleVideo = document.getElementById('adeleVideo');
+const body = document.body;
+
+adeleVideo.addEventListener('play', () => {
+  // вимикаємо fixed/blur фони, щоб Safari не глючив
+  body.style.backgroundAttachment = 'scroll';
+  body.style.overflowY = 'hidden'; // щоб уникнути подвійного рендеру
+});
+
+adeleVideo.addEventListener('pause', () => {
+  body.style.overflowY = 'auto';
+});
+
+adeleVideo.addEventListener('ended', () => {
+  body.style.overflowY = 'auto';
+});
+</script>
 
 
 </body>
