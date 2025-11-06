@@ -576,6 +576,7 @@ section::after {
   display: inline-block;
   width: auto;
   max-width: 100%;
+   z-index: 2; /* загальний контейнер */
 }
 
 .film-strip {
@@ -1982,6 +1983,36 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   }
 }
 
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 3; /* відео має бути вище */
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.video-wrapper .play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.0);
+  transition: background 0.3s ease;
+}
+
+.video-wrapper .play-overlay:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
 
   
   </style>
@@ -2027,10 +2058,16 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
       <div class="adele-photo">
 <div class="photo-wrapper">
   <img src="Film_strip.png" alt="Фотострічка" class="film-strip">
-  <img src="adel_phone.png" alt="Адель" class="main-photo">
+ <div class="video-wrapper">
+  <video id="adeleVideo" class="reel-video" poster="adel_phone.png" playsinline controls>
+    <source src="ADEL.webm" type="video/webm">
+    Твій браузер не підтримує відео
+  </video>
   <div class="play-overlay" id="openVideo">
     <img src="play-button.png" alt="Play Video">
   </div>
+</div>
+
 
   <img src="arrow.png" alt="Стрілка" class="photo-arrow">
 </div>
@@ -2577,65 +2614,24 @@ footerBtns.forEach(btn => {
 
 
 
-<!-- 🎬 ВІДЕО-МОДАЛЬНЕ ВІКНО -->
-<div id="videoModal" class="video-modal">
-  <div class="video-content">
-    <span class="close-btn">&times;</span>
-    <video id="adeleVideo" class="reel-video" autoplay muted playsinline controls>
-      <source src="ADEL.webm" type="video/webm">
-      Твій браузер не підтримує відео. Тому просто листай далі
-    </video>
-  </div>
-</div>
+
 
 
 <script>
-window.onload = () => {
-  const modal = document.getElementById('videoModal');
-  const openBtn = document.getElementById('openVideo');
-  const closeBtn = document.querySelector('.close-btn');
-  const video = document.getElementById('adeleVideo');
+const video = document.getElementById('adeleVideo');
+const playBtn = document.getElementById('openVideo');
 
-  // попереднє завантаження, щоб Safari мав кадр
-  video.preload = 'auto';
-  video.playsInline = true;
-  video.load();
+playBtn.addEventListener('click', () => {
+  video.muted = false;
+  video.play();
+  playBtn.style.display = 'none';
+});
 
-  // 👇 головний хак
-  const playSafe = () => {
-    modal.style.display = 'flex';
-    video.currentTime = 0;
-    video.muted = false;
-
-    // Safari часто ігнорує перше play() → даємо 2 спроби
-    const tryPlay = async () => {
-      try {
-        await video.play();
-      } catch {
-        setTimeout(() => video.play(), 250);
-      }
-    };
-
-    tryPlay();
-  };
-
-  openBtn.addEventListener('click', playSafe);
-
-  closeBtn.addEventListener('click', () => {
-    video.pause();
-    modal.style.display = 'none';
-  });
-
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      video.pause();
-      modal.style.display = 'none';
-    }
-  });
-};
-
-
+video.addEventListener('ended', () => {
+  playBtn.style.display = 'flex';
+});
 </script>
+
 
 
 
