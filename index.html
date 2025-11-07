@@ -17,7 +17,7 @@
   font-style: normal;
 }
 
-/* Основні варіанти Halvar Breit  Rg */
+/* Основні варіанти Halvar Breit Rg */
 @font-face {
   font-family: 'Halvar Breit Rg';
   src: url('font/HalvarBreit-Rg.ttf') format('truetype');
@@ -2032,13 +2032,26 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   z-index: 10; /* підняли заголовок вище */
 }
 
-/* === Відступ між заголовком і блоком з фото/відео === */
+/* звичайний стан */
 .title-section {
-  margin-bottom: 200px; /* збільшуй / зменшуй по смаку */
+  margin-bottom: 60px;
+  transition: margin-bottom 0.5s ease;
 }
 
-.adele-photo {
-  margin-top: 20px; /* щоб ще трохи “дихало” */
+/* коли main-body збільшено */
+.main-body.zoomed ~ .text-info,
+.main-body.zoomed {
+  transition: margin-top 0.5s ease;
+}
+
+.main-body.zoomed {
+  margin-top: 40px;
+}
+
+/* 🪄 робимо більший відступ між заголовком і main-body під час zoom */
+.main-body.zoomed + .text-info,
+.slide-container.zoomed .title-section {
+  margin-bottom: 140px !important;
 }
 
 
@@ -2106,7 +2119,7 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
       <div class="text-info">
         <p><strong>ФІЛОСОФІЯ МОЇХ ПРОДУКТІВ </strong> – Мінімум води, максимум інструментів.</p>
         <p>Мої продукти створені не для того, щоб тебе надихати, а щоб показати,
-          <strong class="highlight-dark-pink">як працює система, яка приносить прибуток</strong>.
+          <strong>як працює система, яка приносить прибуток</strong>.
         </p>
 
         <div class="cards-stack">
@@ -2629,25 +2642,27 @@ footerBtns.forEach(btn => {
 const video = document.getElementById('adeleVideo');
 const playBtn = document.getElementById('openVideo');
 const mainBody = document.querySelector('.main-body');
+const titleSection = document.querySelector('.title-section');
 
 playBtn.addEventListener('click', () => {
   video.muted = false;
   video.play();
   playBtn.style.display = 'none';
-  mainBody.classList.add('zoomed'); // додаємо ефект збільшення
+  mainBody.classList.add('zoomed');
+  titleSection.style.marginBottom = '140px'; // ↑ більший відступ
 });
 
 video.addEventListener('pause', () => {
   mainBody.classList.remove('zoomed');
+  titleSection.style.marginBottom = '60px'; // ↓ повертаємо назад
   playBtn.style.display = 'flex';
 });
 
 video.addEventListener('ended', () => {
   mainBody.classList.remove('zoomed');
+  titleSection.style.marginBottom = '60px';
   playBtn.style.display = 'flex';
 });
-
-
 
 </script>
 
