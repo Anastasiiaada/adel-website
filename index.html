@@ -224,6 +224,7 @@ a, .btn, .program-title, .match-controls button {
     background-position: center center !important;
     background-size: cover !important;
   }
+  
   .motivation::after {
     background: rgba(0,0,0,0.45) !important;
     backdrop-filter: none !important;
@@ -796,7 +797,8 @@ section::after {
   }
 
   .cards-stack {
-    gap: 10px;
+    gap: 20px;
+    flex-direction: column;
   }
 }
 
@@ -820,7 +822,7 @@ section::after {
 }
 
 .stats-header {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 0 auto 0px;
 }
 
@@ -1384,85 +1386,62 @@ justify-content: flex-start;
   }
 }
 
-    /* MOTIVATION */
-.motivation {
-  position: relative;
-  overflow: hidden;
-  padding: 140px 40px;
-  color: #fff;
-  background: url('IMG_5101 1.png') center/cover no-repeat; /* 👈 ТВОЄ ФОТО */
-  background-attachment: fixed; /* легкий паралакс */
-}
-
-.motivation::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45); /* затемнення для контрасту тексту */
-  z-index: 1;
-}
-
-.motivation-inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+ /* ============================
+   CTA BLOCK (замість motivation)
+============================ */
+.cta-section {
+  background: #111;
+  padding: 100px 20px;
   text-align: center;
-  max-width: 900px;
-  margin: 0 auto;
-  gap: 24px;
 }
 
-
-.motivation-text h2 {
-  font-family: "Halvar Breit Bd", cursive;
-  font-size: 56px;
-  line-height: 1.2;
-  color: #ffffff;
-   text-align: left;
+.cta-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
 }
 
-.hint {
-  font-size: 20px;
+.cta-button {
+  background: var(--pink);
   color: #fff;
-  display: inline-block;
-  padding: 6px 18px;
-  border: 3px dashed #fff;
-  border-radius: 30px;
-  font-style: italic;
-  margin-bottom: 24px;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-}
-
-.motivation-buttons .btn {
-  margin-top: 16px;
-  padding: 14px 28px;
-  font-weight: 700;
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 22px;
+  text-transform: lowercase;
+  padding: 18px 48px;
   border-radius: 40px;
   transition: all 0.3s ease;
 }
 
-.motivation-buttons .btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+.cta-button:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-3px);
 }
 
+.cta-container .arrow {
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.cta-container:hover .arrow {
+  transform: translateX(6px);
+}
 
 /* адаптив */
-@media(max-width:768px){
-  .motivation-text h2 { font-size: 42px; }
-  .hint { font-size: 16px; padding: 4px 12px; }
-}
-
-@media(max-width:480px){
-  .motivation-text h2 { font-size: 32px; }
-  .motivation-buttons .btn { font-size: 14px; padding: 10px 20px; margin: 6px 0; display:block; }
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 100px 20px;
+  }
+  .cta-button {
+    font-size: 18px;
+    padding: 14px 36px;
+  }
+  .cta-container .arrow {
+    font-size: 28px;
+  }
 }
 
 
@@ -2021,7 +2000,48 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   background: rgba(0, 0, 0, 0.1);
 }
 
-  
+ /* === Ефект збільшення всієї main-body при старті відео === */
+.main-body {
+  transition: transform 0.6s ease, gap 0.6s ease;
+  transform-origin: center center;
+}
+
+.main-body.zoomed {
+  transform: scale(1.15); /* трошки збільшуємо */
+  gap: 80px; /* щоб не злиплося при масштабі */
+}
+
+.main-body.zoomed .film-strip {
+  transform: scale(1.1) rotate(-9deg);
+  transition: transform 0.6s ease;
+}
+
+.main-body.zoomed .photo-arrow {
+  transform: scale(1.15);
+  transition: transform 0.6s ease;
+}
+
+.main-body.zoomed video {
+  border-radius: 28px;
+  transition: border-radius 0.6s ease;
+}
+
+/* === FIX: щоб фото/відео не перекривали заголовок === */
+.title-section {
+  position: relative;
+  z-index: 10; /* підняли заголовок вище */
+}
+
+/* === Відступ між заголовком і блоком з фото/відео === */
+.title-section {
+  margin-bottom: 200px; /* збільшуй / зменшуй по смаку */
+}
+
+.adele-photo {
+  margin-top: 20px; /* щоб ще трохи “дихало” */
+}
+
+
   </style>
 </head>
 <body>
@@ -2032,10 +2052,9 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
     <div class="hero-text">
       <h1>Адмін — це не просто дівчинка<br>на ресепшені</h1>
       <p class="hero-sub">
-        Від ресепшену до profit: навчимо твою праву руку
-        робити гроші і закохувати клієнтів.
+        Я навчу твою праву руку робити гроші й закохувати клієнтів у твою студію.
       </p>
-      <a href="#program" class="hero-btn">Дізнатися більше →</a>
+      <a href="#signup" class="hero-btn">ПЕРЕДЗАПИС</a>
     </div>
 
     <div class="hero-photo">
@@ -2053,7 +2072,7 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 <div class="title-section" style="text-align:center;margin-bottom:40px;">
   <div class="title-with-icon">
     <img src="310cc84b5fdb46d548836ed72475503581cd38e5.png" alt="Адель логотип" class="title-icon" />
-    <h1>АДЕЛЬ — ЦЕ</h1>
+    <h1>ПОЗНАЙОМИМОСЬ</h1>
   </div>
 </div>
 
@@ -2085,19 +2104,19 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 
       <!-- Текст з інтерактивними картками -->
       <div class="text-info">
-        <p><strong>10+ років у преміум beauty</strong> – HR, ментор і гуру продажів</p>
-        <p>Вона перетворює адміністраторів на <span class="highlight-pink">системних лідерів</span>, які керують командою, піднімають продажі і роблять салон <span class="underline-wavy">profit-орієнтованим</span>.</p>
+        <p><strong>ФІЛОСОФІЯ МОЇХ ПРОДУКТІВ </strong> – Мінімум води, максимум інструментів.</p>
+        <p>Мої продукти створені не для того, щоб тебе надихати, а щоб показати,
+          <strong class="highlight-dark-pink">як працює система, яка приносить прибуток</strong>.
+        </p>
 
         <div class="cards-stack">
-          <div class="card card-1"><span class="asterisk">*</span>Сервіс <br><small>Вражати клієнта кожним контактом</small></div>
-          <div class="card card-2"><span class="asterisk">*</span>Продажі <br><small>Не нав’язуючи, але ефективно</small></div>
-          <div class="card card-3"><span class="asterisk">*</span>Команда <br><small>Будувати згуртовану та продуктивну</small></div>
+          <div class="card card-1"><span class="asterisk">*</span>МОЯ ЗАДАЧА —<br>
+            <small>Не розповідати, як мені було хірово десять років тому і з яких низів я піднімалася,а допомогти тобі зрозуміти, як дійти до тієї точки, де я зараз.</small></div>
+          <div class="card card-2"><span class="asterisk">*</span>ЯКЩО ТИ ГОТОВА —<br>
+            <small>Не ховатися за страхом бути нав’язливою чи вивести своїх працівників із зони комфорту,а 
+              почати реально заробляти і виводити свою студію на інший рівень — тоді welcome.</small></div>
         </div>
 
-        <p style="margin-top:20px;font-style:italic;">
-  Адель вчить не просто адміністраторів – вона формує 
-  <strong class="highlight-dark-pink">праву руку бізнесу</strong>, яка робить роботу салону легшою, прибутковішою та цікавою.
-</p>
 
       </div>
     </div>
@@ -2120,13 +2139,13 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   <div class="stats-header with-image">
     <img src="call.png" alt="Декор call" class="stats-left-img">
     <h2>
-      скільки <span class="wavy-underline">любові</span> та <span class="wavy-underline">системи</span> у курсі
+      не знаю, що ще треба, аби <span class="wavy-underline">вже завтра </span>заробляти більше:
     </h2>
   </div>
 
   <!-- твоє готове SVG-зображення -->
   <div class="stats-svg-wrapper">
-    <img src="stats.svg" alt="Інфографіка курсу" class="stats-svg">
+    <img src="stats1.svg" alt="Інфографіка курсу" class="stats-svg">
   </div>
 </section>
 
@@ -2143,22 +2162,22 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 <section class="match-section">
   <div class="match-container">
     <div class="match-left">
-      <h2>це точно <span class="highlight">метч</span>, якщо...</h2>
-      <p>Ти шукаєш не просто курс, а середовище, де тебе розуміють, підтримують і допомагають зростати професійно.</p>
+      <h2>це точно <span class="highlight">метч</span>, якщо ти...</h2>
+    
     </div>
     <div class="match-right">
       <div class="match-carousel">
+        <!--  <div class="match-item active">
+               <p> ♡ Адміністратор, який хоче системності, але не знає, з чого почати.</p>
+        </div>-->
         <div class="match-item active">
-          <p> ♡ Ти адміністратор, який хоче системності, але не знає, з чого почати.</p>
+          <p> ♡ Власниця(-ник) студії,що хоче збільшити обіг за рахунок правильної роботи з клієнтською базою і сервісу, який закохує у ваш бренд з першого дотику.</p>
         </div>
         <div class="match-item">
-          <p> ♡ Ти керуюча салону і хочеш, щоб твій адмін працював не “на око”, а за чітким алгоритмом.</p>
+          <p> ♡ Керуюча,яка хоче ефективно керувати командою адміністраторів, прокачати свій скіл роботи з негативними відгуками, повертати клієнтів і розуміти, як проконтролювати процес на кожному етапі.</p>
         </div>
         <div class="match-item">
-          <p> ♡ Ти власниця, яка втомилась все тримати на собі — і хочеш делегувати без хаосу.</p>
-        </div>
-        <div class="match-item">
-          <p> ♡ Ти тільки мрієш про кар’єру адміністратора, але хочеш стартувати з правильних навичок.</p>
+          <p> ♡ Майстриня,яка поки працює у своєму кабінеті, але планує відкрити студію і вже зараз хоче збільшувати свій дохід за рахунок правильної роботи з клієнтами, покращення сервісу й розуміння, як мислити не лише як майстер, а як підприємець.</p>
         </div>
       </div>
 
@@ -2317,28 +2336,13 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 
 
 
-<section class="motivation">
-  <div class="motivation-inner">
-    <div class="motivation-text">
-      <h2>курс сам не пройде… але ти можеш проскочити повз!</h2>
-      <p class="hint">#НеПроґавСвоюМожливість</p>
-
-      <!-- Декілька кнопок під текстом 
-      <div class="motivation-buttons">
-        <a href="#signup" class="btn">Хочу почати →</a>
-        <a href="#signup" class="btn" style="background: #fff; color: var(--pink); margin-left: 12px;">Дізнатися більше</a>
-        <a href="#signup" class="btn" style="background: #4B6137; color: #fff; margin-left: 12px;">Записатися зараз</a>
-      </div>
-    </div>-->
-
-    <!-- декоративні плями / абстрактні елементи -->
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-    <div class="shape shape-4"></div>
-    <div class="shape shape-5"></div>
+<section class="cta-section">
+  <div class="cta-container">
+    <a href="#signup" class="cta-button">забронювати місце</a>
+    <span class="arrow">→</span>
   </div>
 </section>
+
 
 
 
@@ -2353,10 +2357,9 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   <!-- 🌷 Текст нижче, під фото -->
   <div class="result-text">
     <p>
-      Ти більше не панікуєш, коли дзвонить телефон,  
-      і не губишся, коли треба закрити продаж.
-      Адмін, який вміє продавати, керувати і надихати —  
-      це вже не мрія, це <b>ТИ</b>
+     Це не курс “під чайок”, який можна ввімкнути на фоні.
+Тут доведеться думати, бо я навчу твого адміністратора не гріти стілець,
+а володіти фундаментальними навичками, які щодня збільшують прибуток твоєї студії.
     </p>
   </div>
 
@@ -2509,7 +2512,7 @@ setInterval(() => {
 
 <section id="signup" class="price-section">
   <h2 class="price-title">
-    <span>ЗРОБИ КРОК ДО </span><br> <span class="accent">НОВОЇ СИСТЕМИ</span>
+    <span>ВАРТІСТЬ </span><br> <span class="accent">ПРОДУКТУ</span>
   </h2>
 
   <div class="price-card">
@@ -2517,21 +2520,19 @@ setInterval(() => {
   <img src="скрепка2.png" alt="skrepka" class="decor-img decor-right">
   <img src="heartprice.png" alt="heart" class="decor-img decor-heart">
   <div class="price-header">
-    <h3>Pro</h3>
-    <p class="price-amount">$299 <span>Per year</span></p>
-    <div class="save-badge">Save 25%</div>
+
+    <p class="price-amount">₴1499 <span> замість ₴5000 — поки я ще не передумала :)</span></p>
   </div>
 
   <ul class="features">
-    <li>+ Заглушка 1</li>
-    <li>+ Заглушка 2</li>
-    <li>+ Заглушка 3</li>
-    <li>+ Заглушка 4</li>
-    <li>+ Заглушка 5</li>
-    <li>+ Заглушка 6</li>
+    <li>+ 10 глибоких уроків</li>
+    <li>+ Q&A-сесія зі мною та адміністратором</li>
+    <li>+ Повний пак додаткових матеріалів</li>
+    <li>+ Telegram Chat Community + зворотний зв’язок</li>
+
   </ul>
 
-  <a href="#" class="price-btn">Choose yearly plan</a>
+  <a href="#" class="price-btn">Приєднатися</a>
 </div>
 
 </section>
@@ -2548,9 +2549,9 @@ setInterval(() => {
 
 <section class="contact">
   <div class="contact-inner">
-    <h2 class="contact-title">зв’язок зі мною</h2>
-    <p class="contact-text">Будь на хвилі — пиши мені у Telegram</p>
-    <a href="https://t.me/yourusername" target="_blank" class="telegram-btn">написати</a>
+    <h2 class="contact-title">залишились питання?</h2>
+    <p class="contact-text">з радістю проконсультуємо:</p>
+    <a href="https://t.me/yourusername" target="_blank" class="telegram-btn">tg підтримка</a>
   </div>
 </section>
 
@@ -2627,16 +2628,27 @@ footerBtns.forEach(btn => {
 <script>
 const video = document.getElementById('adeleVideo');
 const playBtn = document.getElementById('openVideo');
+const mainBody = document.querySelector('.main-body');
 
 playBtn.addEventListener('click', () => {
   video.muted = false;
   video.play();
   playBtn.style.display = 'none';
+  mainBody.classList.add('zoomed'); // додаємо ефект збільшення
+});
+
+video.addEventListener('pause', () => {
+  mainBody.classList.remove('zoomed');
+  playBtn.style.display = 'flex';
 });
 
 video.addEventListener('ended', () => {
+  mainBody.classList.remove('zoomed');
   playBtn.style.display = 'flex';
 });
+
+
+
 </script>
 
 
