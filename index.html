@@ -1336,6 +1336,120 @@
       }
     }
 
+ /* ===============================
+   СЕКЦІЯ "Твій результат після курсу"
+=============================== */
+
+.course-result-section {
+  background: var(--light-pink);
+  padding: 120px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.course-result-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-result-section h1 {
+  font-family: 'Halvar Breit Bd', sans-serif;
+  font-size: 54px;
+  color: var(--pink);
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* --- Сітка карток --- */
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+@media (max-width: 992px) {
+  .steps-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .steps-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+
+/* --- Картка --- */
+.step-card {
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Активна картка --- */
+.step-card.active {
+  background-color: var(--light-pink);
+}
+
+.step-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  width: 120px;
+  height: 10px;
+  background-color: #f4f4f4;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.step-card.active::before {
+  background-color: var(--light-pink);
+}
+
+/* --- Заголовок картки --- */
+.step-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* --- Текст --- */
+.step-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* --- Адаптив під мобілки --- */
+@media (max-width: 768px) {
+  .course-result-section h1 {
+    font-size: 36px;
+  }
+  .step-card {
+    padding: 20px;
+  }
+  .step-title {
+    font-size: 1.2rem;
+  }
+  .step-description {
+    font-size: 0.95rem;
+  }
+}
 
     /* --- 3.10. Секція TESTIMONIALS (Відгуки) --- */
     .testimonials-section {
@@ -2279,6 +2393,22 @@
     </div>
   </div>
 </section>
+<!-- =============================== -->
+<!-- 📂 СЕКЦІЯ "Твій результат після курсу" -->
+<!-- =============================== -->
+<section class="course-result-section" style ="background: #fff9fa;">
+  <div class="container" style="max-width:1200px;margin:0 auto;">
+    <h1 style="font-family:'Halvar Breit Bd',sans-serif;font-size:48px;text-align:left;color:#000000;margin-bottom:60px;">
+      твій результат після курсу
+    </h1>
+
+    <!-- 🔥 Замінено картки на SVG -->
+    <div style="display:flex;justify-content:center;">
+      <img src="yourresult.svg" alt="Твій результат після курсу" style="max-width:100%;height:auto;">
+    </div>
+  </div>
+</section>
+
 
 <section class="testimonials-section">
   <div class="title-section">
