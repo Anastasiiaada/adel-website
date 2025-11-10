@@ -6,2229 +6,2000 @@
   <title>Адмін - це не просто дівчинка на ресепшені</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <meta name="description" content="Адмін - це не просто дівчинка на ресепшені" />
+
   <style>
-   /* ============================
-   ПІДКЛЮЧЕННЯ ЛОКАЛЬНИХ ШРИФТІВ
-============================ */
-@font-face {
-  font-family: 'Allegretto Script One';
-  src: url('font/Allegretto_Script_One_Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+    /* ===================================================================
+       0. НАЛАШТУВАННЯ: ШРИФТИ ТА ГЛОБАЛЬНІ ЗМІННІ
+    =================================================================== */
 
-/* Основні варіанти Halvar Breit Rg */
-@font-face {
-  font-family: 'Halvar Breit Rg';
-  src: url('font/HalvarBreit-Rg.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Halvar Breit Bd';
-  src: url('font/HalvarBreit-Bd.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Halvar Breit Lt';
-  src: url('font/HalvarBreit-Lt.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
+    /* --- 0.1. Підключення шрифтів (з .woff2 для Safari) --- */
+    @font-face {
+      font-family: 'Allegretto Script One';
+      src: url('font/Allegretto_Script_One_Regular.woff2') format('woff2'),
+           url('font/Allegretto_Script_One_Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-/* ============================
-   КОЛЬОРИ ТА ЗМІННІ
-============================ */
-:root {
-  --pink: #d94877;
-  --light-pink: #F7C4D1;
-  --green: #4B6137;
-  --black: #000000;
-  --bg: #fff9fa;
-  --text: #1a1a1a;
-}
+    @font-face {
+      font-family: 'Halvar Breit Rg';
+      src: url('font/HalvarBreit-Rg.woff2') format('woff2'),
+           url('font/HalvarBreit-Rg.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-/* ============================
-   ГЛОБАЛЬНІ СТИЛІ
-============================ */
-@supports (-webkit-touch-callout: none) {
-  .motivation, .floating-footer, .video-modal {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-}
+    @font-face {
+      font-family: 'Halvar Breit Bd';
+      src: url('font/HalvarBreit-Bd.woff2') format('woff2'),
+           url('font/HalvarBreit-Bd.ttf') format('truetype');
+      font-weight: bold;
+      font-style: normal;
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    @font-face {
+      font-family: 'Halvar Breit Lt';
+      src: url('font/HalvarBreit-Lt.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
 
-html, body {
-  font-family: 'Halvar Breit Rg', Arial, sans-serif;
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.6;
-    overflow-x: hidden;
-  width: 100%;
-}
-/* ============================
-  Рожевий глов у бекграунді
-============================ */
-body::before {
-  content: "";
-  position:fixed;
-  top: -10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1200px;
-  height: 1200px;
-  background: url('Ellipse 6.png') center/contain no-repeat;
-  opacity: 0.25; /* робимо ніжним */
-  z-index: 0;
-  pointer-events: none;
-  filter: blur(2px);
-}
+    /* --- 0.2. Кольори та змінні --- */
+    :root {
+      --pink: #d94877;
+      --light-pink: #F7C4D1;
+      --green: #4B6137;
+      --black: #000000;
+      --bg: #fff9fa;
+      --text: #1a1a1a;
+    }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+    /* ===================================================================
+       1. ГЛОБАЛЬНІ СТИЛІ ТА СКИДАННЯ
+    =================================================================== */
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+    /* --- 1.1. Скидання налаштувань (Reset) --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* ============================
-   ТИПОВІ ЕЛЕМЕНТИ
-============================ */
-h1, h2, h3, .brand, .title-wrapper h1 {
-  font-family: 'Halvar Breit Bd', cursive;
-  color: var(--black);
-  margin-bottom: 24px;
-  line-height: 1;
-}
+    /* --- 1.2. Базові стилі сторінки --- */
+    html, body {
+      font-family: 'Halvar Breit Rg', Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      width: 100%;
+    }
 
-p {
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: var(--text);
-}
+    /* --- 1.3. Рожеве сяйво (Glow) у бекграунді --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1200px;
+      height: 1200px;
+      background: url('Ellipse 6.png') center/contain no-repeat;
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+      filter: blur(2px);
+    }
 
-strong, b {
-  font-family: 'Halvar Breit Bd', Arial, sans-serif;
-  font-weight: bold;
-}
+    /* --- 1.4. Глобальні теги --- */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
 
-/* ============================
-   КНОПКИ ТА ПОСИЛАННЯ
-============================ */
-a, .btn, .program-title, .match-controls button {
-  font-family: 'Halvar Breit Bd', sans-serif;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.btn {
-  background: var(--pink);
-  color: white;
-  padding: 14px 24px;
-  border-radius: 40px;
-  font-weight: 600;
-  transition: 0.3s;
-}
-.btn:hover {
-  background: var(--green);
-}
+    /* --- 1.5. Типографія (заголовки, параграфи) --- */
+    h1, h2, h3, .brand, .title-wrapper h1 {
+      font-family: 'Halvar Breit Bd', cursive;
+      color: var(--black);
+      margin-bottom: 24px;
+      line-height: 1;
+    }
 
-/* ============================
-   ВЕРХНЄ МЕНЮ (HEADER)
-============================ */
-/* 🌸 Плаваючий футер-навігатор (як live glass iOS) */
-.floating-footer {
-  position: fixed;
-  bottom: -100px; /* спочатку схований */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 40px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  padding: 10px 20px;
-  z-index: 100;
-  transition: bottom 0.6s ease;
-}
+    p {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: var(--text);
+    }
 
-.footer-btn {
-  font-family: 'Halvar Breit Bd', sans-serif;
-  color: #000;
-  font-size: 16px;
-  text-transform: uppercase;
-  padding: 10px 16px;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-}
+    strong, b {
+      font-family: 'Halvar Breit Bd', Arial, sans-serif;
+      font-weight: bold;
+    }
 
-.footer-btn.main {
-  background: #d94877;
-  color: #fff;
-  font-weight: 700;
-}
+    /* ===================================================================
+       2. УТИЛІТИ ТА ХЕЛПЕРИ (Кнопки, Хайлайти)
+    =================================================================== */
 
-.footer-btn:hover,
-.footer-btn.active {
-  background: #F7C4D1;
-  color: #fff;
-}
+    /* --- 2.1. Кнопки та посилання --- */
+    a, .btn, .program-title, .match-controls button {
+      font-family: 'Halvar Breit Bd', sans-serif;
+    }
 
-/* 📱 мобільна адаптація */
-@media (max-width: 768px) {
-  .floating-footer {
-    width: 94%;
-    justify-content: space-around;
-    padding: 12px;
-    bottom: -100px;
-    border-radius: 25px;
-  }
-  .footer-btn {
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-  .footer-btn.main {
-    font-size: 15px;
-  }
-}
+    .btn {
+      background: var(--pink);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: var(--green);
+    }
 
-.show-footer {
-  bottom: 20px !important;
-}
-.hide-footer {
-  bottom: -120px !important;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.6s ease;
-}
+    /* --- 2.2. Рожевий хайлайт (Hero) --- */
+    .highlight {
+      padding: 0 2px;
+      display: inline;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+      font-size: 70px;
+    }
 
+    @media (max-width: 768px) {
+      .highlight {
+        font-size: 55px;
+      }
+    }
+    @media (max-width: 480px) {
+      .highlight {
+        font-size: 50px;
+      }
+    }
 
-/* 🔧 iPhone (iOS Safari) fix */
+    /* --- 2.3. Хвилясте підкреслення (базове) --- */
+    .highlight-dark-pink {
+      text-decoration: underline wavy var(--pink);
+      text-underline-offset: 4px;
+      font-weight: 700;
+    }
 
-@supports (-webkit-touch-callout: none) {
-  /* Виправлення фону мотивації */
-  .motivation {
-    background-attachment: scroll !important;
-    background-position: center center !important;
-    background-size: cover !important;
-  }
-  
-  .motivation::after {
-    background: rgba(0,0,0,0.45) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
+    .wavy-underline {
+      text-decoration: underline wavy var(--pink);
+      text-underline-offset: 6px;
+      text-decoration-thickness: 2px;
+      font-weight: 600;
+      color: var(--black);
+    }
 
-  /* Помітніше рожеве хвилясте підкреслення */
-  .highlight-dark-pink,
-  .wavy-underline {
-    text-decoration: none !important;
-    position: relative;
-    display: inline-block;
-  }
-  @supports (-webkit-touch-callout: none) {
-  .highlight-dark-pink::after,
-  .wavy-underline::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 8px;
-    background: url("data:image/svg+xml;utf8,<svg width='120' height='16' xmlns='http://www.w3.org/2000/svg'><path d='M0 8 Q10 0 20 8 T40 8 T60 8 T80 8 T100 8 T120 8' stroke='%23d94877' stroke-width='3' fill='none'/></svg>") repeat-x;
-    background-size: 24px 8px;
-  }
-}
+    /* ===================================================================
+       3. СТИЛІ СЕКЦІЙ (в порядку появи на сторінці)
+    =================================================================== */
 
-}
-/* ================================
-   📱  FIX для iPhone / iPad Safari
-   ================================ */
+    /* --- 3.0. Глобальні стилі секцій (градієнти, переходи) --- */
+    section {
+      position: relative;
+      z-index: 1;
+      transition: background 1s ease;
+    }
 
-/* 1️⃣ Підтримка шрифтів Safari (.woff2 + fallback) */
-@font-face {
-  font-family: 'Halvar Breit Rg';
-  src: url('font/HalvarBreit-Rg.woff2') format('woff2'),
-       url('font/HalvarBreit-Rg.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Halvar Breit Bd';
-  src: url('font/HalvarBreit-Bd.woff2') format('woff2'),
-       url('font/HalvarBreit-Bd.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Allegretto Script One';
-  src: url('font/Allegretto_Script_One_Regular.woff2') format('woff2'),
-       url('font/Allegretto_Script_One_Regular.ttf') format('truetype');
-}
+    /* рожево-білі переливи */
+    .hero, .hero-modern {
+      background: linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%);
+    }
 
-/* 2️⃣ Виправлення для Safari */
-@supports (-webkit-touch-callout: none) {
+    .adele-slide,
+    .stats-section,
+    .match-section {
+      background: #fdeef3 !important;
+    }
 
-  /* Заборона фіксованих фонів */
-  .motivation,
-  .hero,
-  .adele-slide {
-    background-attachment: scroll !important;
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-  }
+    /* ЧОРНИЙ блок без градієнта — контраст */
+    .program-section {
+      background: #111;
+    }
 
-  /* Хвилясте рожеве підкреслення через SVG */
-  .highlight-dark-pink,
-  .wavy-underline {
-    position: relative;
-    text-decoration: none !important;
-  }
+    /* після чорного — знову плавний рожевий перехід */
+    .result-section {
+      background: #fff9fa;
+    }
 
-  .highlight-dark-pink::after,
-  .wavy-underline::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 8px;
-    background: url("data:image/svg+xml;utf8,<svg width='120' height='16' xmlns='http://www.w3.org/2000/svg'><path d='M0 8 Q10 0 20 8 T40 8 T60 8 T80 8 T100 8 T120 8' stroke='%23d94877' stroke-width='3' fill='none'/></svg>") repeat-x;
-    background-size: 24px 8px;
-  }
+    .price-section {
+      background: linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%);
+    }
 
-  /* Корекція шрифтової сітки */
-  body {
-    -webkit-text-size-adjust: 100%;
-    font-smooth: always;
-  }
+    .contact {
+      background: linear-gradient(180deg, #fff9fa 0%, #fdeef3 100%);
+    }
 
-  /* Заборона горизонтального скролу (іноді злітає) */
-  html, body {
-    overflow-x: hidden !important;
-  }
-}
-
-/* 3️⃣ Додатково — PNG елементи без фону */
-.main-photo,
-.film-strip,
-.photo-arrow {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* 4️⃣ Тестовий фікс для текстових блоків, щоб не “стрибав” line-height */
-.text-info p {
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-
-
-
-/* ============================
-   СЕКЦІЇ
-============================ */
-/* ПЛАВНІ ПЕРЕХОДИ МІЖ СЕКЦІЯМИ */
-section {
-  position: relative;
-  z-index: 1;
-  transition: background 1s ease;
-}
-
-/* рожево-білі переливи */
-.hero {
-  background: linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%);
-}
-
-.adele-slide,
-.stats-section,
-.match-section {
-  background: #fdeef3 !important; /* або #fff9fa — залежно який виглядає краще */
-}
-
-
-
-/* ЧОРНИЙ блок без градієнта — контраст */
-.program-section {
-  background: #111;
-}
-
-/* після чорного — знову плавний рожевий перехід */
-.motivation {
-  background: linear-gradient(180deg, #111 0%, #f7c4d1 100%);
-}
-
-.result-section {
-  background: linear-gradient(180deg, #f7c4d1 0%, #fdeef3 100%);
-}
-
-.price-section {
-  background: linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%);
-}
-
-.contact {
-  background: linear-gradient(180deg, #fff9fa 0%, #fdeef3 100%);
-}
-
-/* додаткове "розмиття" на стиках — дуже ніжний ефект */
-section::after {
-  content: "";
-  position: absolute;
-  bottom: -80px;
-  left: 0;
-  width: 100%;
-  height: 160px;
-  background: inherit;
-  filter: blur(60px);
-  opacity: 0.35;
-  z-index: -1;
-}
-/* Плавний перехід між рожевою секцією та чорною програмою */
-.match-section::after {
-  content: "";
-  position: absolute;
-  bottom: -120px; /* наскільки заходить у чорний */
-  left: 0;
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(180deg, #fdeef3 0%, #111 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-
-
-    /* HERO */
-.hero-modern {
-  position: relative;
-  background: #fff;
-  overflow: hidden;
-  padding: 100px 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-modern::after {
-  content: "";
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 500px;
-  background: url("pink_pic.png") center/contain no-repeat;
-  opacity: 0.9;
-  z-index: 0;
-  filter: blur(25px);
-}
-
-.hero-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px;
-  max-width: 1200px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-text {
-  flex: 1;
-  font-family: 'Halvar Breit Rg', sans-serif;
-}
-
-.hero-text h1 {
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 54px;
-  color: #000;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.hero-sub {
-  color: #444;
-  font-size: 20px;
-  margin-bottom: 32px;
-  max-width: 480px;
-  line-height: 1.5;
-}
-
-.hero-btn {
-  background: #d94877;
-  color: #fff;
-  font-family: 'Halvar Breit Bd', sans-serif;
-  text-transform: uppercase;
-  padding: 16px 34px;
-  border-radius: 40px;
-  text-decoration: none;
-  transition: 0.3s;
-  display: inline-block;
-}
-
-.hero-btn:hover {
-  background: #000;
-}
-
-.hero-photo {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.hero-photo img {
-  width: 100%;
-  max-width: 420px;
-  border-radius: 20px;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
-}
-
-/* адаптив */
-@media (max-width: 900px) {
-  .hero-container {
-    flex-direction: column-reverse;
+    /* додаткове "розмиття" на стиках */
+    section::after {
+      content: "";
+      position: absolute;
+      bottom: -80px;
+      left: 0;
+      width: 100%;
+      height: 160px;
+      background: inherit;
+      filter: blur(60px);
+      opacity: 0.35;
+      z-index: -1;
+    }
     
-    text-align:justify;
-  }
-  .hero-text h1 {
-    font-size: 30px;
+    /* Плавний перехід між рожевою секцією (match) та чорною (program) */
+    .match-section::after {
+      content: "";
+      position: absolute;
+      bottom: -120px;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(180deg, #fdeef3 0%, #111 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* --- 3.1. Плаваючий футер (Навігація) --- */
+    .floating-footer {
+      position: fixed;
+      bottom: -100px; /* спочатку схований */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 40px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      padding: 10px 20px;
+      z-index: 100;
+      transition: bottom 0.6s ease;
+    }
+
+    .footer-btn {
+      font-family: 'Halvar Breit Bd', sans-serif;
+      color: #000;
+      font-size: 16px;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-btn.main {
+      background: #d94877;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .footer-btn:hover,
+    .footer-btn.active {
+      background: #F7C4D1;
+      color: #fff;
+    }
+
+    .show-footer {
+      bottom: 20px !important;
+    }
+    .hide-footer {
+      bottom: -120px !important;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.6s ease;
+    }
     
-  }
-  .hero-sub {
-    font-size: 18px;
-    margin: 16px auto 28px;
-
-  }
-  .hero-photo img {
-    max-width: 320px;
-  }
-  .hero-modern::after {
-    bottom: 30%;
-  }
-  .hero-btn{
-     margin: 0 20%;
-  }
-}
-
-
-
-/* ============================
-   РОЖЕВИЙ ХАЙЛАЙТ
-============================ */
-.highlight {
-  padding: 0 2px;
-  display: inline;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-  font-size: 70px;
-}
-
-@media (max-width: 480px) {
-  .highlight {
-      font-size: 50px;
-  }
-}
-
-@media (max-width: 768px) {
-  .highlight {
-      font-size: 55px;
-  }
-}
-/* ============================
-   СЕКЦІЯ АДЕЛЬ (стабільна версія)
-============================ */
-.adele-slide {
-  background: #fdeef3;
-  position: relative;
-  z-index: 4;
-  padding: clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px);
-  padding-bottom:0px;
-  display: flex;
-  justify-content: center;
-
-}
-
-.slide-container {
-  margin: 0 auto;
-  max-width: 1200px;
-  width: 100%;
-  font-family: "Halvar Breit Rg", Arial, sans-serif;
-  position: relative;
-  z-index: 5;
-}
+    @media (max-width: 768px) {
+      .floating-footer {
+        width: 94%;
+        justify-content: space-around;
+        padding: 12px;
+        bottom: -100px;
+        border-radius: 25px;
+      }
+      .footer-btn {
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+      .footer-btn.main {
+        font-size: 15px;
+      }
+    }
 
 
-/* === Основний контейнер === */
-.main-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  gap: 60px;
-  padding-left: 17%;
-}
+    /* --- 3.2. Секція HERO --- */
+    .hero-modern {
+      position: relative;
+      /* background: #fff; */ /* Визначено в 3.0 */
+      overflow: hidden;
+      padding: 100px 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* === Фото === */
-.adele-photo {
-  flex: 0 0 auto;
-  width: 260px;
-  margin-left: -80px;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-}
+    .hero-modern::after {
+      content: "";
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 500px;
+      background: url("pink_pic.png") center/contain no-repeat;
+      opacity: 0.9;
+      z-index: 0;
+      filter: blur(25px);
+    }
 
-.adele-photo img {
-  max-width: 100%;
-  height: auto;
-}
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      max-width: 1200px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
 
-/* === Фотострічка позаду фото === */
-.photo-wrapper {
-  position: relative;
-  display: inline-block;
-  width: auto;
-  max-width: 100%;
-   z-index: 2; /* загальний контейнер */
-}
+    .hero-text {
+      flex: 1;
+      font-family: 'Halvar Breit Rg', sans-serif;
+    }
 
-.film-strip {
-  position: absolute;
-  left: -70px;
-  top: 30px;
-  width: 140px;
-  transform: rotate(-9deg);
-  z-index: 1;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  opacity: 0.95;
-  transition: all 0.3s ease;
-}
+    .hero-text h1 {
+      font-family: 'Halvar Breit Bd', sans-serif;
+      font-size: 54px;
+      color: #000;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
 
-/* планшети */
-@media (max-width: 1024px) {
-  .film-strip {
-    left: -50px;
-    top: 20px;
-    width: 14 0px;
-    transform: rotate(-6deg);
-  }
-}
+    .hero-sub {
+      color: #444;
+      font-size: 20px;
+      margin-bottom: 32px;
+      max-width: 480px;
+      line-height: 1.5;
+    }
 
-/* мобільні */
-@media (max-width: 768px) {
-  .film-strip {
-    left: -55px;
-    top: 12px;
-    width: 116px;
-    transform: rotate(-7deg);
-    opacity: 0.9;
-  }
-}
+    .hero-btn {
+      background: #d94877;
+      color: #fff;
+      font-family: 'Halvar Breit Bd', sans-serif;
+      text-transform: uppercase;
+      padding: 16px 34px;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-block;
+    }
 
-/* вузькі телефони */
-@media (max-width: 480px) {
-  .film-strip {
-    left: -45px;
-    top: 8px;
-    width: 100px;
-    transform: rotate(-9deg);
-    opacity: 0.85;
-  }
-}
+    .hero-btn:hover {
+      background: #000;
+    }
 
-/* дуже маленькі екрани */
-@media (max-width: 360px) {
-  .film-strip {
-    left: -25px;
-    top: 6px;
-    width: 100px;
-    transform: rotate(-8deg);
-  }
-}
+    .hero-photo {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
 
-/* === Стрілка під фото === */
-.photo-arrow {
-  position: absolute;
-  bottom: -7%;
-  right: -3%;
-  width: 60px;
-  z-index: 3;
-  cursor: pointer;
-  animation: bounceArrow 1.6s infinite ease-in-out;
-}
+    .hero-photo img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+    }
 
-@keyframes bounceArrow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
+    @media (max-width: 900px) {
+      .hero-container {
+        flex-direction: column-reverse;
+        text-align: justify;
+      }
+      .hero-text h1 {
+        font-size: 30px;
+      }
+      .hero-sub {
+        font-size: 18px;
+        margin: 16px auto 28px;
+      }
+      .hero-photo img {
+        max-width: 320px;
+      }
+      .hero-modern::after {
+        bottom: 30%;
+      }
+      .hero-btn {
+        margin: 0 20%;
+      }
+    }
 
-/* Основне фото */
-.main-photo {
-  position: relative;
-  z-index: 2;
-}
+    /* --- 3.3. Секція АДЕЛЬ (Про автора) --- */
+    .adele-slide {
+      /* background: #fdeef3; */ /* Визначено в 3.0 */
+      position: relative;
+      z-index: 4;
+      padding: clamp(60px, 8vw, 100px) clamp(20px, 6vw, 80px);
+      padding-bottom: 0px;
+      display: flex;
+      justify-content: center;
+    }
 
-/* === Текст === */
-.text-info {
-  flex: 0.9;
-  max-width: 680px;
-  font-size: 20px;
-  line-height: 1.7;
-  padding-left: 7%;
-}
+    .slide-container {
+      margin: 0 auto;
+      max-width: 1200px;
+      width: 100%;
+      font-family: "Halvar Breit Rg", Arial, sans-serif;
+      position: relative;
+      z-index: 5;
+    }
 
-.text-info p {
-  margin-bottom: 18px;
-}
+    .main-body {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      gap: 60px;
+      padding-left: 17%;
+    }
 
-.text-info p:last-child {
-  margin-top: 30px;
-  font-style: italic;
-}
+    .adele-photo {
+      flex: 0 0 auto;
+      width: 260px;
+      margin-left: -80px;
+      z-index: 3;
+      display: flex;
+      justify-content: center;
+    }
 
-/* === Картки === */
-.cards-stack {
-  display: flex;
-  gap: 16px;
-  margin-top: 25px;
-  flex-wrap: wrap;
-}
+    .adele-photo img {
+      max-width: 100%;
+      height: auto;
+    }
 
-.card {
-  position: relative;
-  padding: 20px 18px 18px 28px;
-  border-radius: 20px;
-  font-weight: 600;
-  color: #222;
-  background: #f4c8d6;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-  flex: 1 1 140px;
-}
+    .photo-wrapper {
+      position: relative;
+      display: inline-block;
+      width: auto;
+      max-width: 100%;
+      z-index: 2;
+    }
 
-.card .asterisk {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  color: var(--pink);
-  font-size: 20px;
-}
+    .film-strip {
+      position: absolute;
+      left: -70px;
+      top: 30px;
+      width: 160px;
+      transform: rotate(-9deg);
+      z-index: 1;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      opacity: 0.95;
+      transition: all 0.3s ease;
+    }
 
-.card small {
-  display: block;
-  font-weight: 400;
-  font-size: 14px;
-  margin-top: 6px;
-  color: #555;
-}
+    .photo-arrow {
+      position: absolute;
+      bottom: -7%;
+      right: -3%;
+      width: 60px;
+      z-index: 3;
+      cursor: pointer;
+      animation: bounceArrow 1.6s infinite ease-in-out;
+    }
 
-.card:hover {
-  transform: translateY(-8px) rotate(-1deg);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.25);
-  background: #f7b2c5;
-  color: white;
-}
+    @keyframes bounceArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
 
-/* === Заголовок з іконкою === */
-.title-with-icon {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  border-radius: 16px;
-}
+    .main-photo {
+      position: relative;
+      z-index: 2;
+    }
 
-.title-with-icon h1 {
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 42px;
-  color: var(--black);
-  margin: 0;
-  letter-spacing: 1px;
-}
+    .text-info {
+      flex: 0.9;
+      max-width: 680px;
+      font-size: 20px;
+      line-height: 1.7;
+      padding-left: 7%;
+    }
 
-.title-icon {
-  height: 115px;
-  width: auto;
-  transform: translateY(-3px);
-  margin-right: 0px;
-}
-@media (max-width: 768px) {
-  .adele-slide {
-    padding-top: 40px;   /* 🔥 менше зверху */
-    padding-bottom: 40px;
-  }
+    .text-info p {
+      margin-bottom: 18px;
+    }
 
-  .title-section {
-    margin-bottom: 10px !important; /* 💅 замість 40-60px */
-  }
+    .text-info p:last-child {
+      margin-top: 30px;
+      font-style: italic;
+    }
 
-  .title-with-icon {
-    gap: 8px;
-  }
+    .cards-stack {
+      display: flex;
+      gap: 16px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
 
-  .title-with-icon h1 {
-    font-size: 24px; /* щоб не здавалося громіздким */
-  }
+    .card {
+      position: relative;
+      padding: 20px 18px 18px 28px;
+      border-radius: 20px;
+      font-weight: 600;
+      color: #222;
+      background: #f4c8d6;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+      flex: 1 1 140px;
+    }
 
-  .title-icon {
-    height: 42px;
-  }
-}
+    .card .asterisk {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: var(--pink);
+      font-size: 20px;
+    }
 
-/* === Адаптивність === */
-@media (max-width: 768px) {
-  .adele-slide {
-    padding: 40px 20px;
-  }
+    .card small {
+      display: block;
+      font-weight: 400;
+      font-size: 14px;
+      margin-top: 6px;
+      color: #555;
+    }
 
-  .main-body {
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-    gap: 40px;
-    padding-left: 2%;
-  }
+    .card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.25);
+      background: #f7b2c5;
+      color: white;
+    }
 
-  .adele-photo {
-    margin-left: 0;
-    width: 210px;
-  }
+    .title-with-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 16px;
+    }
 
-  .text-info {
+    .title-with-icon h1 {
+      font-family: 'Halvar Breit Bd', sans-serif;
+      font-size: 42px;
+      color: var(--black);
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    .title-icon {
+      height: 115px;
+      width: auto;
+      transform: translateY(-3px);
+      margin-right: 0px;
+    }
+
+    @media (max-width: 1024px) {
+      .film-strip {
+        left: -50px;
+        top: 20px;
+        width: 160px;
+        transform: rotate(-6deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .adele-slide {
+        padding: 40px 20px;
+      }
+      .title-section {
+        margin-bottom: 10px !important;
+      }
+      .title-with-icon {
+        gap: 8px;
+      }
+      .title-with-icon h1 {
+        font-size: clamp(20px, 6vw, 32px);
+      }
+      .title-icon {
+        height: 60px;
+      }
+      .main-body {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        gap: 40px;
+        padding-left: 2%;
+      }
+      .adele-photo {
+        margin-left: 0;
+        width: 210px;
+      }
+     .text-info {
     padding: 0 10px;
     font-size: 17px;
     line-height: 1.65;
+    transition: margin-top 0.5s ease; /* 💡 <--- ДОДАЙТЕ ЦЕЙ РЯДОК */
   }
+      .cards-stack {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+      .film-strip {
+        left: -55px;
+        top: 12px;
+        width: 130px;
+        transform: rotate(-7deg);
+        opacity: 0.9;
+      }
+    }
 
-  .cards-stack {
-    justify-content: flex-start;
-    gap: 14px;
-  }
+    @media (max-width: 480px) {
+      .text-info {
+        font-size: 16px;
+      }
+      .adele-photo {
+        width: 180px;
+      }
+      .cards-stack {
+        gap: 20px;
+        flex-direction: column;
+      }
+      .film-strip {
+        left: -45px;
+        top: 8px;
+        width: 110px;
+        transform: rotate(-9deg);
+        opacity: 0.85;
+      }
+    }
+    @media (max-width: 360px) {
+      .film-strip {
+        left: -45px;
+        top: 6px;
+        width: 115px;
+        transform: rotate(-8deg);
+      }
+    }
 
-  .title-with-icon h1 {
-    font-size: clamp(20px, 6vw, 32px);
-  }
+    /* --- 3.4. Секція STATS (Статистика) --- */
+    .stats-section {
+      padding-top: 100px;
+      padding-bottom: 50px;
+      /* background: #fdeef3; */ /* Визначено в 3.0 */
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
 
-  .title-icon {
-    height: 60px;
-  }
-}
+    .stats-header {
+      max-width: 1000px;
+      margin: 0 auto 0px;
+    }
 
-@media (max-width: 480px) {
-  .text-info {
-    font-size: 16px;
-  }
+    .stats-header h2 {
+      font-family: "Halvar Breit Rg", cursive;
+      font-size: 42px;
+      color: var(--black);
+    }
 
-  .adele-photo {
-    width: 180px;
-  }
+    .stats-header.with-image {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      gap: 20px;
+      text-align: left;
+    }
 
-  .cards-stack {
-    gap: 20px;
-    flex-direction: column;
-  }
-}
+    .stats-left-img {
+      width: 40%;
+      height: auto;
+      flex-shrink: 0;
+      transform: translateY(2px);
+      opacity: 0.95;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
 
-.highlight-dark-pink {
-  text-decoration: underline wavy var(--pink);
-  text-underline-offset: 4px;
-  font-weight: 700;
-}
+    .stats-left-img:hover {
+      transform: scale(1.05) rotate(-2deg);
+      opacity: 1;
+    }
 
+    .stats-header p {
+      color: var(--text);
+      font-size: 20px;
+      line-height: 1.5;
+    }
 
-/* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
 
-.stats-section {
-  padding-top: 100px; /* відступ, щоб слайдер красиво “заходив” зверху */
-  padding-bottom: 50px;
-  background: #fdeef3;
-  position: relative;
-  z-index: 1;
-  text-align: center;
+    .stat {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      flex: 1 1 220px;
+      max-width: 280px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-}
+    .stat strong {
+      display: block;
+      font-size: 40px;
+      color: var(--pink);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
-.stats-header {
-  max-width: 1000px;
-  margin: 0 auto 0px;
-}
+    .stat:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+    }
 
-.stats-header h2 {
-  font-family: "Halvar Breit Rg", cursive;
-  font-size: 42px;
-  color: var(--black);
+    .stats-beauty {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
 
-}
-/* зображення зліва від заголовка */
-.stats-header.with-image {
-  display: flex;
-  align-items: center;
-  justify-content: left; /* центрує всю групу (png + текст) по горизонталі */
-  gap: 20px;
-  text-align: left; /* щоб текст не центрувався */
-}
+    .stat-card {
+      position: relative;
+      background: white;
+      border-radius: 16px;
+      padding: 50px 24px 60px;
+      width: 240px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.stats-left-img {
-  width:40%;
-  height: auto;
-  flex-shrink: 0;
-  transform: translateY(2px);
-  opacity: 0.95;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
+    .stat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+    }
 
-.stats-left-img:hover {
-  transform: scale(1.05) rotate(-2deg);
-  opacity: 1;
-}
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      background: var(--light-pink);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
-/* на мобільних */
-@media (max-width: 768px) {
-  .stats-header.with-image {
-    justify-content: flex-start; /* вирівнюємо зліва */
-    padding-top: 40px; /* відступ, щоб слайдер красиво “заходив” зверху */
-    margin-bottom: 10px;
-    gap: 12px;
-  }
+    .icon-circle span {
+      color: var(--pink);
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-  .stats-left-img {
-    width: 100px;
-  }
+    .stat-card p {
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.4;
+    }
 
-  .stats-header.with-image h2 {
-    font-size: 26px;
-    line-height: 1.3;
-  }
-}
+    .stat-card strong {
+      font-size: 36px;
+      color: var(--pink);
+      font-family: 'Halvar Breit Bd', sans-serif;
+    }
 
+    .stat-card .bracket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      border-bottom: 4px solid var(--light-pink);
+      border-radius: 0 0 40px 40px;
+    }
 
+    .stats-svg-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -5%;
+    }
 
-.wavy-underline {
-  text-decoration: underline wavy var(--pink);
-  text-underline-offset: 6px;
-  text-decoration-thickness: 2px;
-  font-weight: 600;
-  color: var(--black);
-}
+    .stats-svg {
+      width: 100%;
+      height: auto;
+      max-width: 1200px;
+      display: block;
+    }
 
+    @media (max-width: 768px) {
+      .stats-section {
+        padding: 40px 10px;
+        padding-top: 0px;
+      }
+      .stats-header h2 {
+        font-size: 32px;
+      }
+      .stats-header p {
+        font-size: 18px;
+      }
+      .stats-header.with-image {
+        justify-content: flex-start;
+        padding-top: 40px;
+        margin-bottom: 10px;
+        gap: 12px;
+      }
+      .stats-left-img {
+        width: 100px;
+      }
+      .stats-header.with-image h2 {
+        font-size: 26px;
+        line-height: 1.3;
+      }
+      .stats-beauty {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .stat-card {
+        width: 80%;
+      }
+    }
 
-.stats-header p {
-  color: var(--text);
-  font-size: 20px;
-  line-height: 1.5;
-}
+    /* --- 3.5. Стрічка LOVE (Ticker) --- */
+    .love-ticker {
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      padding: 12px 0;
+      font-family: 'Halvar Breit Bd', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-.stats {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px;
-}
+    .ticker-track {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scrollText 15s linear infinite;
+    }
 
-.stat {
-  background: white;
-  padding: 40px 30px;
-  border-radius: 24px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-  flex: 1 1 220px;
-  max-width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    @keyframes scrollText {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-.stat strong {
-  display: block;
-  font-size: 40px;
-  color: var(--pink);
-  font-weight: 700;
-  margin-bottom: 8px;
-}
+    .love-ticker span {
+      background: linear-gradient(90deg, #fff, #ff84b7, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 4s linear infinite;
+    }
 
-.stat:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.15);
-}
-.stats-beauty {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
+    @keyframes shine {
+      0% { background-position: -200px; }
+      100% { background-position: 200px; }
+    }
 
-.stat-card {
-  position: relative;
-  background: white;
-  border-radius: 16px;
-  padding: 50px 24px 60px;
-  width: 240px;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    @media (max-width: 768px) {
+      .love-ticker {
+        font-size: 18px;
+        padding: 10px 0;
+      }
+    }
 
-.stat-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.15);
-}
-
-/* Галочка в рожевому кружечку */
-.icon-circle {
-  width: 48px;
-  height: 48px;
-  background: var(--light-pink);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 18px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.icon-circle span {
-  color: var(--pink);
-  font-size: 24px;
-  font-weight: bold;
-}
-
-/* Текст */
-.stat-card p {
-  color: var(--text);
-  font-size: 18px;
-  line-height: 1.4;
-}
-
-.stat-card strong {
-  font-size: 36px;
-  color: var(--pink);
-  font-family: 'Halvar Breit Bd', sans-serif;
-}
-
-/* Нижня дужка */
-.stat-card .bracket {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  border-bottom: 4px solid var(--light-pink);
-  border-radius: 0 0 40px 40px;
-}
-
-/* адаптив */
-@media (max-width: 768px) {
-  .stats-beauty {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .stat-card {
-    width: 80%;
-  }
-}
-/* адаптив */
-@media(max-width:768px){
-  .stats-section{padding:40px 10px;
-  padding-top: 0px;}
-  .stats-header h2{font-size:32px;}
-  .stats-header p{font-size:18px;}
-}
-
-.stats-svg-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: -5%;
-}
-
-.stats-svg {
-  width: 100%;
-  height: auto;
-  max-width: 1200px;
-  display: block;
-}
-
-
-/* Бігаюча стрічка LOVE LOVE LOVE */
-.love-ticker {
-  background: #000;
-  color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  padding: 12px 0;
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 24px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.ticker-track {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scrollText 15s linear infinite;
-}
-
-@keyframes scrollText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* Ефект блиску тексту */
-.love-ticker span {
-  background: linear-gradient(90deg, #fff, #ff84b7, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 4s linear infinite;
-}
-
-@keyframes shine {
-  0% { background-position: -200px; }
-  100% { background-position: 200px; }
-}
-
-/* адаптив */
-@media (max-width: 768px) {
-  .love-ticker {
-    font-size: 18px;
-    padding: 10px 0;
-  }
-}
-
-
-    /* MATCH */
+    /* --- 3.6. Секція MATCH (Для кого) --- */
     .match-section {
-  width: 100%;
- 
-  padding: 120px 60px;
-  display: flex;
-  justify-content: center;
-}
-
-.match-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  width: 100%;
-  gap: 60px;
-}
-
-.match-left {
-  flex: 1;
-}
-
-.match-left h2 {
-  font-family: "Halvar Breit Rg", sans-serif;
-  font-size: 48px;
-  color: #000;
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-
-.match-left .highlight {
-
-  padding: 0 6px;
-  font-family: "Allegretto Script One", cursive;
-  color: #000;
-  background: none !important;
-  color: #000 !important;
-}
-
-.match-left p {
-  font-size: 20px;
-  color: #333;
-  max-width: 400px;
-  line-height: 1.5;
-}
-
-.match-right {
-  flex: 1.2;
-  position: relative;
-}
-
-.match-carousel {
-  position: relative;
-  overflow: hidden;
-  min-height: 160px;
-}
-
-.match-item {
-  position: absolute;
-  opacity: 0;
-  transform: translateX(30px);
-  transition: all 0.6s ease;
-  font-size: 22px;
-  line-height: 1.6;
-  color: #111;
-  background: #fbe1ea;
-  border-radius: 12px;
-  padding: 30px 40px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-}
-
-.match-item.active {
-  opacity: 1;
-  transform: translateX(0);
-  position: relative;
-}
-
-.match-controls {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  justify-content: flex-end;
-}
-
-.match-controls button {
-  background: #ff8fb1;
-  border: none;
-  color: white;
-  font-size: 24px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.match-controls button:hover {
-  background: #ff6f9d;
-  transform: scale(1.1);
-}
-
-@media(max-width: 768px) {
-  .match-section {
-    padding: 40px 20px 30px; /* менший верхній та нижній відступ */
-
-  }
-
-  .match-container {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: left;
-    position: relative;
-    gap: 10px; /* 🔥 додає відстань між match-left і match-right */
-  }
-
-  .match-left {
-    margin-bottom: 0; /* 🔥 прибираємо зайвий нижній відступ */
-  }
-
-  .match-left h2 {
-    font-size: 30px;
-    line-height: 1.3;
-  }
-
-  .match-left p {
-    display: none; /* 🔥 прибирає текст тільки на мобільних */
-  }
-
-  .match-controls {
-    justify-content: center;
-    margin-top: 10px;
-  }
-}
-
-
-/* ============================
-   PROGRAM SECTION (оновлено)
-============================ */
-.program-section {
-  width: 100%;
-  border-top-left-radius: 80px;
-  border-top-right-radius: 80px;
-  margin-top: -20px; /* щоб накладалась поверх попередньої */
-  color: #fff;
-  padding: 120px 0;
-  position: relative;
-  z-index: 2;
-}
-
-
-/* Контейнер */
-.program-wrapper {
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* Заголовок */
-.program-heading {
-  font-family: "Halvar Breit Bd", sans-serif ;
-  font-size: 56px ;
-  color: var(--white);
-  text-align: left;
-  margin-left: 0;
-  margin-bottom: 0;
-}
-
-.program-heading-wrapper {
-display: flex;
-justify-content: space-between;
-align-items: center; /* Вертикальне вирівнювання */
-margin-left: 5vw;
-padding-right: 5vw; /* Щоб вирівняти картинку по правому краю програми */
-margin-bottom: 60px;
-}
-
-.program-header-image {
-max-height: 300px; /* Ви можете налаштувати розмір */
-width: auto;
-flex-shrink: 0;
-margin-left: 20px; /* Невеликий відступ від тексту */
-}
-/* Розташування контенту */
-.program-layout {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  width: 100%;
-}
-
-/* Список програми */
-.program-right {
-  flex: 0 0 70%;
-  padding-right: 5vw;
-}
-
-/* Контейнер з пунктами програми */
-.program {
-  width: 100%;
-  border-top: 1px solid #444;
-}
-
-.program-item {
-  border-bottom: 1px solid #444;
-  padding: 28px 0;
-}
-
-/* Кнопка розділу */
-.program-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  font-family: "Halvar Breit Rg", sans-serif;
-  cursor: pointer;
-  text-align: left;
-  padding: 0;
-  transition: color 0.3s ease;
-}
-
-.program-title:hover span:first-child {
-  color: var(--pink);
-}
-
-.program-title .icon {
-  font-size: 26px;
-  color: var(--pink);
-  transition: transform 0.3s ease;
-}
-
-/* Контент пунктів */
-.program-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.program-item.open .program-content {
-  max-height: 500px;
-  opacity: 1;
-  margin-top: 16px;
-}
-
-.program-content p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #ddd;
-  font-family: "Halvar Breit Lt", sans-serif;
-}
-
-.program-item.open .icon {
-  transform: rotate(180deg);
-}
-
-/* ============================
-   АДАПТИВНІСТЬ
-============================ */
-@media (max-width: 1024px) {
-  .program-section {
-    padding: 100px 0;
-  }
-
-  .program-heading {
-    font-size: 48px;
-    margin-left: 6vw;
-  }
-
-  .program-right {
-    flex: 0 0 80%;
-    padding-right: 6vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .program-section {
-    padding: 80px 0;
-  }
-
-  .program-layout {
- flex-direction: column;
-justify-content: flex-start;
-}
-
-/* === ОНОВЛЕНИЙ БЛОК === */
-.program-heading-wrapper {
- margin-left: 6vw;
- padding-right: 6vw;
- margin-bottom: 30px;
- align-items: flex-start; /* На мобільному краще притиснути догори */
- }
-
-.program-header-image {
- max-height: 80px; /* Зменшуємо картинку */
- }
-
-  .program-heading {
-    font-size: 42px;
-    text-align: left;
-  }
-
-  .program-right {
-    flex: 1 1 100%;
-    padding: 0 6vw;
-  }
-
-  .program-title {
-    font-size: 18px;
-  }
-
-  .program-content p {
-    font-size: 16px;
-  }
-}
-
- /* ============================
-   CTA BLOCK (замість motivation)
-============================ */
-.cta-section {
-  background: #111;
-  padding: 100px 20px;
-  text-align: center;
-}
-
-.cta-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-  justify-content: center;
-}
-
-.cta-button {
-  background: var(--pink);
-  color: #fff;
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 22px;
-  text-transform: lowercase;
-  padding: 18px 48px;
-  border-radius: 40px;
-  transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-  background: #fff;
-  color: #000;
-  transform: translateY(-3px);
-}
-
-.cta-container .arrow {
-  color: #fff;
-  font-size: 32px;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-}
-
-.cta-container:hover .arrow {
-  transform: translateX(6px);
-}
-
-/* адаптив */
-@media (max-width: 768px) {
-  .cta-section {
-    padding: 100px 20px;
-  }
-  .cta-button {
-    font-size: 18px;
-    padding: 14px 36px;
-  }
-  .cta-container .arrow {
-    font-size: 28px;
-  }
-}
-
-
-/* ============================
-   СЕКЦІЯ "ТВІЙ РЕЗУЛЬТАТ" (заголовок на фото, текст під фото)
-   
-============================ */
-
-.result-header-modern {
-  position: relative;              /* базовий контейнер */
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 120px 20px;
-  font-family: 'Halvar Breit Rg', sans-serif;
-  text-align: left;
-}
-
-.result-bg-flower {
-  position: absolute;
-  top: 10%;
-  left: 59%;                       /* 👉 зсув вправо */
-  transform: translate(-20%, -20%);
-  width: 60%;                    /* підправиш розмір, якщо треба */
-  height: auto;
-  opacity: 0.5;                    /* щоб текст читався */
-  z-index: 0;                      /* ПІД текстом */
-  pointer-events: none;
-}
-.result-text-overlay {
-  position: relative;
-  z-index: 1;                      /* вище за картинку */
-}
-
-.result-text-overlay p {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #000;
-}
-
-.result-text-overlay .accent-word {
-  font-family: 'Halvar Breit Bd', sans-serif;
-  text-transform: uppercase;
-  font-size: 32px;
-  margin-bottom: 16px;
-  display: block;
-}
-@media (max-width: 768px) {
-  .result-bg-flower {
-    width: 90%;
-    left: 59%;
-
-  }
-
-  .result-header-modern {
-    padding: 100px 16px;
-  }
-}
-
-
-.result-header-modern .accent-word {
-  font-family: 'Halvar Breit Bd';
-  text-transform: uppercase;
-  font-size: clamp(24px, 4vw, 40px);
-  color: #000;
-  display: block;
-  margin-bottom: 16px;
-  letter-spacing: -0.02em;
-}
-
-.result-header-modern .orange {
-  color: var(--pink);
-  font-family: 'Halvar Breit Bd';
-}
-
-.result-header-modern .italic {
-  font-style: italic;
-}
-
-.result-header-modern .bold {
-  font-family: 'Halvar Breit Bd';
-}
-
-@media (max-width: 768px) {
-  .result-header-modern {
-    font-size: 20px;
-    line-height: 1.5;
-    padding: 80px 16px;
-  }
-}
-
-.result-section {
-  background: #fff9fa;
-  padding: 120px 20px;
-  text-align: start;
-  position: relative;
-  overflow: hidden;
-}
-
-/* 🌸 Фото + заголовок */
-.result-header {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto 0px auto;
-}
-
-/* ✅ трохи зміщуємо квітку */
-.result-flower {
-  width: 100%;
-  max-width: 700px;
-  opacity: 0.9;
-  display: block;
-  margin: 0 auto;
-  position: relative;
-  top: -10px;       /* піднімаємо вище */
-  left: 80px;       /* трохи вправо */
-}
-
-.result-header h2 {
-  position: absolute;
-  top: 45%;         /* підлаштовуємо вертикаль, щоб лишився центр */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 42px;
-  line-height: 1.2;
-  color: #000;
-  text-transform: none;
-  z-index: 2;
-  width: 100%;
-  padding: 0 0px;
-}
-
-
-/* 🌷 Текст під фото */
-.result-text {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-
-}
-
-.result-text p {
-  font-family: 'Halvar Breit Lt', sans-serif;
-  color: #000;
-  font-size: 20px;
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
-
-/* 📱 адаптивність */
-@media (max-width: 768px) {
-  .result-section {
-    padding: 80px 20px;
-  }
-  .result-header h2 {
-    font-size: 28px;
-  }
-  .result-flower {
-    max-width: 480px;
-    opacity: 0.8;
-  }
-  .result-text p {
-    font-size: 17px;
-  }
-}
-
-
-
-
-    /* TESTIMONIALS */
- .testimonials-section {
-  background: #fff9fa;
-  padding: 10px 20px;
-  text-align: center;
-  position: relative;
-  
-}
-
-.title-section { margin-bottom: 40px; }
-
-.title-wrapper {
-  display: inline-flex;       /* ставимо в рядок */
-  align-items: center;        /* вирівнюємо по вертикалі */
-  gap: 10px;                  /* відстань між текстом і зображенням */
-  padding: 12px 24px;
-  border-radius: 16px;
-}
-
-.title-wrapper h1 {
-  font-family: "Halvar Breit Bd", cursive;
-  font-size: 38px;
-  color: #000;
-  margin: 0;
-  text-align: left;
-}
-
-.testimonials-carousel {
-  position: relative;
-  overflow: hidden;
-  max-width: 2000px;
-  margin: 0 auto;
-  cursor: grab;
-}
-
-.carousel-track {
-  display: flex;
-  gap: 24px;
-  transition: transform 0.5s ease;
-  
-}
-
-.testimonial {
-  flex: 0 0 30%;
-  background: #fff;
-  border-radius: 24px;
-
-  padding: 30px;
-  text-align: left;
-  min-height: 320px;
-  position: relative;
-}
-
-.testimonial::before {
-  content: "“";
-  position: absolute;
-  top: 16px;
-  left: 20px;
-  font-size: 70px;
-  color: #f7c4d1;
-  font-family: serif;
-}
-.heart_img_testi{
-  width: 110px;                /* або 80px — як тобі по дизайну */
-  height: auto;
-  transform: translateY(2px); /* легке вирівнювання по лінії тексту */
-}
-.testimonial img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.testimonial p {
-  font-size: 16px;
-  color: #1a1a1a;
-  margin-bottom: 16px;
-}
-
-.testimonial strong {
-  display: block;
-  font-weight: 700;
-  color: #d94877;
-}
-
-/* точки */
-.carousel-indicators {
-  margin-top: 30px;
-  margin-bottom: 70px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.carousel-indicators span {
-  width: 12px;
-  height: 12px;
-  background: #f7c4d1;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.carousel-indicators span.active {
-  background: #d94877;
-  transform: scale(1.2);
-}
-
-/* 📱 адаптив */
-@media (max-width: 1024px) {
-  .testimonial { flex: 0 0 45%; 
-  }
-  .testimonials-carousel{
-    width:88%;
-  }
-  .carousel-track {
-    width:110%;
-  }
-}
-
-@media (max-width: 768px) {
-  .testimonial { flex: 0 0 90%; }
-}
-
-
-
-    /* === ВИПРАВЛЕННЯ РОЗТАШУВАННЯ ПРАЙС-БЛОКУ === */
-.price-section {
-  background: linear-gradient(180deg,#fdeef3 0%,#fff9fa 100%);
-  text-align: center;
-  padding: 120px 20px;
-}
-
-.price-title {
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 52px;
-  text-transform: uppercase;
-  margin-bottom: 60px;
-  line-height: 1.1;
-}
-
-.price-title .accent {
-  color: var(--pink);
-}
-
-.price-card {
-  position: relative;
-  background: var(--pink);
-  color: #fff;
-  border-radius: 28px;
-  padding: 60px 40px 50px;
-  width: 340px;
-  margin: 0 auto;
-  text-align: left;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-}
-
-.price-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.price-header h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.price-amount {
-  font-size: 56px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.price-amount span {
-  display: block;
-  font-size: 16px;
-  font-weight: 400;
-  opacity: .9;
-}
-
-.save-badge {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  background: #fff;
-  color: #000;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px;
-}
-
-.features li {
-  font-size: 16px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-}
-
-.price-btn {
-  display: block;
-  background: #000;
-  color: #fff;
-  text-align: center;
-  padding: 14px 0;
-  border-radius: 12px;
-  font-weight: 700;
-  transition: background .3s;
-}
-
-.price-btn:hover {
-  background: var(--bg);
-  color: #000;
-}
-
-/* Адаптив */
-@media (max-width: 768px) {
-  .price-title {
-    font-size: 34px;
-    margin-bottom: 40px;
-  }
-  .price-card {
-    width: 90%;
-    padding: 50px 24px;
-  }
-}
-.decor-img {
-  position: absolute;
-  z-index: 2;
-  width: 90px;
-  height: auto;
-  pointer-events: none;
-}
-
-/* курсор — зверху зліва, легкий нахил */
-.decor-left {
-  top: 150px;
-  left: -40px;
-  transform: rotate(-15deg);
-}
-
-/* скрєпка — зверху справа, трохи нахилена */
-.decor-right {
-  top: -50px;
-  right: -30px;
-  transform: rotate(12deg);
-}
-
-.decor-heart {
-  top: 400px;
-  right: -30px;
-  transform: rotate(12deg);
-}
-
-/* 🎨 фон PNG для секції прайс тільки на десктопі */
-@media (min-width: 1025px) {
-  .price-section,
-  .hero-modern {
-    background: 
-      linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%), /* твій основний градієнт */
-      url('Group.png') center/cover no-repeat; /* 👉 сюди встав свій PNG */
-    background-blend-mode: soft-light; /* робить ніжно, без різких переходів */
-  }
-}
-
-.hero-modern {
-    background: 
-      linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%), /* твій основний градієнт */
-      url('Group.png') center/cover no-repeat; /* 👉 сюди встав свій PNG */
-    background-blend-mode: soft-light; /* робить ніжно, без різких переходів */
-  }
-
-    /* CONTACT */
-/* ============================
-   МІНІМАЛІСТИЧНИЙ CONTACT
-============================ */
-.contact {
-  background: #fff;
-  padding: 100px 20px;
-  text-align: center;
-  position: relative;
-}
-
-.contact-inner {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.contact-title {
-  font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 48px;
-  text-transform: lowercase;
-  color: #000;
-  margin-bottom: 16px;
-  letter-spacing: -0.5px;
-}
-
-.contact-text {
-  font-family: 'Halvar Breit Lt', sans-serif;
-  font-size: 18px;
-  color: #444;
-  margin-bottom: 40px;
-}
-
-.telegram-btn {
-  display: inline-block;
-  padding: 16px 36px;
-  border-radius: 40px;
-  font-family: 'Halvar Breit Bd', sans-serif;
-  text-transform: uppercase;
-  background: #d94877;
-  color: #fff;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-}
-
-.telegram-btn:hover {
-  background: var(--light-pink);
-  transform: translateY(-3px);
-}
-
-/* адаптив */
-@media (max-width: 768px) {
-  .contact { padding: 60px 20px; }
-  .contact-title { font-size: 36px; }
-  .contact-text { font-size: 16px; }
-  .telegram-btn { font-size: 16px; padding: 14px 30px; }
-}
-
-footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max-width:768px){ section{padding:60px 20px;} .hero{padding-left:20px;text-align:center;justify-content:center;} .result{grid-template-columns:1fr;} }
-  
-  
-.video-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(6px);
-}
-
-/* 🎥 Вертикальне відео формату reels */
-.video-content {
-  position: relative;
-  width: 90%;
-  max-width: 360px;
-  aspect-ratio: 9 / 16;
-  background: #000;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* === FIX для повноекранного режиму відео === */
-.reel-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Коли відео у fullscreen — показуємо повністю, без обрізки */
-.reel-video:fullscreen {
-  object-fit: contain !important;
-  background: #000; /* чорний фон, якщо співвідношення сторін інше */
-}
-
-/* Для Safari (бо він трошки інший) */
-.reel-video::-webkit-media-controls-fullscreen-button {
-  display: none;
-}
-
-
-/* ❌ Кнопка закриття */
-.close-btn {
-  position: absolute;
-  top: -45px;        /* виносимо над відео */
-  right: -5px;       /* трохи за межу */
-  font-size: 32px;
-  color: #fff;
-  cursor: pointer;
-  z-index: 10;
-  transition: opacity 0.3s ease;
-}
-.close-btn:hover { opacity: 0.7; }
-
-@media (max-width: 480px) {
-  .video-content { max-width: 320px; }
-  .close-btn { font-size: 26px; top: 6px; right: 10px; }
-}
-
-.play-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 4;
-  transition: background 0.3s ease;
-}
-.play-overlay img {
-  width: clamp(48px, 8vw, 80px);
-  height: auto;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
-  opacity: 0.9;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.play-overlay:hover img {
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-/* 🧠 FIX: жирний заголовок "скільки любові та системи у курсі" на iPhone */
-@supports (-webkit-touch-callout: none) {
-  .stats-header h2 {
-    font-family: 'Halvar Breit Bd', sans-serif !important;
-    font-weight: 700 !important;
-    -webkit-text-stroke: 0.2px transparent; /* примушує Safari перемалювати жирний */
-  }
-
-  /* щоб підкреслені слова не “скидали” жирність */
-  .stats-header h2 .wavy-underline {
-    font-family: inherit !important;
-    font-weight: inherit !important;
-  }
-}
-
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 260px;
-  border-radius: 20px;
-  overflow: hidden;
-  z-index: 3; /* відео має бути вище */
-}
-
-.video-wrapper video {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 20px;
-}
-
-.video-wrapper .play-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.0);
-  transition: background 0.3s ease;
-}
-
-.video-wrapper .play-overlay:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-
- /* === Ефект збільшення всієї main-body при старті відео === */
-.main-body {
-  transition: transform 0.6s ease, gap 0.6s ease;
-  transform-origin: center center;
-}
-
-.main-body.zoomed .adele-photo,
-.main-body.zoomed .video-wrapper,
-.main-body.zoomed .photo-arrow {
-  transform: scale(1.15);
-  transition: transform 0.6s ease;
-}
-
-/* 💫 залишаємо обертання стрічки навіть після zoom */
-.main-body.zoomed .film-strip {
-  transform: rotate(-9deg) scale(1.15);
-  transition: transform 0.6s ease;
-}
-
-
-.main-body.zoomed video {
-  border-radius: 28px;
-  transition: border-radius 0.6s ease;
-}
-
-
-
-/* === FIX: щоб фото/відео не перекривали заголовок === */
-.title-section {
-  position: relative;
-  z-index: 10; /* підняли заголовок вище */
-}
-
-/* звичайний стан */
-.title-section {
-  margin-bottom: 60px;
-  transition: margin-bottom 0.5s ease;
-}
-
-/* коли main-body збільшено */
-.main-body.zoomed ~ .text-info,
-.main-body.zoomed {
-  transition: margin-top 0.5s ease;
-}
-
-
-/* 🪄 робимо більший відступ між заголовком і main-body під час zoom */
-.main-body.zoomed + .text-info,
-.slide-container.zoomed .title-section {
-  margin-bottom: 140px !important;
-}
-.main-body {
-  align-items: flex-start;
-}
-
-.main-body.zoomed {
-  transform: none; /* прибираємо загальний масштаб */
-}
-
-.main-body.zoomed .adele-photo,
-.main-body.zoomed .video-wrapper,
-.main-body.zoomed .film-strip,
-.main-body.zoomed .photo-arrow {
-  transform: scale(1.1);
-}
-
-.text-info {
-  position: relative;
-  z-index: 5; /* підняли текст вище */
-}
-@media (max-width: 768px) {
-  .main-body {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 30px;
-    transform: none !important;
-  }
-
-  .main-body.zoomed {
-    transform: none !important; /* 🚫 не масштабуємо контейнер */
-  }
-
-  .main-body.zoomed .adele-photo,
-  .main-body.zoomed .video-wrapper,
-  .main-body.zoomed .film-strip,
-  .main-body.zoomed .photo-arrow {
-    transform: scale(1.08); /* 🔥 легкий zoom тільки на медіа */
-  }
-
-  .adele-photo,
-  .video-wrapper {
-    max-width: 360px;
-    margin: 0 auto;
-  }
-
-  .text-info {
-    position: relative;
-    z-index: 5;
-    margin-top: 0;
-  }
-}
+      width: 100%;
+      padding: 120px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .match-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      width: 100%;
+      gap: 60px;
+    }
+
+    .match-left {
+      flex: 1;
+    }
+
+    .match-left h2 {
+      font-family: "Halvar Breit Rg", sans-serif;
+      font-size: 48px;
+      color: #000;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .match-left .highlight {
+      padding: 0 6px;
+      font-family: "Allegretto Script One", cursive;
+      color: #000;
+      background: none !important;
+      color: #000 !important;
+    }
+
+    .match-left p {
+      font-size: 20px;
+      color: #333;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    .match-right {
+      flex: 1.2;
+      position: relative;
+    }
+
+    .match-carousel {
+      position: relative;
+      overflow: hidden;
+      min-height: 160px;
+    }
+
+    .match-item {
+      position: absolute;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.6s ease;
+      font-size: 22px;
+      line-height: 1.6;
+      color: #111;
+      background: #fbe1ea;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .match-item.active {
+      opacity: 1;
+      transform: translateX(0);
+      position: relative;
+    }
+
+    .match-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: flex-end;
+    }
+
+    .match-controls button {
+      background: #ff8fb1;
+      border: none;
+      color: white;
+      font-size: 24px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .match-controls button:hover {
+      background: #ff6f9d;
+      transform: scale(1.1);
+    }
+
+    @media(max-width: 768px) {
+      .match-section {
+        padding: 40px 20px 30px;
+      }
+      .match-container {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+        position: relative;
+        gap: 10px;
+      }
+      .match-left {
+        margin-bottom: 0;
+      }
+      .match-left h2 {
+        font-size: 35px;
+        line-height: 1.3;
+      }
+      .match-left p {
+        display: none; /* прибирає текст тільки на мобільних */
+      }
+      .match-controls {
+        justify-content: center;
+        margin-top: 10px;
+      }
+    }
+
+    /* --- 3.7. Секція PROGRAM (Програма курсу) --- */
+    .program-section {
+      width: 100%;
+      border-top-left-radius: 80px;
+      border-top-right-radius: 80px;
+      margin-top: -20px; /* щоб накладалась поверх попередньої */
+      color: #fff;
+      padding: 120px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .program-wrapper {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .program-heading {
+      font-family: "Halvar Breit Bd", sans-serif ;
+      font-size: 56px ;
+      color: var(--white);
+      text-align: left;
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+
+    .program-heading-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 5vw;
+      padding-right: 5vw;
+      margin-bottom: 60px;
+    }
+
+    .program-header-image {
+      max-height: 300px;
+      width: auto;
+      flex-shrink: 0;
+      margin-left: 20px;
+    }
+
+    .program-layout {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .program-right {
+      flex: 0 0 70%;
+      padding-right: 5vw;
+    }
+
+    .program {
+      width: 100%;
+      border-top: 1px solid #444;
+    }
+
+    .program-item {
+      border-bottom: 1px solid #444;
+      padding: 28px 0;
+    }
+
+    .program-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      font-family: "Halvar Breit Rg", sans-serif;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      transition: color 0.3s ease;
+    }
+
+    .program-title:hover span:first-child {
+      color: var(--pink);
+    }
+
+    .program-title .icon {
+      font-size: 26px;
+      color: var(--pink);
+      transition: transform 0.3s ease;
+    }
+
+    .program-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .program-item.open .program-content {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 16px;
+    }
+
+    .program-content p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ddd;
+      font-family: "Halvar Breit Lt", sans-serif;
+    }
+
+    .program-item.open .icon {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 1024px) {
+      .program-section {
+        padding: 100px 0;
+      }
+      .program-heading {
+        font-size: 48px;
+        margin-left: 6vw;
+      }
+      .program-right {
+        flex: 0 0 80%;
+        padding-right: 6vw;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .program-section {
+        padding: 80px 0;
+      }
+      .program-layout {
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      .program-heading-wrapper {
+        margin-left: 6vw;
+        padding-right: 6vw;
+        margin-bottom: 30px;
+        align-items: flex-start;
+      }
+      .program-header-image {
+        max-height: 80px;
+      }
+      .program-heading {
+        font-size: 42px;
+        text-align: left;
+      }
+      .program-right {
+        flex: 1 1 100%;
+        padding: 0 6vw;
+      }
+      .program-title {
+        font-size: 18px;
+      }
+      .program-content p {
+        font-size: 16px;
+      }
+    }
+
+    /* --- 3.8. Секція CTA (Заклик до дії) --- */
+    .cta-section {
+      background: #111;
+      padding: 100px 20px;
+      text-align: center;
+    }
+
+    .cta-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .cta-button {
+      background: var(--pink);
+      color: #fff;
+      font-family: 'Halvar Breit Bd', sans-serif;
+      font-size: 22px;
+      text-transform: lowercase;
+      padding: 18px 48px;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    .cta-container .arrow {
+      color: #fff;
+      font-size: 32px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-container:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    @media (max-width: 768px) {
+      .cta-section {
+        padding: 100px 20px;
+      }
+      .cta-button {
+        font-size: 18px;
+        padding: 14px 36px;
+      }
+      .cta-container .arrow {
+        font-size: 28px;
+      }
+    }
+
+    /* --- 3.9. Секція RESULT (Твій результат) --- */
+    .result-section {
+      /* background: linear-gradient(180deg, #f7c4d1 0%, #fdeef3 100%); */ /* Визначено в 3.0 */
+      padding: 120px 20px;
+      text-align: start;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .result-header-modern {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+       padding: 60px 20px; /* Паддінг задано на .result-section */
+      font-family: 'Halvar Breit Rg', sans-serif;
+      text-align: left;
+    }
+
+    .result-bg-flower {
+      position: absolute;
+      top: 2%;
+      left: 69%;
+      transform: translate(-20%, -20%);
+      width: 50%;
+      height: auto;
+      opacity: 0.5;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .result-text-overlay {
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-text-overlay p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #000;
+    }
+
+    .result-text-overlay .accent-word {
+      font-family: 'Halvar Breit Bd', sans-serif;
+      text-transform: uppercase;
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .result-header-modern .accent-word {
+      font-family: 'Halvar Breit Bd';
+      text-transform: uppercase;
+      font-size: clamp(24px, 4vw, 40px);
+      color: #000;
+      display: block;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .result-header-modern .orange {
+      color: var(--pink);
+      font-family: 'Halvar Breit Bd';
+    }
+
+    .result-header-modern .italic {
+      font-style: italic;
+    }
+
+    .result-header-modern .bold {
+      font-family: 'Halvar Breit Bd';
+    }
+
+    @media (max-width: 768px) {
+      .result-section {
+        padding: 80px 20px;
+      }
+      .result-header-modern {
+        font-size: 20px;
+        line-height: 1.5;
+        /* padding: 80px 16px; */ /* Паддінг на секції */
+      }
+      .result-bg-flower {
+        top: 8%;
+        width: 90%;
+        left: 59%;
+      }
+    }
+
+
+    /* --- 3.10. Секція TESTIMONIALS (Відгуки) --- */
+    .testimonials-section {
+      background: #fff9fa;
+      padding: 10px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .title-section {
+      margin-bottom: 40px;
+    }
+
+    .title-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 16px;
+    }
+
+    .title-wrapper h1 {
+      font-family: "Halvar Breit Bd", cursive;
+      font-size: 38px;
+      color: #000;
+      margin: 0;
+      text-align: left;
+    }
+
+    .heart_img_testi {
+      width: 110px;
+      height: auto;
+      transform: translateY(2px);
+    }
+
+    .testimonials-carousel {
+      position: relative;
+      overflow: hidden;
+      max-width: 2000px;
+      margin: 0 auto;
+      cursor: grab;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.5s ease;
+    }
+
+    .testimonial {
+      flex: 0 0 30%;
+      background: #fff;
+      border-radius: 24px;
+      padding: 30px;
+      text-align: left;
+      min-height: 320px;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: "“";
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      font-size: 70px;
+      color: #f7c4d1;
+      font-family: serif;
+    }
+
+    .testimonial img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .testimonial p {
+      font-size: 16px;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    .testimonial strong {
+      display: block;
+      font-weight: 700;
+      color: #d94877;
+    }
+
+    .carousel-indicators {
+      margin-top: 30px;
+      margin-bottom: 70px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .carousel-indicators span {
+      width: 12px;
+      height: 12px;
+      background: #f7c4d1;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-indicators span.active {
+      background: #d94877;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 1024px) {
+      .testimonial {
+        flex: 0 0 45%;
+      }
+      .testimonials-carousel {
+        width: 88%;
+      }
+      .carousel-track {
+        width: 110%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .testimonial {
+        flex: 0 0 90%;
+      }
+    }
+
+    /* --- 3.11. Секція PRICE (Ціна) --- */
+    .price-section {
+      /* background: linear-gradient(180deg,#fdeef3 0%,#fff9fa 100%); */ /* Визначено в 3.0 */
+      text-align: center;
+      padding: 120px 20px;
+    }
+
+    .price-title {
+      font-family: 'Halvar Breit Bd', sans-serif;
+      font-size: 52px;
+      text-transform: uppercase;
+      margin-bottom: 60px;
+      line-height: 1.1;
+    }
+
+    .price-title .accent {
+      color: var(--pink);
+    }
+
+    .price-card {
+      position: relative;
+      background: var(--pink);
+      color: #fff;
+      border-radius: 28px;
+      padding: 60px 40px 50px;
+      width: 340px;
+      margin: 0 auto;
+      text-align: left;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    .price-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .price-header h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .price-amount {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .price-amount span {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: .9;
+    }
+
+    .save-badge {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: #fff;
+      color: #000;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 40px;
+    }
+
+    .features li {
+      font-size: 16px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .price-btn {
+      display: block;
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 14px 0;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: background .3s;
+    }
+
+    .price-btn:hover {
+      background: var(--bg);
+      color: #000;
+    }
+
+    .decor-img {
+      position: absolute;
+      z-index: 2;
+      width: 90px;
+      height: auto;
+      pointer-events: none;
+    }
+
+    .decor-left {
+      top: 150px;
+      left: -40px;
+      transform: rotate(-15deg);
+    }
+
+    .decor-right {
+      top: -50px;
+      right: -30px;
+      transform: rotate(12deg);
+    }
+
+    .decor-heart {
+      top: 400px;
+      right: -30px;
+      transform: rotate(12deg);
+    }
+
+    @media (min-width: 1025px) {
+      .price-section,
+      .hero-modern {
+        background:
+          linear-gradient(180deg, #fdeef3 0%, #fff9fa 100%),
+          url('Group.png') center/cover no-repeat;
+        background-blend-mode: soft-light;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .price-title {
+        font-size: 34px;
+        margin-bottom: 40px;
+      }
+      .price-card {
+        width: 90%;
+        padding: 50px 24px;
+      }
+    }
+    
+    /* --- 3.12. Секція CONTACT --- */
+    .contact {
+      /* background: #fff; */ /* Визначено в 3.0 */
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-title {
+      font-family: 'Halvar Breit Bd', sans-serif;
+      font-size: 48px;
+      text-transform: lowercase;
+      color: #000;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .contact-text {
+      font-family: 'Halvar Breit Lt', sans-serif;
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    .telegram-btn {
+      display: inline-block;
+      padding: 16px 36px;
+      border-radius: 40px;
+      font-family: 'Halvar Breit Bd', sans-serif;
+      text-transform: uppercase;
+      background: #d94877;
+      color: #fff;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .telegram-btn:hover {
+      background: var(--light-pink);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .contact {
+        padding: 60px 20px;
+      }
+      .contact-title {
+        font-size: 36px;
+      }
+      .contact-text {
+        font-size: 16px;
+      }
+      .telegram-btn {
+        font-size: 16px;
+        padding: 14px 30px;
+      }
+    }
+
+    /* --- 3.13. FOOTER (Підвал) --- */
+    footer {
+      padding: 40px;
+      text-align: center;
+      color: #555;
+      background: #f2f2f2;
+    }
+
+    /* ===================================================================
+       4. МОДАЛЬНІ ВІКНА ТА ПЛЕЄР
+    =================================================================== */
+
+    /* --- 4.1. Модальне вікно (стара версія, не використовується в HTML) --- */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .video-content {
+      position: relative;
+      width: 90%;
+      max-width: 360px;
+      aspect-ratio: 9 / 16;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -45px;
+      right: -5px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      transition: opacity 0.3s ease;
+    }
+    .close-btn:hover {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 480px) {
+      .video-content {
+        max-width: 320px;
+      }
+      .close-btn {
+        font-size: 26px;
+        top: 6px;
+        right: 10px;
+      }
+    }
+
+    /* --- 4.2. Відео-плеєр (в секції Адель) --- */
+    /* === 🎬 Відео та постер однакового розміру (875×1730) === */
+    .video-wrapper {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 875px; /* повна ширина постера */
+      aspect-ratio: 875 / 1730; /* точна пропорція */
+      border-radius: 20px;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+
+    .video-wrapper video,
+    .reel-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .video-wrapper .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.0);
+      transition: background 0.3s ease;
+    }
+
+    .video-wrapper .play-overlay:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    /* --- 4.3. Оверлей Play --- */
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 4;
+      transition: background 0.3s ease;
+    }
+    .play-overlay img {
+      width: clamp(48px, 8vw, 80px);
+      height: auto;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+      opacity: 0.9;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .play-overlay:hover img {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    
+    /* --- 4.4. Анімація Zoom під час програвання відео --- */
+    .main-body {
+      transition: transform 0.6s ease, gap 0.6s ease;
+      transform-origin: center center;
+      align-items: flex-start;
+    }
+    
+    .text-info {
+      position: relative;
+      z-index: 5;
+    }
+
+    .title-section {
+      position: relative;
+      z-index: 10;
+      margin-bottom: 60px;
+      transition: margin-bottom 0.5s ease;
+    }
+    
+    .main-body.zoomed {
+      transform: none;
+    }
+
+    /* * =========== 💡 ОСЬ ТУТ ВИПРАВЛЕННЯ 💡 ===========
+     * Я прибрав .main-body.zoomed .film-strip з цього списку, 
+     * щоб його стилі не конфліктували.
+     */
+    .main-body.zoomed .adele-photo,
+    .main-body.zoomed .video-wrapper,
+    .main-body.zoomed .photo-arrow {
+      transform: scale(1.25);
+      transition: transform 0.6s ease;
+    }
+
+    /* * І я додав окреме правило для .film-strip, 
+     * яке поєднує і поворот, і збільшення.
+     */
+    .main-body.zoomed .film-strip {
+      transform: rotate(-9deg) scale(1.25);
+      transition: transform 0.6s ease;
+      left:-50%;
+      top: 2%;
+    }
+
+    .main-body.zoomed .photo-arrow {
+          display: none;
+      }
+
+    .main-body.zoomed video {
+      border-radius: 28px;
+      transition: border-radius 0.6s ease;
+    }
+
+    .main-body.zoomed + .text-info,
+    .slide-container.zoomed .title-section {
+      margin-bottom: 140px !important;
+    }
+
+    
+    @media (max-width: 768px) {
+      .main-body {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 30px;
+        transform: none !important;
+      }
+      .main-body.zoomed {
+        transform: none !important;
+      }
+      .main-body.zoomed .adele-photo,
+      .main-body.zoomed .video-wrapper,
+      .main-body.zoomed .film-strip {
+        transform: scale(1.25); /* На мобільних ми залишаємо груповий стиль */
+        transform-origin: top center; /* 💡 <--- ДОДАЙ ЦЕ (2) */
+      }
+      
+      /* ...але для .film-strip ми його ПЕРЕЗАПИСУЄМО, щоб зберегти поворот */
+      .main-body.zoomed .film-strip {
+         transform: rotate(-7deg) scale(1.25); /* Використовуємо градус з мобільної версії */
+         transform-origin: top center; /* 💡 <--- ДОДАЙ ЦЕ (2) */
+         left:-40%;
+      }
+
+      .main-body.zoomed .photo-arrow {
+          display: none;
+      }
+      
+      .adele-photo,
+      .video-wrapper {
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      .text-info {
+        margin-top: 0;
+      }
+    }
+
+    /* ===================================================================
+       5. ГЛОБАЛЬНІ МЕДІА-ЗАПИТИ
+    =================================================================== */
+    @media(max-width:768px) {
+      section {
+        padding: 60px 20px;
+      }
+      /* Цей стиль .hero був в кінці, я додав його до .hero-modern@900px */
+      .hero {
+        padding-left: 20px;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    /* ===================================================================
+       6. СПЕЦІФІЧНІ ФІКСИ ДЛЯ iOS (Safari)
+    =================================================================== */
+
+    /* --- 6.1. Фікс backdrop-filter --- */
+    @supports (-webkit-touch-callout: none) {
+      .floating-footer, .video-modal {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+    }
+
+    /* --- 6.2. Загальний блок фіксів Safari --- */
+    @supports (-webkit-touch-callout: none) {
+      /* Заборона фіксованих фонів */
+      .hero, .hero-modern,
+      .adele-slide {
+        background-attachment: scroll !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+      }
+
+      /* Хвилясте рожеве підкреслення через SVG */
+      .highlight-dark-pink,
+      .wavy-underline {
+        position: relative;
+        text-decoration: none !important;
+      }
+
+      .highlight-dark-pink::after,
+      .wavy-underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 100%;
+        height: 8px;
+        background: url("data:image/svg+xml;utf8,<svg width='120' height='16' xmlns='http://www.w3.org/2000/svg'><path d='M0 8 Q10 0 20 8 T40 8 T60 8 T80 8 T100 8 T120 8' stroke='%23d94877' stroke-width='3' fill='none'/></svg>") repeat-x;
+        background-size: 24px 8px;
+      }
+
+      /* Корекція шрифтової сітки */
+      body {
+        -webkit-text-size-adjust: 100%;
+        font-smooth: always;
+      }
+
+      /* Заборона горизонтального скролу (іноді злітає) */
+      html, body {
+        overflow-x: hidden !important;
+      }
+    }
+
+    /* --- 6.3. Фікси прозорості PNG --- */
+    .main-photo,
+    .film-strip,
+    .photo-arrow {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    /* --- 6.4. Фікс "стрибання" тексту --- */
+    .text-info p {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* --- 6.5. Фікс жирного заголовка .stats-header на iPhone --- */
+    @supports (-webkit-touch-callout: none) {
+      .stats-header h2 {
+        font-family: 'Halvar Breit Bd', sans-serif !important;
+        font-weight: 700 !important;
+        -webkit-text-stroke: 0.2px transparent;
+      }
+      .stats-header h2 .wavy-underline {
+        font-family: inherit !important;
+        font-weight: inherit !important;
+      }
+    }
+
+    /* --- 6.6. Фікс повноекранного відео --- */
+    .reel-video:fullscreen {
+      object-fit: contain !important;
+      background: #000;
+    }
+    .reel-video::-webkit-media-controls-fullscreen-button {
+      display: none;
+    }
 
 
   </style>
 </head>
 <body>
-
 
 <section class="hero-modern">
   <div class="hero-container">
@@ -2246,49 +2017,37 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   </div>
 </section>
 
-
-
 <section class="adele-slide">
   <div class="slide-container">
 
-<!-- Додаємо title wrapper без заокруглення -->
-<div class="title-section" style="text-align:center;margin-bottom:40px;">
-  <div class="title-with-icon">
-    <img src="310cc84b5fdb46d548836ed72475503581cd38e5.png" alt="Адель логотип" class="title-icon" />
-    <h1>ПОЗНАЙОМИМОСЬ</h1>
-  </div>
-</div>
-
-
-
+    <div class="title-section" style="text-align:center;margin-bottom:40px;">
+      <div class="title-with-icon">
+        <img src="310cc84b5fdb46d548836ed72475503581cd38e5.png" alt="Адель логотип" class="title-icon" />
+        <h1>ПОЗНАЙОМИМОСЬ</h1>
+      </div>
+    </div>
 
     <div class="main-body">
-      <!-- Фото Адель -->
       <div class="adele-photo">
-<div class="photo-wrapper">
-  <div class="film-strip-wrapper">
-  <img src="film_strip.png" alt="" class="film-strip">
-</div>
+        <div class="photo-wrapper">
+          <div class="film-strip-wrapper">
+            <img src="film_strip.png" alt="" class="film-strip">
+          </div>
 
- <div class="video-wrapper">
-  <video id="adeleVideo" class="reel-video" poster="adel_phone.png" playsinline controls preload="metadata">
-    <source src="ADEL.webm" type="video/webm">
-    Твій браузер не підтримує відео
-  </video>
-  <div class="play-overlay" id="openVideo">
-    <img src="play-button.png" alt="Play Video">
-  </div>
-</div>
+          <div class="video-wrapper">
+            <video id="adeleVideo" class="reel-video" poster="adel-phone1.png" playsinline controls preload="metadata">
+              <source src="ADEL.webm" type="video/webm">
+              Твій браузер не підтримує відео
+            </video>
+            <div class="play-overlay" id="openVideo">
+              <img src="play-button.png" alt="Play Video">
+            </div>
+          </div>
 
+          <img src="arrow.png" alt="Стрілка" class="photo-arrow">
+        </div>
+      </div>
 
-  <img src="arrow.png" alt="Стрілка" class="photo-arrow">
-</div>
-
-
-</div>
-
-
-      <!-- Текст з інтерактивними картками -->
       <div class="text-info">
         <p><strong>ФІЛОСОФІЯ МОЇХ ПРОДУКТІВ </strong> – Мінімум води, максимум інструментів.</p>
         <p>Мої продукти створені не для того, щоб тебе надихати, а щоб показати,
@@ -2299,27 +2058,13 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
           <div class="card card-1"><span class="asterisk">*</span>МОЯ ЗАДАЧА —<br>
             <small>Не розповідати, як мені було хірово десять років тому і з яких низів я піднімалася,а допомогти тобі зрозуміти, як дійти до тієї точки, де я зараз.</small></div>
           <div class="card card-2"><span class="asterisk">*</span>ЯКЩО ТИ ГОТОВА —<br>
-            <small>Не ховатися за страхом бути нав’язливою чи вивести своїх працівників із зони комфорту,а 
+            <small>Не ховатися за страхом бути нав’язливою чи вивести своїх працівників із зони комфорту,а
               почати реально заробляти і виводити свою студію на інший рівень — тоді welcome.</small></div>
         </div>
-
-
       </div>
     </div>
   </div>
-
 </section>
-
-
-
-
-
-
-
-
-
-
-
 
 <section class="stats-section">
   <div class="stats-header with-image">
@@ -2329,14 +2074,10 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
     </h2>
   </div>
 
-  <!-- твоє готове SVG-зображення -->
   <div class="stats-svg-wrapper">
     <img src="stats1.svg" alt="Інфографіка курсу" class="stats-svg">
   </div>
 </section>
-
-
-
 
 <section class="love-ticker">
   <div class="ticker-track">
@@ -2344,18 +2085,13 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   </div>
 </section>
 
-
 <section class="match-section">
   <div class="match-container">
     <div class="match-left">
       <h2>це точно <span class="highlight">метч</span>, якщо ти...</h2>
-    
     </div>
     <div class="match-right">
       <div class="match-carousel">
-        <!--  <div class="match-item active">
-               <p> ♡ Адміністратор, який хоче системності, але не знає, з чого почати.</p>
-        </div>-->
         <div class="match-item active">
           <p> <span class="wavy-underline">Власниця(-ник) студії</span>, що хоче збільшити обіг за рахунок правильної роботи з клієнтською базою і сервісу, який закохує у ваш бренд з першого дотику.</p>
         </div>
@@ -2376,6 +2112,7 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 </section>
 
 <script>
+  // Скрипт для секції MATCH
   const matchItems = document.querySelectorAll('.match-item');
   let matchIndex = 0;
 
@@ -2396,131 +2133,130 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 </script>
 
 <section id="program" class="program-section">
- <div class="program-wrapper">
-  
-      <div class="program-heading-wrapper">
-   <h2 class="program-heading">програма курсу</h2>
-   <img src="pink_micro.png" alt="Мікрофон" class="program-header-image">
-  </div>
+  <div class="program-wrapper">
+
+    <div class="program-heading-wrapper">
+      <h2 class="program-heading">програма курсу</h2>
+      <img src="pink_micro.png" alt="Мікрофон" class="program-header-image">
+    </div>
     <div class="program-layout">
-   <div class="program-right">
-    <div class="program">
-     <div class="program-item">
-      <button class="program-title">
-    <span>1. Найм і старт</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Навчишся правильно шукати адміністратора, ставити чіткі критерії, проводити співбесіди без інтуїції “подобається / не подобається”. Розберемо стажування, адаптацію і як не втратити людину на першому тижні. </p>
-   </div>
-  </div>
+      <div class="program-right">
+        <div class="program">
+          <div class="program-item">
+            <button class="program-title">
+              <span>1. Найм і старт</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Навчишся правильно шукати адміністратора, ставити чіткі критерії, проводити співбесіди без інтуїції “подобається / не подобається”. Розберемо стажування, адаптацію і як не втратити людину на першому тижні. </p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>2. Обов’язки адміністратора</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Базові функції, додаткові задачі, субординація та “зони відповідальності”. Ти побачиш, як має виглядати день адміністратора — по годинах, із прикладами шаблонів.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>2. Обов’язки адміністратора</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Базові функції, додаткові задачі, субординація та “зони відповідальності”. Ти побачиш, як має виглядати день адміністратора — по годинах, із прикладами шаблонів.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>3. Психологія сервісу</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>М’яка комунікація, відновлення довіри після негативу, як збирати відгуки, що реально впливають на продаж. Поговоримо про тон сервісу і як зробити клієнтів адвокатами бренду.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>3. Психологія сервісу</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>М’яка комунікація, відновлення довіри після негативу, як збирати відгуки, що реально впливають на продаж. Поговоримо про тон сервісу і як зробити клієнтів адвокатами бренду.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>4. Продажі 1: переписка і коментарі</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Алгоритми відповідей, шаблони фраз, скрипти для обробки заперечень. Як не бути нав’язливими, але завжди закривати діалог на запис.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>4. Продажі 1: переписка і коментарі</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Алгоритми відповідей, шаблони фраз, скрипти для обробки заперечень. Як не бути нав’язливими, але завжди закривати діалог на запис.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>5. Продажі 2: дзвінки та довпродажі</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Як звучати впевнено, закривати на додаткові послуги без “тиску”, формули для upsell і приклади успішних розмов.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>5. Продажі 2: дзвінки та довпродажі</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Як звучати впевнено, закривати на додаткові послуги без “тиску”, формули для upsell і приклади успішних розмов.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>6. CRM і клієнтська база</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Яку CRM обрати, як налаштувати аналітику, розподіл клієнтів за категоріями, автоматизація нагадувань і система онлайн-запису.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>6. CRM і клієнтська база</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Яку CRM обрати, як налаштувати аналітику, розподіл клієнтів за категоріями, автоматизація нагадувань і система онлайн-запису.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>7. Комунікація з майстрами</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Як адміну бути мостом між клієнтами та командою: структура чатів, правила комунікації, профілактика конфліктів, робота з “токсичними” колегами.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>7. Комунікація з майстрами</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Як адміну бути мостом між клієнтами та командою: структура чатів, правила комунікації, профілактика конфліктів, робота з “токсичними” колегами.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>8. KPI та ефективність</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Які показники реально відображають якість роботи. Система оцінки: від конверсії у запис до повторних візитів. Шаблони звітів і приклади таблиць.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>8. KPI та ефективність</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Які показники реально відображають якість роботи. Система оцінки: від конверсії у запис до повторних візитів. Шаблони звітів і приклади таблиць.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>9. Ріст і розвиток</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Як вирощувати старшого адміністратора чи керуючу. Сценарії розвитку, зарплатні моделі, мотивація через цілі, а не страх.</p>
-   </div>
-  </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>9. Ріст і розвиток</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Як вирощувати старшого адміністратора чи керуючу. Сценарії розвитку, зарплатні моделі, мотивація через цілі, а не страх.</p>
+            </div>
+          </div>
 
-  <div class="program-item">
-   <button class="program-title">
-    <span>10. Q&A сесія з керуючою та адміном</span>
-    <span class="icon">+</span>
-   </button>
-   <div class="program-content">
-    <p>Жива зустріч у Zoom, де вони розбирають кризові ситуації, відповідають на питання, показують “закулісся” справжньої адміністративної роботи.</p>
-   </div>
+          <div class="program-item">
+            <button class="program-title">
+              <span>10. Q&A сесія з керуючою та адміном</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="program-content">
+              <p>Жива зустріч у Zoom, де вони розбирають кризові ситуації, відповідають на питання, показують “закулісся” справжньої адміністративної роботи.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
- </div>
- </div>
- </div>
- 
 </section>
 
 <script>
- document.querySelectorAll(".program-title").forEach((btn) => {
-  btn.addEventListener("click", () => {
-   const item = btn.parentElement;
-   item.classList.toggle("open");
-   btn.querySelector(".icon").textContent = item.classList.contains("open") ? "−" : "+";
+  // Скрипт для секції PROGRAM (акордеон)
+  document.querySelectorAll(".program-title").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.parentElement;
+      item.classList.toggle("open");
+      btn.querySelector(".icon").textContent = item.classList.contains("open") ? "−" : "+";
+    });
   });
- });
 </script>
-
-
 
 <section class="cta-section">
   <div class="cta-container">
@@ -2529,16 +2265,12 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   </div>
 </section>
 
-
-
-
 <section class="result-section">
   <div class="result-header-modern">
     <img src="star.png" alt="flower background" class="result-bg-flower">
 
     <div class="result-text-overlay">
       <p>
- 
         це не курс <span class="orange italic">«під чайок»</span>, який можна ввімкнути на фоні.<br>
         тут доведеться <span class="orange">думати</span>, бо я навчу твого адміністратора <br>
         не гріти стілець, а <span class="bold">володіти фундаментальними навичками</span>, <br>
@@ -2548,19 +2280,11 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
   </div>
 </section>
 
-
-
-
-
-
-
-
-
- <section class="testimonials-section">
+<section class="testimonials-section">
   <div class="title-section">
     <div class="title-wrapper">
-  <h1>відгуки учасників</h1>
-  <img class="heart_img_testi" src="Screenshot 2025-10-27 162028.png" alt="heart">
+      <h1>відгуки учасників</h1>
+      <img class="heart_img_testi" src="Screenshot 2025-10-27 162028.png" alt="heart">
     </div>
   </div>
 
@@ -2620,79 +2344,74 @@ footer{padding:40px;text-align:center;color:#555;background:#f2f2f2;} @media(max
 </section>
 
 <script>
-const track = document.querySelector('.carousel-track');
-const items = Array.from(track.children);
-const indicatorsContainer = document.querySelector('.carousel-indicators');
+  // Скрипт для TESTIMONIALS (карусель)
+  const track = document.querySelector('.carousel-track');
+  const items = Array.from(track.children);
+  const indicatorsContainer = document.querySelector('.carousel-indicators');
 
-let index = 0;
+  let index = 0;
 
-// створюємо точки
-items.forEach((_, i) => {
-  const dot = document.createElement('span');
-  if (i === 0) dot.classList.add('active');
-  indicatorsContainer.appendChild(dot);
-});
+  items.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    indicatorsContainer.appendChild(dot);
+  });
 
-const dots = Array.from(indicatorsContainer.children);
+  const dots = Array.from(indicatorsContainer.children);
 
-// клонування першого та останнього елементів
-const firstClone = items[0].cloneNode(true);
-const lastClone = items[items.length - 1].cloneNode(true);
-track.appendChild(firstClone);
-track.insertBefore(lastClone, items[0]);
+  const firstClone = items[0].cloneNode(true);
+  const lastClone = items[items.length - 1].cloneNode(true);
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, items[0]);
 
-const allItems = Array.from(track.children);
-const itemWidth = items[0].getBoundingClientRect().width + 24;
+  const allItems = Array.from(track.children);
+  const itemWidth = items[0].getBoundingClientRect().width + 24;
 
-let isTransitioning = false;
-track.style.transform = `translateX(-${itemWidth}px)`;
+  let isTransitioning = false;
+  track.style.transform = `translateX(-${itemWidth}px)`;
 
-const updateDots = () => {
-  dots.forEach(d => d.classList.remove('active'));
-  dots[index % items.length].classList.add('active');
-};
+  const updateDots = () => {
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index % items.length].classList.add('active');
+  };
 
-const moveToIndex = (newIndex) => {
-  if (isTransitioning) return;
-  isTransitioning = true;
-  index = newIndex;
-  track.style.transition = 'transform 0.6s ease';
-  track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
-  updateDots();
-};
-
-track.addEventListener('transitionend', () => {
-  isTransitioning = false;
-  if (index === -1) {
-    track.style.transition = 'none';
-    index = items.length - 1;
+  const moveToIndex = (newIndex) => {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    index = newIndex;
+    track.style.transition = 'transform 0.6s ease';
     track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
-  } else if (index === items.length) {
-    track.style.transition = 'none';
-    index = 0;
-    track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
-  }
-});
+    updateDots();
+  };
 
-// кліки по точках
-dots.forEach((dot, i) => {
-  dot.addEventListener('click', () => moveToIndex(i));
-});
+  track.addEventListener('transitionend', () => {
+    isTransitioning = false;
+    if (index === -1) {
+      track.style.transition = 'none';
+      index = items.length - 1;
+      track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
+    } else if (index === items.length) {
+      track.style.transition = 'none';
+      index = 0;
+      track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
+    }
+  });
 
-// свайп для мобільних
-let startX = 0;
-track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
-track.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) moveToIndex(index + 1);
-  else if (endX - startX > 50) moveToIndex(index - 1);
-});
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => moveToIndex(i));
+  });
 
-// автопрокрутка без пауз
-setInterval(() => {
-  if (!isTransitioning) moveToIndex(index + 1);
-}, 4000);
+  let startX = 0;
+  track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+  track.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) moveToIndex(index + 1);
+    else if (endX - startX > 50) moveToIndex(index - 1);
+  });
 
+  setInterval(() => {
+    if (!isTransitioning) moveToIndex(index + 1);
+  }, 4000);
 </script>
 
 <section id="signup" class="price-section">
@@ -2701,36 +2420,24 @@ setInterval(() => {
   </h2>
 
   <div class="price-card">
-  <img src="курсор.png" alt="cursor" class="decor-img decor-left">
-  <img src="скрепка2.png" alt="skrepka" class="decor-img decor-right">
-  <img src="heartprice.png" alt="heart" class="decor-img decor-heart">
-  <div class="price-header">
+    <img src="курсор.png" alt="cursor" class="decor-img decor-left">
+    <img src="скрепка2.png" alt="skrepka" class="decor-img decor-right">
+    <img src="heartprice.png" alt="heart" class="decor-img decor-heart">
+    <div class="price-header">
 
-    <p class="price-amount">₴1499 <span> замість ₴5000 — поки я ще не передумала :)</span></p>
+      <p class="price-amount">₴1499 <span> замість ₴5000 — поки я ще не передумала :)</span></p>
+    </div>
+
+    <ul class="features">
+      <li>+ 10 глибоких уроків</li>
+      <li>+ Q&A-сесія зі мною та адміністратором</li>
+      <li>+ Повний пак додаткових матеріалів</li>
+      <li>+ Telegram Chat Community + зворотний зв’язок</li>
+    </ul>
+
+    <a href="#" class="price-btn">Приєднатися</a>
   </div>
-
-  <ul class="features">
-    <li>+ 10 глибоких уроків</li>
-    <li>+ Q&A-сесія зі мною та адміністратором</li>
-    <li>+ Повний пак додаткових матеріалів</li>
-    <li>+ Telegram Chat Community + зворотний зв’язок</li>
-
-  </ul>
-
-  <a href="#" class="price-btn">Приєднатися</a>
-</div>
-
 </section>
-
-
-
-
-
-
-
-
-         
-     
 
 <section class="contact">
   <div class="contact-inner">
@@ -2740,128 +2447,130 @@ setInterval(() => {
   </div>
 </section>
 
+<footer>
+  © 2025 Adele Course. Всі права захищені.
+</footer>
 
-  <footer>
-    © 2025 Adele Course. Всі права захищені.
-  </footer>
-  <div class="floating-footer">
-
+<div class="floating-footer">
   <a href="#signup" class="footer-btn main">Записатися</a>
-
 </div>
+
 <script>
-const footer = document.querySelector('.floating-footer');
-const heroSection = document.querySelector('.hero-modern');
-const heroHeight = heroSection ? heroSection.offsetHeight : 600;
-const footerBtns = document.querySelectorAll('.footer-btn');
-const priceSection = document.querySelector('.price-section');
-const sections = document.querySelectorAll('section[id]');
+  // Скрипт для ПЛАВАЮЧОЇ НАВІГАЦІЇ
+  const footer = document.querySelector('.floating-footer');
+  const heroSection = document.querySelector('.hero-modern');
+  const heroHeight = heroSection ? heroSection.offsetHeight : 600;
+  const footerBtns = document.querySelectorAll('.footer-btn');
+  const priceSection = document.querySelector('.price-section');
+  const sections = document.querySelectorAll('section[id]');
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const scrollMid = scrollY + window.innerHeight / 2;
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const scrollMid = scrollY + window.innerHeight / 2;
 
-  // === показуємо футер після hero ===
-  if (scrollY > heroHeight - 100) {
-    footer.classList.add('show-footer');
-  } else {
-    footer.classList.remove('show-footer');
-  }
+    if (scrollY > heroHeight - 100) {
+      footer.classList.add('show-footer');
+    } else {
+      footer.classList.remove('show-footer');
+    }
 
-  // === ховаємо футер, якщо юзер у секції прайсу ===
-  const priceTop = priceSection.offsetTop;
-  const priceBottom = priceTop + priceSection.offsetHeight;
-  if (scrollMid > priceTop && scrollMid < priceBottom) {
-    footer.classList.remove('show-footer');
-    footer.classList.add('hide-footer');
-  } else {
-    footer.classList.remove('hide-footer');
-  }
+    const priceTop = priceSection.offsetTop;
+    const priceBottom = priceTop + priceSection.offsetHeight;
+    if (scrollMid > priceTop && scrollMid < priceBottom) {
+      footer.classList.remove('show-footer');
+      footer.classList.add('hide-footer');
+    } else {
+      footer.classList.remove('hide-footer');
+    }
 
-  // === підсвічування активної секції ===
-  sections.forEach(section => {
-    if (scrollMid > section.offsetTop && scrollMid < section.offsetTop + section.offsetHeight) {
-      const id = section.getAttribute('id');
-      footerBtns.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('href') === `#${id}`) {
-          btn.classList.add('active');
-        }
-      });
+    sections.forEach(section => {
+      if (scrollMid > section.offsetTop && scrollMid < section.offsetTop + section.offsetHeight) {
+        const id = section.getAttribute('id');
+        footerBtns.forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('href') === `#${id}`) {
+            btn.classList.add('active');
+          }
+        });
+      }
+    });
+  });
+
+  footerBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      footerBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      setTimeout(() => btn.classList.remove('active'), 1500);
+    });
+  });
+</script>
+
+<script>
+  // Скрипт для плеєра в секції АДЕЛЬ (ОНОВЛЕНІ ВІДСТУПИ)
+  const video = document.getElementById('adeleVideo');
+  const playBtn = document.getElementById('openVideo');
+  const mainBody = document.querySelector('.main-body');
+  const titleSection = document.querySelector('.title-section');
+  const textInfo = document.querySelector('.adele-slide .text-info');
+
+  playBtn.addEventListener('click', () => {
+    video.muted = false;
+    video.play();
+    playBtn.style.display = 'none';
+    mainBody.classList.add('zoomed');
+    
+    // 💡 1. ВІДСТУП ВІД ЗАГОЛОВКА (збільшено)
+    // Відштовхує блок з фото/відео вниз від заголовка "Познайомимось"
+    titleSection.style.marginBottom = '200px'; // <-- Було 140px
+    
+    // 💡 2. ВІДСТУП ВІД ТЕКСТУ (збільшено)
+    // Відштовхує текст "Філософія..." вниз від фото/відео (тільки на мобільних)
+    if (window.innerWidth <= 768) { 
+        textInfo.style.marginTop = '200px'; // <-- Було 100px
     }
   });
-});
 
-// === логіка кліку/тапу ===
-footerBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    footerBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    setTimeout(() => btn.classList.remove('active'), 1500);
+  video.addEventListener('pause', () => {
+    mainBody.classList.remove('zoomed');
+    titleSection.style.marginBottom = '60px'; // Повертаємо базовий відступ
+    playBtn.style.display = 'flex';
+    
+    // Прибираємо мобільний відступ
+    if (window.innerWidth <= 768) { 
+        textInfo.style.marginTop = '0px';
+    }
   });
-});
+
+  video.addEventListener('ended', () => {
+    mainBody.classList.remove('zoomed');
+    titleSection.style.marginBottom = '60px'; // Повертаємо базовий відступ
+    playBtn.style.display = 'flex';
+    
+    // Прибираємо мобільний відступ
+    if (window.innerWidth <= 768) { 
+        textInfo.style.marginTop = '0px';
+    }
+  });
 </script>
-
-
-
-
-
-
-
-
 
 <script>
-const video = document.getElementById('adeleVideo');
-const playBtn = document.getElementById('openVideo');
-const mainBody = document.querySelector('.main-body');
-const titleSection = document.querySelector('.title-section');
+  // Скрипт-фікс для Safari під час відтворення відео
+  const adeleVideo = document.getElementById('adeleVideo');
+  const body = document.body;
 
-playBtn.addEventListener('click', () => {
-  video.muted = false;
-  video.play();
-  playBtn.style.display = 'none';
-  mainBody.classList.add('zoomed');
-  titleSection.style.marginBottom = '140px'; // ↑ більший відступ
-});
+  adeleVideo.addEventListener('play', () => {
+    body.style.backgroundAttachment = 'scroll';
+    body.style.overflowY = 'hidden';
+  });
 
-video.addEventListener('pause', () => {
-  mainBody.classList.remove('zoomed');
-  titleSection.style.marginBottom = '60px'; // ↓ повертаємо назад
-  playBtn.style.display = 'flex';
-});
+  adeleVideo.addEventListener('pause', () => {
+    body.style.overflowY = 'auto';
+  });
 
-video.addEventListener('ended', () => {
-  mainBody.classList.remove('zoomed');
-  titleSection.style.marginBottom = '60px';
-  playBtn.style.display = 'flex';
-});
-
+  adeleVideo.addEventListener('ended', () => {
+    body.style.overflowY = 'auto';
+  });
 </script>
-
-
-
-
-
-
-<script>
-const adeleVideo = document.getElementById('adeleVideo');
-const body = document.body;
-
-adeleVideo.addEventListener('play', () => {
-  // вимикаємо fixed/blur фони, щоб Safari не глючив
-  body.style.backgroundAttachment = 'scroll';
-  body.style.overflowY = 'hidden'; // щоб уникнути подвійного рендеру
-});
-
-adeleVideo.addEventListener('pause', () => {
-  body.style.overflowY = 'auto';
-});
-
-adeleVideo.addEventListener('ended', () => {
-  body.style.overflowY = 'auto';
-});
-</script>
-
 
 </body>
 </html>
