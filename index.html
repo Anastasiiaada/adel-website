@@ -6,6 +6,8 @@
   <title>Адмін - це не просто дівчинка на ресепшені</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <meta name="description" content="Адмін - це не просто дівчинка на ресепшені" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
 
   <style>
     /* ===================================================================
@@ -2597,8 +2599,7 @@ document.getElementById('joinButton').addEventListener('click', function (e) {
 
   alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
 
-  // формуємо форму для LiqPay
-// 💳 Дані для LiqPay
+ // 💳 Дані для LiqPay
 const liqpayData = {
   public_key: "sandbox_i57839809613",
   version: "3",
@@ -2609,31 +2610,34 @@ const liqpayData = {
   result_url: "https://anastasiiaadamska.github.io/success.html"
 };
 
-// ✅ Безпечне кодування українського тексту:
-const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(liqpayData))));
-const signature = "sandbox_signature";
+// безпечне кодування
+const data = btoa(unescape(encodeURIComponent(JSON.stringify(liqpayData))));
 
+// 🧮 формуємо signature по документації LiqPay
+const privateKey = "sandbox_wCyjtkcLKugQv9imzC7E7cOqTnxgV2UeHSSsXnI0"; // <-- твій sandbox key
+const signature = CryptoJS.SHA1(privateKey + data + privateKey).toString(CryptoJS.enc.Base64);
 
-  // створюємо нову вкладку з формою
-  const liqpayForm = document.createElement('form');
-  liqpayForm.method = 'POST';
-  liqpayForm.action = 'https://www.liqpay.ua/api/3/checkout';
-  liqpayForm.target = '_blank';
+// створюємо форму і відправляємо
+const form = document.createElement('form');
+form.method = 'POST';
+form.action = 'https://www.liqpay.ua/api/3/checkout';
+form.target = '_blank';
 
-  const inputData = document.createElement('input');
-  inputData.type = 'hidden';
-  inputData.name = 'data';
-  inputData.value = base64;
+const inputData = document.createElement('input');
+inputData.type = 'hidden';
+inputData.name = 'data';
+inputData.value = data;
 
-  const inputSign = document.createElement('input');
-  inputSign.type = 'hidden';
-  inputSign.name = 'signature';
-  inputSign.value = signature;
+const inputSignature = document.createElement('input');
+inputSignature.type = 'hidden';
+inputSignature.name = 'signature';
+inputSignature.value = signature;
 
-  liqpayForm.appendChild(inputData);
-  liqpayForm.appendChild(inputSign);
-  document.body.appendChild(liqpayForm);
-  liqpayForm.submit();
+form.appendChild(inputData);
+form.appendChild(inputSignature);
+document.body.appendChild(form);
+form.submit();
+
 });
 </script>
 
