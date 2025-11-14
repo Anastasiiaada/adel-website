@@ -2471,7 +2471,8 @@
       <li>+ Telegram Chat Community + зворотний зв’язок</li>
     </ul>
 
-    <a href="#" class="price-btn">Приєднатися</a>
+    <a href="#" class="price-btn" id="joinButton">Приєднатися</a>
+
   </div>
 </section>
 
@@ -2577,6 +2578,51 @@ playBtn.addEventListener('click', async () => {
   });
 });
 
+</script>
+<script>
+document.getElementById('joinButton').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // 🟣 Попросимо короткі дані користувача
+  const name = prompt("Вкажи своє ім’я:");
+  const phone = prompt("Вкажи свій номер телефону:");
+
+  if (!name || !phone) {
+    alert("Будь ласка, заповни обидва поля ❤️");
+    return;
+  }
+
+  // 🟢 Google Script URL (сюди летять дані)
+  const url = "https://script.google.com/macros/s/AKfycbx7mRQn_OzRWn3xp6kjgmxxdB52aoerOLQv5_ftxptomqiH8AGetiGRKxXLBmMhZSLf/exec";
+
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, phone })
+  })
+  .then(() => {
+    alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
+
+    // 🔸 LiqPay test redirect
+    const data = {
+      public_key: "sandbox_i57839809613",
+      version: "3",
+      action: "pay",
+      amount: "1499",
+      currency: "UAH",
+      description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
+      result_url: "https://anastasiiaadamska.github.io/success.html"
+    };
+
+    const base64 = btoa(JSON.stringify(data));
+    const liqpayUrl = `https://www.liqpay.ua/api/3/checkout?data=${base64}`;
+    window.location.href = liqpayUrl;
+  })
+  .catch(err => {
+    console.error(err);
+    alert("⚠️ Помилка при збереженні. Перевір URL Google Script.");
+  });
+});
 </script>
 
 </body>
