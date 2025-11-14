@@ -1342,7 +1342,7 @@
 
 .course-result-section {
   background: var(--light-pink);
-  padding: 120px 20px;
+  padding: 50px 0px;
   position: relative;
   z-index: 1;
 }
@@ -1350,106 +1350,81 @@
 .course-result-section .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 5px;
 }
 
-.course-result-section h1 {
+
+.course-result-title {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* відстань між іконкою та текстом */
+   justify-content: center;
+
+}
+
+.course-result-title .pov-icon {
+  width: 130px;  /* розмір картинки */
+  height: auto;
+  flex-shrink: 0;
+}
+
+.course-result-title h1 {
   font-family: 'Halvar Breit Bd', sans-serif;
-  font-size: 54px;
-  color: var(--pink);
-  text-align: center;
-  margin-bottom: 60px;
+  font-size: 38px;
+  color: #000;
+  text-align: left;
+  margin: 0; /* щоб не з’їжджав */
 }
 
-/* --- Сітка карток --- */
-.steps-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-}
 
 @media (max-width: 992px) {
-  .steps-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
+
 }
 
 @media (max-width: 576px) {
-  .steps-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+
+  .course-result-title {
+  margin-left: 5vw;
+    justify-content: flex-start; /* вирівнюємо вліво */
+}
 }
 
-
-/* --- Картка --- */
-.step-card {
-  background-color: #f4f4f4;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  position: relative;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.step-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Активна картка --- */
-.step-card.active {
-  background-color: var(--light-pink);
-}
-
-.step-card::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  width: 120px;
-  height: 10px;
-  background-color: #f4f4f4;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.step-card.active::before {
-  background-color: var(--light-pink);
-}
-
-/* --- Заголовок картки --- */
-.step-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 12px;
-}
-
-/* --- Текст --- */
-.step-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #555;
-}
 
 /* --- Адаптив під мобілки --- */
 @media (max-width: 768px) {
-  .course-result-section h1 {
+  .course-result-title h1 {
     font-size: 36px;
   }
-  .step-card {
-    padding: 20px;
+
+}
+/* спільні стилі */
+.result-svg {
+  width: 100vw;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* мобільну ховаємо на десктопі */
+.desktop-svg {
+  display: block;
+}
+
+.mobile-svg {
+  display: none;
+}
+
+/* 📱 показуємо мобільну замість десктопної */
+@media (max-width: 768px) {
+  .desktop-svg {
+    display: none;
   }
-  .step-title {
-    font-size: 1.2rem;
-  }
-  .step-description {
-    font-size: 0.95rem;
+
+  .mobile-svg {
+    display: block;
   }
 }
+
 
     /* --- 3.10. Секція TESTIMONIALS (Відгуки) --- */
     .testimonials-section {
@@ -2396,14 +2371,17 @@
 <!-- =============================== -->
 <!-- 📂 СЕКЦІЯ "Твій результат після курсу" -->
 <!-- =============================== -->
-<section class="course-result-section" style="background:#fdeef3 ; padding:100px 5px;">
+<section class="course-result-section" style="background:#fdeef3 ; ">
   <div class="container" style="max-width:100%;margin:0 auto;">
-    <h1 style="font-family:'Halvar Breit Bd',sans-serif;font-size:48px;text-align:left;color:#2c3e50;margin-bottom:60px;">
-      твій результат після курсу
-    </h1>
+    <div class="course-result-title">
+  <img src="pov.png" alt="pov icon" class="pov-icon">
+  <h1>твій результат після курсу</h1>
+</div>
 
-    <img src="yourresult.svg" alt="Твій результат після курсу"
-         style="width:100vw;height:auto;display:block;margin:0 auto;">
+
+    <!-- Дві версії SVG -->
+    <img src="yourresult.svg" alt="Твій результат після курсу" class="result-svg desktop-svg">
+    <img src="yourresult-mobile.svg" alt="Твій результат після курсу мобільна версія" class="result-svg mobile-svg">
   </div>
 </section>
 
