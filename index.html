@@ -2598,18 +2598,21 @@ document.getElementById('joinButton').addEventListener('click', function (e) {
   alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
 
   // формуємо форму для LiqPay
-  const liqpayData = {
-    public_key: "sandbox_i57839809613",
-    version: "3",
-    action: "pay",
-    amount: "1499",
-    currency: "UAH",
-    description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
-    result_url: "https://anastasiiaadamska.github.io/success.html"
-  };
+// 💳 Дані для LiqPay
+const liqpayData = {
+  public_key: "sandbox_i57839809613",
+  version: "3",
+  action: "pay",
+  amount: "1499",
+  currency: "UAH",
+  description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
+  result_url: "https://anastasiiaadamska.github.io/success.html"
+};
 
-  const base64 = btoa(JSON.stringify(liqpayData));
-  const signature = "sandbox_signature";
+// ✅ Безпечне кодування українського тексту:
+const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(liqpayData))));
+const signature = "sandbox_signature";
+
 
   // створюємо нову вкладку з формою
   const liqpayForm = document.createElement('form');
