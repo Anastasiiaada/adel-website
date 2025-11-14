@@ -2596,33 +2596,30 @@ document.getElementById('joinButton').addEventListener('click', function (e) {
   const url = "https://script.google.com/macros/s/AKfycbwaVxxRqIFVcWTIra10Qal3Dh5Ab2Wi7Tt1gpZzcKked5rmeobSjl765WXgg1rcZxOo/exec";
 
   fetch(url, {
-    method: "POST",
-      mode: "no-cors",   // 💥 додай це
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, phone })
-  })
-  .then(() => {
-    alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
+  method: "POST",
+  mode: "no-cors",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name, phone })
+});
 
-    // 🔸 LiqPay test redirect
-    const data = {
-      public_key: "sandbox_i57839809613",
-      version: "3",
-      action: "pay",
-      amount: "1499",
-      currency: "UAH",
-      description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
-      result_url: "https://anastasiiaadamska.github.io/success.html"
-    };
+// показуємо повідомлення одразу
+alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
 
-    const base64 = btoa(JSON.stringify(data));
-    const liqpayUrl = `https://www.liqpay.ua/api/3/checkout?data=${base64}`;
-    window.location.href = liqpayUrl;
-  })
-  .catch(err => {
-    console.error(err);
-    alert("⚠️ Помилка при збереженні. Перевір URL Google Script.");
-  });
+// потім відкриваємо LiqPay
+const data = {
+  public_key: "sandbox_i57839809613",
+  version: "3",
+  action: "pay",
+  amount: "1499",
+  currency: "UAH",
+  description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
+  result_url: "https://anastasiiaadamska.github.io/success.html"
+};
+
+const base64 = btoa(JSON.stringify(data));
+const liqpayUrl = `https://www.liqpay.ua/api/3/checkout?data=${base64}`;
+window.location.href = liqpayUrl;
+
 });
 </script>
 
