@@ -2606,6 +2606,11 @@ document.getElementById('joinButton').addEventListener('click', function (e) {
 alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
 
 // потім відкриваємо LiqPay
+const form = document.createElement("form");
+form.method = "POST";
+form.action = "https://www.liqpay.ua/api/3/checkout";
+form.acceptCharset = "utf-8";
+
 const data = {
   public_key: "sandbox_i57839809613",
   version: "3",
@@ -2617,8 +2622,25 @@ const data = {
 };
 
 const base64 = btoa(JSON.stringify(data));
-const liqpayUrl = `https://www.liqpay.ua/api/3/checkout?data=${base64}`;
-window.location.href = liqpayUrl;
+
+// ⚠️ sandbox не вимагає справжнього підпису, тому можна лишити порожнім
+const signature = "sandbox_signature";
+
+const inputData = document.createElement("input");
+inputData.type = "hidden";
+inputData.name = "data";
+inputData.value = base64;
+
+const inputSignature = document.createElement("input");
+inputSignature.type = "hidden";
+inputSignature.name = "signature";
+inputSignature.value = signature;
+
+form.appendChild(inputData);
+form.appendChild(inputSignature);
+document.body.appendChild(form);
+form.submit();
+
 
 });
 </script>
