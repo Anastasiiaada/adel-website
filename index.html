@@ -2593,10 +2593,11 @@ document.getElementById('joinButton').addEventListener('click', function (e) {
   }
 
   // 🟢 Google Script URL (сюди летять дані)
-  const url = "https://script.google.com/macros/s/AKfycbx7mRQn_OzRWn3xp6kjgmxxdB52aoerOLQv5_ftxptomqiH8AGetiGRKxXLBmMhZSLf/exec";
+  const url = "https://script.google.com/macros/s/AKfycbwaVxxRqIFVcWTIra10Qal3Dh5Ab2Wi7Tt1gpZzcKked5rmeobSjl765WXgg1rcZxOo/exec";
 
   fetch(url, {
     method: "POST",
+      mode: "no-cors",   // 💥 додай це
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, phone })
   })
