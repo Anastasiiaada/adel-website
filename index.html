@@ -2131,7 +2131,16 @@
           </div>
 
           <div class="video-wrapper">
-            <video id="adeleVideo" class="reel-video" poster="adel-phone1.png" playsinline controls preload="metadata">
+              <video 
+              id="adeleVideo"
+              class="reel-video"
+              poster="adel-phone1.png"
+              playsinline
+              webkit-playsinline
+              preload="none"
+              muted
+            >
+
               <source src="ADEL.webm" type="video/webm">
               Твій браузер не підтримує відео
             </video>
@@ -2620,70 +2629,41 @@
 </script>
 
 <script>
-  // Скрипт для плеєра в секції АДЕЛЬ (ОНОВЛЕНІ ВІДСТУПИ)
-  const video = document.getElementById('adeleVideo');
-  const playBtn = document.getElementById('openVideo');
-  const mainBody = document.querySelector('.main-body');
-  const titleSection = document.querySelector('.title-section');
-  const textInfo = document.querySelector('.adele-slide .text-info');
+ // 🎬 СТАБІЛЬНИЙ ПЛЕЄР ДЛЯ IPHONE / SAFARI
+const video = document.getElementById('adeleVideo');
+const playBtn = document.getElementById('openVideo');
+const mainBody = document.querySelector('.main-body');
+const titleSection = document.querySelector('.title-section');
+const textInfo = document.querySelector('.adele-slide .text-info');
 
-  playBtn.addEventListener('click', () => {
-    video.muted = false;
-    video.play();
-    playBtn.style.display = 'none';
-    mainBody.classList.add('zoomed');
-    
-    // 💡 1. ВІДСТУП ВІД ЗАГОЛОВКА (збільшено)
-    // Відштовхує блок з фото/відео вниз від заголовка "Познайомимось"
-    titleSection.style.marginBottom = '200px'; // <-- Було 140px
-    
-    // 💡 2. ВІДСТУП ВІД ТЕКСТУ (збільшено)
-    // Відштовхує текст "Філософія..." вниз від фото/відео (тільки на мобільних)
-    if (window.innerWidth <= 768) { 
-        textInfo.style.marginTop = '200px'; // <-- Було 100px
-    }
-  });
+playBtn.addEventListener('click', async () => {
+  // Вимикаємо mute після кліку
+  video.muted = false;
 
-  video.addEventListener('pause', () => {
+  try {
+    await video.play();
+  } catch (err) {
+    console.warn('Autoplay blocked:', err);
+  }
+
+  playBtn.style.display = 'none';
+  mainBody.classList.add('zoomed');
+
+  // Збільшуємо відступи при програванні
+  titleSection.style.marginBottom = '200px';
+  if (window.innerWidth <= 768) textInfo.style.marginTop = '200px';
+});
+
+// Коли відео ставлять на паузу або закінчується — все повертаємо
+['pause', 'ended'].forEach(event => {
+  video.addEventListener(event, () => {
     mainBody.classList.remove('zoomed');
-    titleSection.style.marginBottom = '60px'; // Повертаємо базовий відступ
+    titleSection.style.marginBottom = '60px';
     playBtn.style.display = 'flex';
-    
-    // Прибираємо мобільний відступ
-    if (window.innerWidth <= 768) { 
-        textInfo.style.marginTop = '0px';
-    }
+    if (window.innerWidth <= 768) textInfo.style.marginTop = '0px';
   });
+});
 
-  video.addEventListener('ended', () => {
-    mainBody.classList.remove('zoomed');
-    titleSection.style.marginBottom = '60px'; // Повертаємо базовий відступ
-    playBtn.style.display = 'flex';
-    
-    // Прибираємо мобільний відступ
-    if (window.innerWidth <= 768) { 
-        textInfo.style.marginTop = '0px';
-    }
-  });
-</script>
-
-<script>
-  // Скрипт-фікс для Safari під час відтворення відео
-  const adeleVideo = document.getElementById('adeleVideo');
-  const body = document.body;
-
-  adeleVideo.addEventListener('play', () => {
-    body.style.backgroundAttachment = 'scroll';
-    body.style.overflowY = 'hidden';
-  });
-
-  adeleVideo.addEventListener('pause', () => {
-    body.style.overflowY = 'auto';
-  });
-
-  adeleVideo.addEventListener('ended', () => {
-    body.style.overflowY = 'auto';
-  });
 </script>
 
 </body>
