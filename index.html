@@ -2582,63 +2582,57 @@ playBtn.addEventListener('click', async () => {
 
 </script>
 <script>
-document.getElementById('joinButton').addEventListener('click', function (e) {
+document.getElementById('joinButton').addEventListener('click', async function (e) {
   e.preventDefault();
 
   const name = prompt("Вкажи своє ім’я:");
   const phone = prompt("Вкажи свій номер телефону:");
-  if (!name || !phone) return alert("Заповни обидва поля ❤️");
 
-  // надсилаємо в Google Sheets
-  fetch("https://script.google.com/macros/s/AKfycbwaVxxRqIFVcWTIra10Qal3Dh5Ab2Wi7Tt1gpZzcKked5rmeobSjl765WXgg1rcZxOo/exec", {
+  if (!name || !phone) {
+    alert("Будь ласка, заповни обидва поля ❤️");
+    return;
+  }
+
+  const liqpayData = {
+    public_key: "sandbox_i57839809613",
+    version: "3",
+    action: "pay",
+    amount: "1499",
+    currency: "UAH",
+    description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
+    result_url: "https://anastasiiaadamska.github.io/success.html"
+  };
+
+  // 🔹 отримуємо підпис з Apps Script
+  const response = await fetch("https://script.google.com/macros/s/AKfycbwZqg11Lz4c5lw5vIRkujwuXpVRObKNslv3e3P-IstwRpi0VwoOiEHKErK1MSlVuPbB/exec", {
     method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, phone })
+    body: JSON.stringify({ liqpayData })
   });
 
-  alert("✅ Ти успішно записалась! Зараз відкриється сторінка оплати 💸");
+  const result = await response.json();
 
- // 💳 Дані для LiqPay
-const liqpayData = {
-  public_key: "sandbox_i57839809613",
-  version: "3",
-  action: "pay",
-  amount: "1499",
-  currency: "UAH",
-  description: "Оплата курсу 'Адмін — це не просто дівчинка на ресепшені'",
-  result_url: "https://anastasiiaadamska.github.io/success.html"
-};
+  // 🔹 створюємо форму
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://www.liqpay.ua/api/3/checkout';
+  form.target = '_blank';
 
-// безпечне кодування
-const data = btoa(unescape(encodeURIComponent(JSON.stringify(liqpayData))));
+  const inputData = document.createElement('input');
+  inputData.type = 'hidden';
+  inputData.name = 'data';
+  inputData.value = result.data;
 
-// 🧮 формуємо signature по документації LiqPay
-const privateKey = "sandbox_wCyjtkcLKugQv9imzC7E7cOqTnxgV2UeHSSsXnI0"; // <-- твій sandbox key
-const signature = CryptoJS.SHA1(privateKey + data + privateKey).toString(CryptoJS.enc.Base64);
+  const inputSignature = document.createElement('input');
+  inputSignature.type = 'hidden';
+  inputSignature.name = 'signature';
+  inputSignature.value = result.signature;
 
-// створюємо форму і відправляємо
-const form = document.createElement('form');
-form.method = 'POST';
-form.action = 'https://www.liqpay.ua/api/3/checkout';
-form.target = '_blank';
-
-const inputData = document.createElement('input');
-inputData.type = 'hidden';
-inputData.name = 'data';
-inputData.value = data;
-
-const inputSignature = document.createElement('input');
-inputSignature.type = 'hidden';
-inputSignature.name = 'signature';
-inputSignature.value = signature;
-
-form.appendChild(inputData);
-form.appendChild(inputSignature);
-document.body.appendChild(form);
-form.submit();
-
+  form.appendChild(inputData);
+  form.appendChild(inputSignature);
+  document.body.appendChild(form);
+  form.submit();
 });
+
 </script>
 
 <form id="liqpayForm" method="POST" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8" style="display:none;">
