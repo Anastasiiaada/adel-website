@@ -1460,100 +1460,110 @@
       transform: translateY(2px);
     }
 
-    .testimonials-carousel {
-      position: relative;
-      overflow: hidden;
-      max-width: 2000px;
-      margin: 0 auto;
-      cursor: grab;
-    }
+    /* ============================
+   🔥 СТИЛЬНІ ВІДГУКИ — ФІКС
+============================ */
 
-    .carousel-track {
-      display: flex;
-      gap: 24px;
-      transition: transform 0.5s ease;
-    }
+.testimonials-list {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: nowrap; /* ❗ не дає їм падати вниз */
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-    .testimonial {
-      flex: 0 0 30%;
-      background: #fff;
-      border-radius: 24px;
-      padding: 30px;
-      text-align: left;
-      min-height: 320px;
-      position: relative;
-    }
 
-    .testimonial::before {
-      content: "“";
-      position: absolute;
-      top: 16px;
-      left: 20px;
-      font-size: 70px;
-      color: #f7c4d1;
-      font-family: serif;
-    }
+.review-card {
+  background: #fff;
+  border-radius: 26px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+  display: block;
+  transition: transform .25s ease;
+  flex: 0 0 45%; /* дві картки по 45% ширини */
+}
 
-    .testimonial img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+.review-card:hover {
+  transform: translateY(-4px);
+}
 
-    .testimonial p {
-      font-size: 16px;
-      color: #1a1a1a;
-      margin-bottom: 16px;
-    }
+.review-img {
+  width: 100%;
+  border-radius: 22px;
+  object-fit: cover;
+  cursor: pointer;
+  aspect-ratio: 9/16;
+}
+/* ===========================
+   🔥 FIX REVIEW MODAL
+=========================== */
+.review-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  padding: 20px;
+}
 
-    .testimonial strong {
-      display: block;
-      font-weight: 700;
-      color: #d94877;
-    }
+.review-modal.active {
+  display: flex;
+}
 
-    .carousel-indicators {
-      margin-top: 30px;
-      margin-bottom: 70px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
+.review-modal .modal-img {
+  max-width: 90%;
+  max-height: 95vh;
+  object-fit: contain;
+  border-radius: 20px;
+}
 
-    .carousel-indicators span {
-      width: 12px;
-      height: 12px;
-      background: #f7c4d1;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+.review-modal .close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+}
 
-    .carousel-indicators span.active {
-      background: #d94877;
-      transform: scale(1.2);
-    }
 
-    @media (max-width: 1024px) {
-      .testimonial {
-        flex: 0 0 45%;
-      }
-      .testimonials-carousel {
-        width: 88%;
-      }
-      .carousel-track {
-        width: 110%;
-      }
-    }
+/* 📱 Мобілки */
+@media (max-width: 768px) {
+  .testimonials-list {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
 
-    @media (max-width: 768px) {
-      .testimonial {
-        flex: 0 0 90%;
-      }
-    }
+  .review-card {
+    border-radius: 20px;
+    padding: 12px;
+  }
+
+  .review-img {
+    border-radius: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .testimonials-list {
+    gap: 12px;
+  }
+
+  .review-card {
+    flex: 0 0 48%;
+  }
+
+  .review-img {
+    border-radius: 16px;
+  }
+}
+
+
 
     /* --- 3.11. Секція PRICE (Ціна) --- */
     .price-section {
@@ -2420,131 +2430,68 @@
     </div>
   </div>
 
-  <div class="testimonials-carousel">
-    <div class="carousel-track">
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Аліна">
-        <p>“Курс — це вибух! Стала впевненою в роботі і нарешті зрозуміла, як системно керувати процесами.”</p>
-        <strong>Аліна</strong>
-      </div>
+  <div class="testimonials-list">
 
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Марія">
-        <p>“Дуже структурно, просто і з любов’ю. Нарешті відчуваю себе правою рукою власника.”</p>
-        <strong>Марія</strong>
-      </div>
-
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Ірина">
-        <p>“Після курсу все стало на свої місця. Клієнти задоволені, а команда працює спокійно.”</p>
-        <strong>Ірина</strong>
-      </div>
-
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Катерина">
-        <p>“Навчання змінило моє бачення ролі адміністратора. Тепер я — координатор усього салону.”</p>
-        <strong>Катерина</strong>
-      </div>
-
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Дарія">
-        <p>“Після кожного уроку — практичні фішки. Це реально курс, який працює.”</p>
-        <strong>Дарія</strong>
-      </div>
-
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Юлія">
-        <p>“Мені подобається, що матеріали подані легко, але зміст — максимально професійний.”</p>
-        <strong>Юлія</strong>
-      </div>
-
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Олена">
-        <p>“Я стала спокійнішою і впевненою. Тепер я не просто адміністратор, а менеджер сервісу.”</p>
-        <strong>Олена</strong>
-      </div>
-
-      <div class="testimonial">
-        <img src="IMG_5101 1.png" alt="Тетяна">
-        <p>“Курс мотивував не лише працювати краще, а й любити свою роботу ще більше.”</p>
-        <strong>Тетяна</strong>
-      </div>
+    <div class="review-card">
+      <img src="5249396290481753173.jpg"
+           data-full="5249396290481753173.jpg"
+           class="review-img open-modal">
     </div>
-  </div>
 
-  <div class="carousel-indicators"></div>
+    <div class="review-card">
+      <img src="5255939492768582695.jpg"
+           data-full="5255939492768582695.jpg"
+           class="review-img open-modal">
+    </div>
+
+  </div>
 </section>
 
+
 <script>
-  // Скрипт для TESTIMONIALS (карусель)
-  const track = document.querySelector('.carousel-track');
-  const items = Array.from(track.children);
-  const indicatorsContainer = document.querySelector('.carousel-indicators');
+ // Створюємо модалку один раз
+const modal = document.createElement("div");
+modal.classList.add("review-modal");
 
-  let index = 0;
+modal.innerHTML = `
+  <span class="close">×</span>
+  <img class="modal-img">
+`;
 
-  items.forEach((_, i) => {
-    const dot = document.createElement('span');
-    if (i === 0) dot.classList.add('active');
-    indicatorsContainer.appendChild(dot);
+document.body.appendChild(modal);
+
+const modalImg = modal.querySelector(".modal-img");
+const closeBtn = modal.querySelector(".close");
+
+// Відкриття модалки
+document.querySelectorAll(".open-modal").forEach(img => {
+  img.addEventListener("click", () => {
+    const fullImg = img.dataset.full;
+
+    modalImg.src = fullImg;
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
   });
+});
 
-  const dots = Array.from(indicatorsContainer.children);
+// Закриття модалки кнопкою
+closeBtn.addEventListener("click", () => {
+  modal.classList.remove("active");
+  modalImg.src = "";
+  document.body.style.overflow = "";
+});
 
-  const firstClone = items[0].cloneNode(true);
-  const lastClone = items[items.length - 1].cloneNode(true);
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, items[0]);
+// Закриття кліком по фону
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.remove("active");
+    modalImg.src = "";
+    document.body.style.overflow = "";
+  }
+});
 
-  const allItems = Array.from(track.children);
-  const itemWidth = items[0].getBoundingClientRect().width + 24;
-
-  let isTransitioning = false;
-  track.style.transform = `translateX(-${itemWidth}px)`;
-
-  const updateDots = () => {
-    dots.forEach(d => d.classList.remove('active'));
-    dots[index % items.length].classList.add('active');
-  };
-
-  const moveToIndex = (newIndex) => {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    index = newIndex;
-    track.style.transition = 'transform 0.6s ease';
-    track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
-    updateDots();
-  };
-
-  track.addEventListener('transitionend', () => {
-    isTransitioning = false;
-    if (index === -1) {
-      track.style.transition = 'none';
-      index = items.length - 1;
-      track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
-    } else if (index === items.length) {
-      track.style.transition = 'none';
-      index = 0;
-      track.style.transform = `translateX(-${(index + 1) * itemWidth}px)`;
-    }
-  });
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => moveToIndex(i));
-  });
-
-  let startX = 0;
-  track.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
-  track.addEventListener('touchend', (e) => {
-    const endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) moveToIndex(index + 1);
-    else if (endX - startX > 50) moveToIndex(index - 1);
-  });
-
-  setInterval(() => {
-    if (!isTransitioning) moveToIndex(index + 1);
-  }, 4000);
 </script>
+
 
 <section id="signup" class="price-section">
   <h2 class="price-title">
