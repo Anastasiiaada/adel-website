@@ -1465,15 +1465,43 @@
 ============================ */
 
 .testimonials-list {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  flex-wrap: nowrap; /* ❗ не дає їм падати вниз */
   max-width: 900px;
   margin: 0 auto;
 }
 
+/* перші два — як є */
+.review-card:nth-child(-n+2) {
+  grid-column: span 1;
+}
+
+/* третій — розтягується на дві */
+.review-card:nth-child(3) {
+  grid-column: span 2;
+  height: 400px; /* зроби вищим або нижчим як треба */
+}
+
+.review-card:nth-child(3) .review-img {
+  object-fit: fill;
+  height: 100%;
+}
+  @media (max-width: 768px) {
+  .testimonials-list {
+    grid-template-columns: repeat(2, 1fr); /* ✅ залишає дві колонки навіть на мобілці */
+    gap: 12px;
+  }
+
+  .review-card:nth-child(3) {
+    grid-column: span 2; /* ✅ третій розтягується на всю ширину */
+    height: 400px;
+  }
+
+  .review-img {
+    object-fit: cover;
+  }
+}
 
 .review-card {
   background: #fff;
@@ -1493,7 +1521,7 @@
 .review-img {
   width: 100%;
   border-radius: 22px;
-  object-fit: cover;
+  object-fit:fill;
   cursor: pointer;
   aspect-ratio: 9/16;
 }
@@ -2110,6 +2138,20 @@
       display: none;
     }
     
+.video-hint {
+  font-family: 'Halvar Breit Bd', sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  color: var(--pink);
+  font-size: 14px;
+  animation: bounceText 1.5s infinite ease-in-out;
+  margin-left:-70%;
+}
+
+@keyframes bounceText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
 
 
   </style>
@@ -2162,13 +2204,14 @@
                 <source src="ADEL.webm" type="video/webm">
                 Твій браузер не підтримує відео
               </video>
-
+            
             <div class="play-overlay" id="openVideo">
               <img src="play-button.png" alt="Play Video">
             </div>
           </div>
 
           <img src="arrow.png" alt="Стрілка" class="photo-arrow">
+            <p class="video-hint">тицяй на відео</p>
         </div>
       </div>
 
@@ -2430,22 +2473,9 @@
     </div>
   </div>
 
-  <div class="testimonials-list">
-
-    <div class="review-card">
-      <img src="5249396290481753173.jpg"
-           data-full="5249396290481753173.jpg"
-           class="review-img open-modal">
-    </div>
-
-    <div class="review-card">
-      <img src="5255939492768582695.jpg"
-           data-full="5255939492768582695.jpg"
-           class="review-img open-modal">
-    </div>
-
-  </div>
+  <img src="reviews.png" alt="Відгуки" style="max-width:100%;height:auto;display:block;margin:0 auto;">
 </section>
+
 
 
 <script>
@@ -2514,7 +2544,7 @@ modal.addEventListener("click", (e) => {
       <li>+ Telegram Chat Community + зворотний зв’язок</li>
     </ul>
 
-    <a href="#" class="price-btn">Приєднатися</a>
+    <a href="https://secure.wayforpay.com/button/b5aebaef55c20" style="display:inline-block!important;background:#000;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:16px!important;text-decoration:none!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:center!important;outline:none!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"> <span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;">Оплатити</span></a>
   </div>
 </section>
 
@@ -2522,7 +2552,7 @@ modal.addEventListener("click", (e) => {
   <div class="contact-inner">
     <h2 class="contact-title">залишились питання?</h2>
     <p class="contact-text">з радістю проконсультуємо:</p>
-    <a href="https://t.me/yourusername" target="_blank" class="telegram-btn">tg підтримка</a>
+    <a href="https://t.me/lizzzi7" target="_blank" class="telegram-btn">tg підтримка</a>
   </div>
 </section>
 
