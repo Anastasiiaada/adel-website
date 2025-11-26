@@ -2153,11 +2153,31 @@
   50% { transform: translateY(-4px); }
 }
 
-footer a.f-link,
-footer span {
+footer a.f-link {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
   display: block;
-  margin-bottom: 6px; /* можеш міняти */
+  margin-bottom: 10px;
+  font-family: 'Halvar Breit Bd', sans-serif;
 }
+
+footer a.f-link:hover {
+  opacity: 0.7;
+}
+
+/* ❗️Ховаємо плаваючу кнопку коли бачимо футер */
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+.floating-footer.hide-over-footer {
+  bottom: -120px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 
   </style>
 </head>
@@ -2562,11 +2582,13 @@ modal.addEventListener("click", (e) => {
 </section>
 
 <footer>
-  <a class="f-link" href="https://docs.google.com/document/d/1hjwzvSMZaruxfzvqZnwLrXWbaFTQ2usmpNAueCEs4Qc/edit?usp=sharing">
+  <a class="f-link" href="https://docs.google.com/document/d/1hjwzvSMZaruxfzvqZnwLrXWbaFTQ2usmpNAueCEs4Qc/edit?usp=sharing" target="_blank"
+  rel="noopener noreferrer">
     Політика повернення коштів (Refund Policy)
   </a>
 
-  <a class="f-link" href="https://docs.google.com/document/d/1kfrIZzcPw54Vinonhu7v9VqNleWa7aCYEaqrWjVXD4c/edit?usp=sharing">
+  <a class="f-link" href="https://docs.google.com/document/d/1kfrIZzcPw54Vinonhu7v9VqNleWa7aCYEaqrWjVXD4c/edit?usp=sharing" target="_blank"
+  rel="noopener noreferrer">
     Контактна інформація
   </a>
 
@@ -2590,6 +2612,7 @@ modal.addEventListener("click", (e) => {
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const scrollMid = scrollY + window.innerHeight / 2;
+    const scrollBottom = scrollY + window.innerHeight;
 
     if (scrollY > heroHeight - 100) {
       footer.classList.add('show-footer');
@@ -2597,14 +2620,25 @@ modal.addEventListener("click", (e) => {
       footer.classList.remove('show-footer');
     }
 
-    const priceTop = priceSection.offsetTop;
-    const priceBottom = priceTop + priceSection.offsetHeight;
-    if (scrollMid > priceTop && scrollMid < priceBottom) {
-      footer.classList.remove('show-footer');
-      footer.classList.add('hide-footer');
-    } else {
-      footer.classList.remove('hide-footer');
-    }
+const priceTop = priceSection.offsetTop;
+const priceBottom = priceTop + priceSection.offsetHeight;
+
+const footerSection = document.querySelector('footer');
+const footerTop = footerSection.offsetTop;
+const footerBottom = footerTop + footerSection.offsetHeight;
+
+// ❗️Ховаємо кнопку, якщо низ екрану перетнув прайс або футер
+if (
+  scrollBottom > priceTop && scrollY < priceBottom ||
+  scrollBottom > footerTop
+) {
+  footer.classList.add('hide-over-footer');
+} else {
+  footer.classList.remove('hide-over-footer');
+}
+
+
+
 
     sections.forEach(section => {
       if (scrollMid > section.offsetTop && scrollMid < section.offsetTop + section.offsetHeight) {
