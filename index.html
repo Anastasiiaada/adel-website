@@ -2153,6 +2153,11 @@
   50% { transform: translateY(-4px); }
 }
 
+footer a.f-link,
+footer span {
+  display: block;
+  margin-bottom: 6px; /* можеш міняти */
+}
 
   </style>
 </head>
@@ -2557,10 +2562,17 @@ modal.addEventListener("click", (e) => {
 </section>
 
 <footer>
-  <a href="https://docs.google.com/document/d/1hjwzvSMZaruxfzvqZnwLrXWbaFTQ2usmpNAueCEs4Qc/edit?usp=sharing">Політика повернення коштів (Refund Policy)</a>
-  <a href="https://docs.google.com/document/d/1kfrIZzcPw54Vinonhu7v9VqNleWa7aCYEaqrWjVXD4c/edit?usp=sharing">Контактна інформація</a>
-  © 2025 Adele Course. Всі права захищені.
+  <a class="f-link" href="https://docs.google.com/document/d/1hjwzvSMZaruxfzvqZnwLrXWbaFTQ2usmpNAueCEs4Qc/edit?usp=sharing">
+    Політика повернення коштів (Refund Policy)
+  </a>
+
+  <a class="f-link" href="https://docs.google.com/document/d/1kfrIZzcPw54Vinonhu7v9VqNleWa7aCYEaqrWjVXD4c/edit?usp=sharing">
+    Контактна інформація
+  </a>
+
+  <span>© 2025 Adele Course. Всі права захищені.</span>
 </footer>
+
 
 <div class="floating-footer">
   <a href="#signup" class="footer-btn main">Записатися</a>
